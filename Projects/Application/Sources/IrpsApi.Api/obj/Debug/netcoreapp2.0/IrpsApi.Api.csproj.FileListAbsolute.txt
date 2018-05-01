@@ -1,0 +1,11 @@
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.csproj.CoreCompileInputs.cache
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.AssemblyInfoInputs.cache
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.AssemblyInfo.cs
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.deps.json
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.runtimeconfig.json
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.runtimeconfig.dev.json
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.dll
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.pdb
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.dll
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.pdb

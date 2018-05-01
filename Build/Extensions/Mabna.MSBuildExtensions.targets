@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MabnaMSBuildExtensionsAssembly>$(MabnaMSBuildExtensionsPath)\Mabna.MSBuildExtensions.dll</MabnaMSBuildExtensionsAssembly>
+  </PropertyGroup>
+  <UsingTask AssemblyFile="$(MabnaMSBuildExtensionsAssembly)" TaskName="Mabna.MSBuildExtensions.Tasks.MergeTextFiles" />
+  <UsingTask AssemblyFile="$(MabnaMSBuildExtensionsAssembly)" TaskName="Mabna.MSBuildExtensions.Tasks.GenerateManifest" />
+  <UsingTask AssemblyFile="$(MabnaMSBuildExtensionsAssembly)" TaskName="Mabna.MSBuildExtensions.Tasks.ReadManifest" />
+  <UsingTask AssemblyFile="$(MabnaMSBuildExtensionsAssembly)" TaskName="Mabna.MSBuildExtensions.Tasks.ExecuteSql" />
+</Project>

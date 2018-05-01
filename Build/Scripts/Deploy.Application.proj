@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ImportedDeployApplication>True</ImportedDeployApplication>
+  </PropertyGroup>
+
+  <Import Project="Publish.Application.proj" Condition="'$(ImportedPublishApplication)' == ''" />
+
+  <Target Name="CleanApplicationFiles" Condition="Exists('$(DeployApplicationPath)\Application.manifest')">
+    <ReadManifest File="$(DeployApplicationPath)\Application.manifest" BaseDirectory="$(DeployApplicationPath)">
+      <Output TaskParameter="Files" ItemName="OldApplicationFiles" />
+    </ReadManifest>
+    <Delete Files="@(OldApplicationFiles)" />
+  </Target>
+
+  <Target Name="CopyApplicationFiles">
+    <ItemGroup>
+      <NewApplicationFiles Include="$(BuildApplicationPublishPath)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(NewApplicationFiles)" DestinationFiles="@(NewApplicationFiles->'$(DeployApplicationPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <Target Name="DeployApplication">
+    <CallTarget Targets="PublishApplication" />
+    <CallTarget Targets="CleanApplicationFiles" />
+    <CallTarget Targets="CopyApplicationFiles" />
+  </Target>
+
+</Project>

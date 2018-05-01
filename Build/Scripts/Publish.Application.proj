@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ImportedPublishApplication>True</ImportedPublishApplication>
+  </PropertyGroup>
+
+  <Import Project="Build.Application.proj" Condition="'$(ImportedBuildApplication)' == ''" />
+  <Import Project="Test.Application.proj" Condition="'$(ImportedTestApplication)' == ''" />
+
+  <PropertyGroup>
+    <Configuration>Release</Configuration>
+    <MvcBuildViews>True</MvcBuildViews>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <BuildApplicationSourcesWebSitePath>$(BuildApplicationSourcesPath)\Sabadyar.Web.Site</BuildApplicationSourcesWebSitePath>
+    <BuildApplicationPublishPath>$(BuildApplicationPath)\Publish</BuildApplicationPublishPath>
+  </PropertyGroup>
+
+  <Target Name="PublishApplicationFiles">
+    <RemoveDir Directories="$(BuildApplicationPublishPath)" />
+    <MSBuild Projects="$(BuildApplicationSourcesWebSitePath)\Sabadyar.Web.Site.csproj" Targets="ResolveReferences;_CopyWebApplication" Properties="Configuration=$(Configuration);WebProjectOutputDir=$(BuildApplicationPublishPath);OutDir=$(BuildApplicationPublishPath)\Bin\" />
+  </Target>
+
+  <Target Name="UpdateWebConfig">
+    <XmlUpdate XmlFileName="$(BuildApplicationPublishPath)\Web.config" XPath="/configuration/system.web/compilation/@debug" Value="false" />
+    <XmlUpdate XmlFileName="$(BuildApplicationPublishPath)\Web.config" XPath="/configuration/system.web/customErrors/@mode" Value="On" />
+  </Target>
+
+  <Target Name="GenerateManifest">
+    <GenerateManifest BaseDirectory="$(BuildApplicationPublishPath)" AppName="$(Product)" AppVersion="$(ApplicationVersion)" OutputFile="$(BuildApplicationPublishPath)\Application.manifest" />
+  </Target>
+
+  <Target Name="PublishApplication">
+    <CallTarget Targets="BuildApplication" />
+    <CallTarget Targets="TestApplication" />
+    <CallTarget Targets="PublishApplicationFiles" />
+    <CallTarget Targets="UpdateWebConfig" />
+    <CallTarget Targets="GenerateManifest" />
+  </Target>
+
+</Project>

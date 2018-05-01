@@ -1,0 +1,9 @@
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Managers\obj\Debug\netstandard2.0\IrpsApi.Managers.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Managers\obj\Debug\netstandard2.0\IrpsApi.Managers.csproj.CoreCompileInputs.cache
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Managers\obj\Debug\netstandard2.0\IrpsApi.Managers.AssemblyInfoInputs.cache
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Managers\obj\Debug\netstandard2.0\IrpsApi.Managers.AssemblyInfo.cs
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Managers\bin\Debug\netstandard2.0\IrpsApi.Managers.deps.json
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Managers\bin\Debug\netstandard2.0\IrpsApi.Managers.dll
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Managers\bin\Debug\netstandard2.0\IrpsApi.Managers.pdb
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Managers\obj\Debug\netstandard2.0\IrpsApi.Managers.dll
+\\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Managers\obj\Debug\netstandard2.0\IrpsApi.Managers.pdb

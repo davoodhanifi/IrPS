@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ImportedTestApplication>True</ImportedTestApplication>
+  </PropertyGroup>
+
+  <Import Project="Build.Application.proj" Condition="'$(ImportedBuildApplication)' == ''" />
+  <Import Project="Build.Database.proj" Condition="'$(ImportedBuildDatabase)' == ''" />
+
+  <PropertyGroup>
+    <BuildApplicationTestsPath>$(BuildApplicationPath)\Tests</BuildApplicationTestsPath>
+  </PropertyGroup>
+
+  <Target Name="BuildTests">
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Pascal.Events.Tests\Sabadyar.Pascal.Events.Tests.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+  </Target>
+
+  <Target Name="RunTests">
+    <Exec Command="$(BuildApplicationSourcesPath)\Sabadyar.Pascal.Events.Tests\bin\$(Configuration)\Mabna.Sabadyar.Pascal.Events.Tests.exe --path &quot;$(BuildApplicationTestsPath)&quot; --db-server &quot;$(TestDatabaseServer)&quot; --db-user &quot;$(TestDatabaseUser)&quot; --db-password &quot;$(TestDatabasePassword)&quot;" EchoOff="true" />
+  </Target>
+
+  <Target Name="TestApplication">
+    <CallTarget Targets="BuildApplication" />
+    <CallTarget Targets="BuildTests" />
+    <CallTarget Targets="BuildDatabase" />
+    <CallTarget Targets="RunTests" />
+  </Target>
+
+</Project>

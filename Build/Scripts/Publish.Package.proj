@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ImportedPublishPackage>True</ImportedPublishPackage>
+  </PropertyGroup>
+
+  <Import Project="Build.Package.proj" Condition="'$(ImportedBuildPackage)' == ''" />
+
+  <PropertyGroup>
+    <BuildPackagePublishPath>$(BuildPackagePath)\Publish</BuildPackagePublishPath>
+  </PropertyGroup>
+
+  <Target Name="PublishPackageFiles">
+    <ItemGroup>
+      <PackageScripts Include="$(BuildPackageBinPath)\$(Product)-v$(Version).zip" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PackageScripts)" DestinationFolder="$(BuildPackagePublishPath)" />
+  </Target>
+
+  <Target Name="PublishPackage">
+    <CallTarget Targets="BuildPackage" />
+    <CallTarget Targets="PublishPackageFiles" />
+  </Target>
+
+</Project>

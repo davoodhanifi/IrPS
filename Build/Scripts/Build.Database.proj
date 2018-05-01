@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ImportedBuildDatabase>True</ImportedBuildDatabase>
+  </PropertyGroup>
+
+  <Import Project="Build.proj" Condition="'$(ImportedBuild)' == ''" />
+
+  <PropertyGroup>
+    <BuildDatabasePath>$(BuildProjectsPath)\Database</BuildDatabasePath>
+    <BuildDatabaseBinPath>$(BuildDatabasePath)\Bin</BuildDatabaseBinPath>
+    <BuildDatabaseSourcesPath>$(BuildDatabasePath)\Sources</BuildDatabaseSourcesPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DatabaseVersion Condition="'$(DatabaseVersion)' == ''">$(Version)</DatabaseVersion>
+  </PropertyGroup>
+
+  <Target Name="CreateInstallScript">
+    <MakeDir Directories="$(BuildDatabaseBinPath)" />
+    <ItemGroup>
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Core.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\System.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Core.Country.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Core.Province.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Configuration.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Date.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Feedback.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Message.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.SystemLog.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.SystemLogParameter.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.User.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.UserCredit.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.UserLog.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.UserLogParameter.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Core.Country.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Core.Province.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\System.Configuration.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\System.Date.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Indexes\System.Date.IX_GregorianDate.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Indexes\System.Date.IX_JalaliDate.sql" />
+    </ItemGroup>
+    <MergeTextFiles InputFiles="@(InstallFiles)" OutputFile="$(BuildDatabaseBinPath)\Install.sql.temp" Delimiter="&#13;&#10;GO&#13;&#10;" />
+    <ItemGroup>
+      <Tokens Include="Version">
+        <ReplacementValue>$(DatabaseVersion)</ReplacementValue>
+      </Tokens>
+      <Tokens Include="Product">
+        <ReplacementValue>$(Product)</ReplacementValue>
+      </Tokens>
+    </ItemGroup>
+    <TemplateFile Template="$(BuildDatabaseBinPath)\Install.sql.temp" OutputFileName="$(BuildDatabaseBinPath)\Install.sql" Tokens="@(Tokens)" />
+    <Delete Files="$(BuildDatabaseBinPath)\Install.sql.temp" />
+  </Target>
+
+  <Target Name="CreateUpdateScript">
+    <MakeDir Directories="$(BuildDatabaseBinPath)" />
+    <ItemGroup>
+      <UpdateFiles Include="$(BuildDatabaseSourcesPath)\Updates\v0.1-To-v0.2.sql" />
+    </ItemGroup>
+    <ItemGroup>
+      <UpdateFiles Include="$(BuildDatabaseSourcesPath)\Updates\vNext\*.sql" Condition="'$(Configuration)' != 'Release'" />
+    </ItemGroup>
+    <MergeTextFiles InputFiles="@(UpdateFiles)" OutputFile="$(BuildDatabaseBinPath)\Update.sql.temp" Delimiter="&#13;&#10;&#13;&#10;" />
+    <ItemGroup>
+      <Tokens Include="Product2">
+        <ReplacementValue>$(Product)</ReplacementValue>
+      </Tokens>
+    </ItemGroup>
+    <TemplateFile Template="$(BuildDatabaseBinPath)\Update.sql.temp" OutputFileName="$(BuildDatabaseBinPath)\Update.sql" Tokens="@(Tokens)" />
+    <Delete Files="$(BuildDatabaseBinPath)\Update.sql.temp" />
+  </Target>
+
+  <Target Name="BuildDatabase">
+    <CallTarget Targets="CreateInstallScript" />
+    <CallTarget Targets="CreateUpdateScript" />
+  </Target>
+
+</Project>

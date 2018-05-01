@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ImportedBuildApplication>True</ImportedBuildApplication>
+  </PropertyGroup>
+
+  <Import Project="Build.proj" Condition="'$(ImportedBuild)' == ''" />
+
+  <PropertyGroup>
+    <BuildApplicationPath>$(BuildProjectsPath)\Application</BuildApplicationPath>
+    <BuildApplicationBinPath>$(BuildApplicationPath)\Bin</BuildApplicationBinPath>
+    <BuildApplicationLibrariesPath>$(BuildApplicationPath)\Libraries</BuildApplicationLibrariesPath>
+    <BuildApplicationSourcesPath>$(BuildApplicationPath)\Sources</BuildApplicationSourcesPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ApplicationVersion Condition="'$(ApplicationVersion)' == ''">$(Version)</ApplicationVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Configuration>Debug</Configuration>
+    <MvcBuildViews>False</MvcBuildViews>
+  </PropertyGroup>
+
+  <Target Name="CompileApplication">
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Mabna.Pascal\Mabna.Pascal.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework\Sabadyar.Framework.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Core\Sabadyar.Framework.Core.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Bank\Sabadyar.Framework.Bank.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Broker\Sabadyar.Framework.Broker.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Shared\Sabadyar.Framework.Shared.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Exchange\Sabadyar.Framework.Exchange.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Fund\Sabadyar.Framework.Fund.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Pascal\Sabadyar.Framework.Pascal.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Asset\Sabadyar.Framework.Asset.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Stock\Sabadyar.Framework.Stock.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Bond\Sabadyar.Framework.Bond.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Accounting\Sabadyar.Framework.Accounting.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Loan\Sabadyar.Framework.Loan.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Portfolio\Sabadyar.Framework.Portfolio.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.Option\Sabadyar.Framework.Option.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Framework.System\Sabadyar.Framework.System.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Diagnostics\Sabadyar.Diagnostics.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Utilities\Sabadyar.Utilities.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Helpers\Sabadyar.Helpers.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.DisplayHelpers\Sabadyar.DisplayHelpers.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Calculations\Sabadyar.Calculations.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Pascal\Sabadyar.Pascal.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Pascal.Events\Sabadyar.Pascal.Events.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.FeeCalculation\Sabadyar.FeeCalculation.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.ConstraintRules\Sabadyar.ConstraintRules.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Database\Sabadyar.Database.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Repositories.Sql\Sabadyar.Repositories.Sql.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Repositories.Static\Sabadyar.Repositories.Static.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Providers\Sabadyar.Providers.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Managers\Sabadyar.Managers.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Validation\Sabadyar.Validation.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Reports\Sabadyar.Reports.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Jobs\Sabadyar.Jobs.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Operations\Sabadyar.Operations.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Services\Sabadyar.Services.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.MabnaDP\Sabadyar.MabnaDP.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Runtime\Sabadyar.Runtime.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Web\Sabadyar.Web.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product)" />
+    <MSBuild Projects="$(BuildApplicationSourcesPath)\Sabadyar.Web.Site\Sabadyar.Web.Site.csproj" Targets="Build" Properties="Configuration=$(Configuration);DefineConstants=$(Product);MvcBuildViews=$(MvcBuildViews)" />
+  </Target>
+
+  <Target Name="BuildApplication">
+    <CallTarget Targets="CompileApplication" />
+  </Target>
+
+</Project>

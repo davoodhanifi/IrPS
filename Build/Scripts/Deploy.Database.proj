@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ImportedDeployDatabase>True</ImportedDeployDatabase>
+  </PropertyGroup>
+
+  <Import Project="Publish.Database.proj" Condition="'$(ImportedPublishDatabase)' == ''" />
+
+  <PropertyGroup>
+    <DeployDatabaseConnectionString>server=$(DeployDatabaseServer); database=$(DeployDatabaseName); user id=$(DeployDatabaseUserId); password=$(DeployDatabasePassword);</DeployDatabaseConnectionString>
+  </PropertyGroup>
+
+  <Target Name="InstallDatabase">
+    <ItemGroup>
+      <InstallFile Include="$(BuildDatabasePublishPath)\Install.sql" />
+    </ItemGroup>
+    <ExecuteSql ScriptFiles="@(InstallFile)" Delimiter="GO" ConnectionString="$(DeployDatabaseConnectionString)" />
+  </Target>
+
+  <Target Name="UpdateDatabase">
+    <ItemGroup>
+      <UpdateFile Include="$(BuildDatabasePublishPath)\Update.sql" />
+    </ItemGroup>
+    <ExecuteSql ScriptFiles="@(UpdateFile)" Delimiter="GO" ConnectionString="$(DeployDatabaseConnectionString)" />
+  </Target>
+
+  <Target Name="InstallOrUpdateDatabase">
+    <ExecuteSql Script="USE $(DeployDatabaseName); SELECT COUNT(*) from information_schema.tables WHERE table_type = 'base table'" ConnectionString="$(DeployDatabaseConnectionString)">
+      <Output TaskParameter="Result" PropertyName="TableCount" />
+    </ExecuteSql>
+    <CallTarget Targets="InstallDatabase" Condition="'$(TableCount)' == '0'" />
+    <CallTarget Targets="UpdateDatabase" Condition="'$(TableCount)' != '0'" />
+  </Target>
+
+  <Target Name="DeployDatabase">
+    <CallTarget Targets="PublishDatabase" />
+    <CallTarget Targets="InstallOrUpdateDatabase" />
+  </Target>
+
+</Project>
