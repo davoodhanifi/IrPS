@@ -8,7 +8,7 @@ CREATE TABLE [System].[Configuration](
 	[DateValue] [bigint] NULL,
 	[BinaryValue] [varbinary](4000) NULL,
 	[Tags] [nvarchar](4000) NULL,
-	[Notes] [nvarchar](4000) NULL,
+	[Notes] [nvarchar](max) NULL,
  CONSTRAINT [PK_Configuration] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

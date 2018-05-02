@@ -3,8 +3,7 @@ CREATE TABLE [System].[Message](
 	[Title] [nvarchar](max) NOT NULL,
 	[Text] [nvarchar](max) NOT NULL,
 	[UserId] [int] NULL,
-	[DateTime] [char](19) NOT NULL,
-	[DateTimeEn] [datetime] NOT NULL,
+	[DateTime] [bigint] NOT NULL,
 	[Status] [tinyint] NOT NULL,
 CONSTRAINT [PK_Message] PRIMARY KEY CLUSTERED 
 (

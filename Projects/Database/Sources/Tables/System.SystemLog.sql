@@ -1,7 +1,6 @@
 CREATE TABLE [System].[SystemLog](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Date] [char](19) NOT NULL,
-	[DateEn] [datetime] NOT NULL,
+	[DateTime] [bigint] NOT NULL,
 	[Action] [nvarchar](max) NOT NULL
  CONSTRAINT [PK_SystemLog] PRIMARY KEY CLUSTERED 
 (

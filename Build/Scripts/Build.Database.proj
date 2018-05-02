@@ -20,20 +20,27 @@
   <Target Name="CreateInstallScript">
     <MakeDir Directories="$(BuildDatabaseBinPath)" />
     <ItemGroup>
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Accounting.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Core.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\System.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\User.sql" />
+      
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounting.Balance.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounting.Transaction.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Core.Country.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Core.Province.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Configuration.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Date.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Feedback.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Message.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Otp.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.SystemLog.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.SystemLogParameter.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.User.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.UserCredit.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.UserLog.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.UserLogParameter.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\User.BankAccount.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\User.User.sql" />
+      
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Core.Country.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Core.Province.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\System.Configuration.sql" />

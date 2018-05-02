@@ -1,20 +1,21 @@
-CREATE TABLE [System].[User](
+CREATE TABLE [User].[User](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
     [FirstName] [nvarchar](max) NULL,
 	[LastName] [nvarchar](max) NULL,
 	[PhoneNumber] [varchar](16) NOT NULL,
 	[Username] [varchar](255) NULL,
 	[Email] [varchar](255) NULL,
+	[UserCode] [bigint] NOT NULL,
 	[PasswordHash] [binary](32) NULL,
 	[PasswordSalt] [binary](32) NULL,
-	[RegistrationDateTime] [bigint] NOT NULL,
-	[RegistrationCode] [varchar](255) NOT NULL,
-	[IsEnabled] [bit] NOT NULL,
 	[FingerprintEnabled] [bit] NOT NULL,
 	[Image] [varbinary](max) NULL,
 	[ImageMimeType] [nvarchar](max) NULL,
 	[Barcode] [varbinary](max) NULL,
-	[BarcodeMimeType] [nvarchar](max) NULL
+	[BarcodeMimeType] [nvarchar](max) NULL,
+	[RegistrationDateTime] [bigint] NOT NULL,
+	[RegistrationCode] [varchar](255) NOT NULL,
+	[IsActive] [bit] NOT NULL,
  CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

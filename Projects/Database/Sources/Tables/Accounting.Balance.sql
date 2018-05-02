@@ -1,11 +1,11 @@
-CREATE TABLE [System].[UserCredit](
+CREATE TABLE [Accounting].[Balance](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserId] [varchar](255) NOT NULL,
-	[DateTime] [char](19) NOT NULL,
-	[DateTimeEn] [datetime] NOT NULL,
-	[Credit] [varchar](255) NOT NULL,
+	[UserCode] [bigint] NOT NULL,
+	[DateTime] [bigint] NOT NULL,
+	[Balance] [decimal](19,4) NOT NULL,
+	[IsActive] [bit] NOT NULL,
 	[Notes] [nvarchar](max) NULL,
- CONSTRAINT [PK_UserCredit] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Balance] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
