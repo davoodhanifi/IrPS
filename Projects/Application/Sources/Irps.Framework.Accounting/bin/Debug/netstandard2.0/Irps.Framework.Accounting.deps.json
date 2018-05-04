@@ -7,12 +7,12 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "IrpsApi.Repositories/1.0.0": {
+      "Irps.Framework.Accounting/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "2.0.0"
         },
         "runtime": {
-          "IrpsApi.Repositories.dll": {}
+          "Irps.Framework.Accounting.dll": {}
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
@@ -24,7 +24,7 @@
     }
   },
   "libraries": {
-    "IrpsApi.Repositories/1.0.0": {
+    "Irps.Framework.Accounting/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

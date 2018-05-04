@@ -1,0 +1,8 @@
+C:\Projects\irps-v1\Projects\Application\Sources\Irps.Framework.Core\bin\Debug\netstandard2.0\Irps.Framework.Core.deps.json
+C:\Projects\irps-v1\Projects\Application\Sources\Irps.Framework.Core\bin\Debug\netstandard2.0\Irps.Framework.Core.dll
+C:\Projects\irps-v1\Projects\Application\Sources\Irps.Framework.Core\bin\Debug\netstandard2.0\Irps.Framework.Core.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\Irps.Framework.Core\obj\Debug\netstandard2.0\Irps.Framework.Core.csproj.CoreCompileInputs.cache
+C:\Projects\irps-v1\Projects\Application\Sources\Irps.Framework.Core\obj\Debug\netstandard2.0\Irps.Framework.Core.AssemblyInfoInputs.cache
+C:\Projects\irps-v1\Projects\Application\Sources\Irps.Framework.Core\obj\Debug\netstandard2.0\Irps.Framework.Core.AssemblyInfo.cs
+C:\Projects\irps-v1\Projects\Application\Sources\Irps.Framework.Core\obj\Debug\netstandard2.0\Irps.Framework.Core.dll
+C:\Projects\irps-v1\Projects\Application\Sources\Irps.Framework.Core\obj\Debug\netstandard2.0\Irps.Framework.Core.pdb

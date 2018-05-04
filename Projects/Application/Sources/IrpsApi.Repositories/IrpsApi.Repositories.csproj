@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Noandishan.IrpsApi.Repositories</RootNamespace>
+    <AssemblyName>Noandishan.IrpsApi.Repositories</AssemblyName>
   </PropertyGroup>
 
 </Project>

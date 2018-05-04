@@ -186,11 +186,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "\\\\vmware-host\\Shared Folders\\Documents\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj",
+      "projectUniqueName": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj",
       "projectName": "IrpsApi.Framework",
-      "projectPath": "\\\\vmware-host\\Shared Folders\\Documents\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj",
+      "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj",
       "packagesPath": "C:\\Users\\Davood\\.nuget\\packages\\",
-      "outputPath": "\\\\vmware-host\\Shared Folders\\Documents\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\obj\\",
+      "outputPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -186,11 +186,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "\\\\vmware-host\\Shared Folders\\Documents\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Repositories\\IrpsApi.Repositories.csproj",
-      "projectName": "IrpsApi.Repositories",
-      "projectPath": "\\\\vmware-host\\Shared Folders\\Documents\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Repositories\\IrpsApi.Repositories.csproj",
+      "projectUniqueName": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Repositories\\IrpsApi.Repositories.csproj",
+      "projectName": "Noandishan.IrpsApi.Repositories",
+      "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Repositories\\IrpsApi.Repositories.csproj",
       "packagesPath": "C:\\Users\\Davood\\.nuget\\packages\\",
-      "outputPath": "\\\\vmware-host\\Shared Folders\\Documents\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Repositories\\obj\\",
+      "outputPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Repositories\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
