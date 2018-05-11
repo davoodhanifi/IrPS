@@ -9,7 +9,13 @@
     ".NETStandard,Version=v2.0/": {
       "Noandishan.IrpsApi.Repositories/1.0.0": {
         "dependencies": {
-          "NETStandard.Library": "2.0.0"
+          "Irps.Framework.Core": "1.0.0",
+          "Irps.Framework.User": "1.0.0",
+          "IrpsApi.Framework.System": "1.0.0",
+          "NETStandard.Library": "2.0.0",
+          "Mabna.Data.v1": "1.4.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "2.0.0.0",
+          "System.Data.SqlClient": "4.2.0.0"
         },
         "runtime": {
           "Noandishan.IrpsApi.Repositories.dll": {}
@@ -19,6 +25,47 @@
       "NETStandard.Library/2.0.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "Irps.Framework.Core/1.0.0": {
+        "runtime": {
+          "Irps.Framework.Core.dll": {}
+        }
+      },
+      "Irps.Framework.User/1.0.0": {
+        "dependencies": {
+          "IrpsApi.Framework": "1.0.0"
+        },
+        "runtime": {
+          "Irps.Framework.User.dll": {}
+        }
+      },
+      "IrpsApi.Framework/1.0.0": {
+        "runtime": {
+          "IrpsApi.Framework.dll": {}
+        }
+      },
+      "IrpsApi.Framework.System/1.0.0": {
+        "dependencies": {
+          "IrpsApi.Framework": "1.0.0"
+        },
+        "runtime": {
+          "IrpsApi.Framework.System.dll": {}
+        }
+      },
+      "Mabna.Data.v1/1.4.0.0": {
+        "runtime": {
+          "Mabna.Data.v1.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Configuration.Abstractions/2.0.0.0": {
+        "runtime": {
+          "Microsoft.Extensions.Configuration.Abstractions.dll": {}
+        }
+      },
+      "System.Data.SqlClient/4.2.0.0": {
+        "runtime": {
+          "System.Data.SqlClient.dll": {}
         }
       }
     }
@@ -42,6 +89,41 @@
       "sha512": "sha512-7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
       "path": "netstandard.library/2.0.0",
       "hashPath": "netstandard.library.2.0.0.nupkg.sha512"
+    },
+    "Irps.Framework.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Irps.Framework.User/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IrpsApi.Framework/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IrpsApi.Framework.System/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Mabna.Data.v1/1.4.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Configuration.Abstractions/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Data.SqlClient/4.2.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

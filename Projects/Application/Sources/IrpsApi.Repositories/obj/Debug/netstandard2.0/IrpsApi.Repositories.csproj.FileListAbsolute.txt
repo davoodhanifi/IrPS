@@ -6,11 +6,42 @@
 \\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Repositories.pdb
 \\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.dll
 \\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.pdb
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.csprojResolveAssemblyReference.cache
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.csproj.CoreCompileInputs.cache
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.AssemblyInfoInputs.cache
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.AssemblyInfo.cs
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.dll
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.pdb
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.deps.json
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.dll
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.pdb
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Irps.Framework.Core.dll
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Irps.Framework.User.dll
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.dll
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.System.dll
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Irps.Framework.Core.pdb
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Irps.Framework.User.pdb
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.System.pdb
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.pdb
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.deps.json
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.dll
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Irps.Framework.Core.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Irps.Framework.User.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.System.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Irps.Framework.Core.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Irps.Framework.User.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.System.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.csprojResolveAssemblyReference.cache
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.csproj.CoreCompileInputs.cache
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.AssemblyInfoInputs.cache
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.AssemblyInfo.cs
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.dll
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Mabna.Data.v1.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.xml
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\System.Data.SqlClient.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\System.Data.SqlClient.xml

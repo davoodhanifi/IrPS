@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mabna.WebApi.AspNetCore.v1" Version="1.0.0-beta06" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
     <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
@@ -16,6 +17,18 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IrpsApi.Framework.System\IrpsApi.Framework.System.csproj" />
+    <ProjectReference Include="..\IrpsApi.Framework\IrpsApi.Framework.csproj" />
+    <ProjectReference Include="..\IrpsApi.Repositories\IrpsApi.Repositories.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Mabna.Data.v1">
+      <HintPath>..\..\..\..\..\Nuget\Mabna.Data.v1.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

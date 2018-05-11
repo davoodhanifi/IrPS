@@ -1,9 +1,0 @@
-bin
-obj
-*.suo
-*.user
-_ReSharper.*
-.vs
-
-Build/Build.rsp
-Projects/Application/Publish/

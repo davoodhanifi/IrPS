@@ -25,6 +25,16 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "IrpsApi.Framework/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/IrpsApi.Framework.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IrpsApi.Framework.dll": {}
+        }
       }
     }
   },
@@ -169,10 +179,16 @@
         "netstandard.library.2.0.0.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "IrpsApi.Framework/1.0.0": {
+      "type": "project",
+      "path": "../IrpsApi.Framework/IrpsApi.Framework.csproj",
+      "msbuildProject": "../IrpsApi.Framework/IrpsApi.Framework.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "IrpsApi.Framework >= 1.0.0",
       "NETStandard.Library >= 2.0.0"
     ]
   },
@@ -203,13 +219,17 @@
         "netstandard2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Projects\\Nuget": {},
         "http://nuget.corp.mabnadp.com/nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj": {
+              "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

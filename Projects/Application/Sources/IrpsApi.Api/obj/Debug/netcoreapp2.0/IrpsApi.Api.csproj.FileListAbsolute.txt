@@ -9,14 +9,36 @@
 \\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.pdb
 \\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.dll
 \\vmware-host\Shared Folders\Documents\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.pdb
-C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.csprojResolveAssemblyReference.cache
-C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.csproj.CoreCompileInputs.cache
-C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.AssemblyInfoInputs.cache
-C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.AssemblyInfo.cs
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.deps.json
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.runtimeconfig.json
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.runtimeconfig.dev.json
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.dll
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.pdb
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.csprojResolveAssemblyReference.cache
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.csproj.CoreCompileInputs.cache
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.AssemblyInfoInputs.cache
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.AssemblyInfo.cs
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.dll
+D:\Noandishan\Projects\IrPS-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.pdb
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.deps.json
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.runtimeconfig.json
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.runtimeconfig.dev.json
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.dll
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Api.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.csprojResolveAssemblyReference.cache
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.csproj.CoreCompileInputs.cache
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.AssemblyInfoInputs.cache
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.AssemblyInfo.cs
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.dll
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Framework.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Framework.System.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Framework.System.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Framework.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\Irps.Framework.Core.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\Irps.Framework.User.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\Noandishan.IrpsApi.Repositories.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\Mabna.Data.v1.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\Noandishan.IrpsApi.Repositories.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\Irps.Framework.Core.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\Irps.Framework.User.pdb

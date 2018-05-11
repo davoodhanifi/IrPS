@@ -1,6 +1,6 @@
 CREATE TABLE [System].[Otp](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserCode] [bigint] NOT NULL,
+	[PhoneNumber] [varchar](16) NOT NULL,
 	[DeviceId] [nvarchar](128) NOT NULL,
 	[Password] [int] NOT NULL,
 	[CreationDate] [bigint] NOT NULL,

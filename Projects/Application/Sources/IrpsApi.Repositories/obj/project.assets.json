@@ -25,6 +25,52 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "Irps.Framework.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Irps.Framework.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Irps.Framework.Core.dll": {}
+        }
+      },
+      "Irps.Framework.User/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "IrpsApi.Framework": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Irps.Framework.User.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Irps.Framework.User.dll": {}
+        }
+      },
+      "IrpsApi.Framework/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/IrpsApi.Framework.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IrpsApi.Framework.dll": {}
+        }
+      },
+      "IrpsApi.Framework.System/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "IrpsApi.Framework": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/IrpsApi.Framework.System.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IrpsApi.Framework.System.dll": {}
+        }
       }
     }
   },
@@ -169,10 +215,33 @@
         "netstandard.library.2.0.0.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "Irps.Framework.Core/1.0.0": {
+      "type": "project",
+      "path": "../Irps.Framework.Core/Irps.Framework.Core.csproj",
+      "msbuildProject": "../Irps.Framework.Core/Irps.Framework.Core.csproj"
+    },
+    "Irps.Framework.User/1.0.0": {
+      "type": "project",
+      "path": "../Irps.Framework.User/Irps.Framework.User.csproj",
+      "msbuildProject": "../Irps.Framework.User/Irps.Framework.User.csproj"
+    },
+    "IrpsApi.Framework/1.0.0": {
+      "type": "project",
+      "path": "../IrpsApi.Framework/IrpsApi.Framework.csproj",
+      "msbuildProject": "../IrpsApi.Framework/IrpsApi.Framework.csproj"
+    },
+    "IrpsApi.Framework.System/1.0.0": {
+      "type": "project",
+      "path": "../IrpsApi.Framework.System/IrpsApi.Framework.System.csproj",
+      "msbuildProject": "../IrpsApi.Framework.System/IrpsApi.Framework.System.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "Irps.Framework.Core >= 1.0.0",
+      "Irps.Framework.User >= 1.0.0",
+      "IrpsApi.Framework.System >= 1.0.0",
       "NETStandard.Library >= 2.0.0"
     ]
   },
@@ -203,13 +272,23 @@
         "netstandard2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Projects\\Nuget": {},
         "http://nuget.corp.mabnadp.com/nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\Irps.Framework.Core\\Irps.Framework.Core.csproj": {
+              "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\Irps.Framework.Core\\Irps.Framework.Core.csproj"
+            },
+            "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\Irps.Framework.User\\Irps.Framework.User.csproj": {
+              "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\Irps.Framework.User\\Irps.Framework.User.csproj"
+            },
+            "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj": {
+              "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

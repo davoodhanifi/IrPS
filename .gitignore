@@ -1,0 +1,13 @@
+bin
+obj
+*.suo
+*.user
+_ReSharper.*
+.vs
+
+Build/Build.rsp
+Projects/Application/Publish/
+Projects/Database/Bin/
+Projects/Application/Sources/IrpsApi.Api/ConnectionStrings.config
+Projects/Database/Publish/
+Projects/Package
