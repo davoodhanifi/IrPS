@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IrpsApi.Repositories", "Irp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IrpsApi.Framework.System", "IrpsApi.Framework.System\IrpsApi.Framework.System.csproj", "{F1937882-E076-447E-A698-F515279F0E0B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Irps.Framework.Accounting", "Irps.Framework.Accounting\Irps.Framework.Accounting.csproj", "{C504A115-3197-43B3-A975-36C4B5DB2E18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IrpsApi.Framework.Accounting", "IrpsApi.Framework.Accounting\IrpsApi.Framework.Accounting.csproj", "{C504A115-3197-43B3-A975-36C4B5DB2E18}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Irps.Framework.Core", "Irps.Framework.Core\Irps.Framework.Core.csproj", "{48F8DB4F-FDB5-43CC-B4D5-EB3DEF1FD854}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IrpsApi.Framework.Core", "IrpsApi.Framework.Core\IrpsApi.Framework.Core.csproj", "{48F8DB4F-FDB5-43CC-B4D5-EB3DEF1FD854}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Irps.Framework.User", "Irps.Framework.User\Irps.Framework.User.csproj", "{3775535B-48B4-40AF-AC49-98590E7A20A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IrpsApi.Framework.User", "IrpsApi.Framework.User\IrpsApi.Framework.User.csproj", "{3775535B-48B4-40AF-AC49-98590E7A20A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

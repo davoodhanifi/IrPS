@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <Reference Include="Mabna.Data.v1">
-      <HintPath>..\..\..\..\..\Nuget\Mabna.Data.v1.dll</HintPath>
+      <HintPath>..\..\Libraries\Mabna.Data.v1.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -23,7 +23,7 @@ namespace Noandishan.IrpsApi.Repositories.System
             set;
         }
 
-        public int Password
+        public string Password
         {
             get;
             set;

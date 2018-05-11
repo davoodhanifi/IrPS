@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using IrpsApi.Framework;
 using Mabna.Data;
 using Microsoft.Extensions.Configuration;
@@ -94,5 +95,12 @@ namespace Noandishan.IrpsApi.Repositories
         {
             return new DataCommand(_configuration.GetConnectionString("DefaultConnection"));
         }
+
+        protected virtual void SetEntityCore(TEntity entity, IDataReader reader)
+        {
+            entity.Id = reader.ReadInt32("Id");
+        }
+
+        protected abstract TEntity SetEntity(IDataReader reader);
     }
 }

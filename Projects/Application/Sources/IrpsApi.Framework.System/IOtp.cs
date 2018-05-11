@@ -16,7 +16,7 @@ namespace IrpsApi.Framework.System
             set;
         }
 
-        int Password
+        string Password
         {
             get;
             set;

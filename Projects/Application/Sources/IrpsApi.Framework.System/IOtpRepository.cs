@@ -4,10 +4,14 @@ using System.Threading.Tasks;
 
 namespace IrpsApi.Framework.System
 {
-    public interface IOtpRepository
+    public interface IOtpRepository : IEntityRepository<IOtp>
     {
        Task<IOtp> GetAsync(int id, CancellationToken cancellationToken);
 
-       Task<IOtp> CreateNewOtpAsync(string phoneNumber, string deviceId, CancellationToken cancellationToken);
+       Task<IOtp> CreateAsync(string phoneNumber, CancellationToken cancellationToken);
+
+       Task<IOtp> CheckAsync(string phoneNumber, string password, CancellationToken cancellationToken);
+
+       void DeleteAsync(CancellationToken cancellationToken);
     }
 }
