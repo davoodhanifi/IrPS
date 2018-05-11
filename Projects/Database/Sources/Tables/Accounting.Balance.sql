@@ -1,7 +1,7 @@
 CREATE TABLE [Accounting].[Balance](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[UserCode] [bigint] NOT NULL,
-	[DateTime] [bigint] NOT NULL,
+	[DateTime] [datetime] NOT NULL,
 	[Balance] [decimal](19,4) NOT NULL,
 	[IsActive] [bit] NOT NULL,
 	[Notes] [nvarchar](max) NULL,

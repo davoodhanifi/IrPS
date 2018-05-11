@@ -3,7 +3,7 @@ CREATE TABLE [Accounting].[Transaction](
 	[FromUserCode] [bigint] NOT NULL,
 	[ToUserCode] [bigint] NOT NULL,
 	[Amount] [decimal](19,4) NOT NULL,
-	[DateTime] [bigint] NOT NULL,
+	[DateTime] [datetime] NOT NULL,
 	[Notes] [nvarchar](max) NULL,
  CONSTRAINT [PK_Transaction] PRIMARY KEY CLUSTERED 
 (

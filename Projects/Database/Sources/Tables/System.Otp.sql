@@ -3,8 +3,8 @@ CREATE TABLE [System].[Otp](
 	[PhoneNumber] [varchar](16) NOT NULL,
 	[DeviceId] [nvarchar](128) NOT NULL,
 	[Password] [int] NOT NULL,
-	[CreationDate] [bigint] NOT NULL,
-	[ExpiryDate] [bigint] NOT NULL
+	[CreationDate] [datetime] NOT NULL,
+	[ExpiryDate] [datetime] NOT NULL
  CONSTRAINT [PK_Otp] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

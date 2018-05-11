@@ -6,7 +6,7 @@ CREATE TABLE [System].[SystemLogParameter](
 	[IntegerValue] [bigint] NULL,
 	[DecimalValue] [decimal](19, 4) NULL,
 	[TextValue] [nvarchar](max) NULL,
-	[DateTime] [bigint] NULL,
+	[DateTime] [datetime] NULL,
 	[BinaryValue] [varbinary](max) NULL
  CONSTRAINT [PK_SystemLogParameter] PRIMARY KEY CLUSTERED 
 (

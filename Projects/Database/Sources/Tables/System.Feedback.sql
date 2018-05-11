@@ -3,7 +3,7 @@ CREATE TABLE [System].[Feedback](
 	[Subject] [nvarchar](max) NOT NULL,
 	[Text] [nvarchar](max) NOT NULL,
 	[UserCode] [bigint] NOT NULL,
-	[DateTime] [bigint] NOT NULL
+	[DateTime] [datetime] NOT NULL
 CONSTRAINT [PK_Feedback] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

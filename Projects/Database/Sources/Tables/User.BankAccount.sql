@@ -5,7 +5,7 @@ CREATE TABLE [User].[BankAccount](
 	[AccountOwner] [nvarchar](256) NULL,
 	[ShebaCode] [nvarchar](32) NULL,
 	[CardNo] [nvarchar](32) NULL,
-	[CreationDateTime] [bigint] NOT NULL,
+	[CreationDateTime] [datetime] NOT NULL,
 	[IsActive] [bit] NOT NULL,
 	[Notes] [nvarchar](max) NULL,
  CONSTRAINT [PK_BankAccount] PRIMARY KEY CLUSTERED 

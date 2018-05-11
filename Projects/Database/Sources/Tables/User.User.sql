@@ -13,7 +13,7 @@ CREATE TABLE [User].[User](
 	[ImageMimeType] [nvarchar](max) NULL,
 	[Barcode] [varbinary](max) NULL,
 	[BarcodeMimeType] [nvarchar](max) NULL,
-	[RegistrationDateTime] [bigint] NOT NULL,
+	[RegistrationDateTime] [datetime] NOT NULL,
 	[RegistrationCode] [varchar](255) NOT NULL,
 	[IsActive] [bit] NOT NULL,
  CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 

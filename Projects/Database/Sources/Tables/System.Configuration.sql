@@ -5,7 +5,7 @@ CREATE TABLE [System].[Configuration](
 	[IntegerValue] [bigint] NULL,
 	[DecimalValue] [decimal](19, 4) NULL,
 	[TextValue] [nvarchar](max) NULL,
-	[DateValue] [bigint] NULL,
+	[DateValue] [datetime] NULL,
 	[BinaryValue] [varbinary](4000) NULL,
 	[Tags] [nvarchar](4000) NULL,
 	[Notes] [nvarchar](max) NULL,
