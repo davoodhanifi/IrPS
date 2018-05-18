@@ -41,7 +41,7 @@ namespace Noandishan.IrpsApi.Repositories.User
             set;
         }
 
-        public long UserCode
+        public string UserCode
         {
             get;
             set;
@@ -65,11 +65,12 @@ namespace Noandishan.IrpsApi.Repositories.User
             set;
         }
 
-        public bool FingerprintEnabled
+        public bool? FingerprintEnabled
         {
             get;
             set;
         }
+
         public byte[] Image
         {
             get;
@@ -95,12 +96,6 @@ namespace Noandishan.IrpsApi.Repositories.User
         }
 
         public DateTime RegistrationDateTime
-        {
-            get;
-            set;
-        }
-
-        public string RegistrationCode
         {
             get;
             set;

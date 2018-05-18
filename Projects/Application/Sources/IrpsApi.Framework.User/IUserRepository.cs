@@ -9,6 +9,6 @@ namespace IrpsApi.Framework.User
 
         Task<IUser> GetAsync(int id, CancellationToken cancellationToken);
 
-        Task<IUser> CreateAsync(string phoneNumber, CancellationToken cancellationToken);
+        Task<IUser> CreateAsync(IUser user, CancellationToken cancellationToken);
     }
 }

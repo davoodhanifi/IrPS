@@ -27,17 +27,43 @@ namespace Noandishan.IrpsApi.Repositories.User
             return null;
         }
 
+        public Task<IUser> GetAsync(int id, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IUser> CreateAsync(IUser user, CancellationToken cancellationToken)
+        {
+            user.UserCode = new Random().Next(0, 99999999).ToString("D8");
+            user.RegistrationDateTime = DateTime.Now;
+
+            var command = GetCommand();
+            command.CommandText = "INSERT INTO [User].[User]([FirstName], [LastName], [PhoneNumber], [UserCode], [RegistrationDateTime], [FingerprintEnabled], [IsActive]) OUTPUT Inserted.Id VALUES(@firstName, @lastName, @phoneNumber, @userCode, @registrationDateTime, @fingerprintEnabled, @isActive)";
+
+            command.AddParameter("@firstName", user.FirstName);
+            command.AddParameter("@lastName", user.LastName);
+            command.AddParameter("@phoneNumber", user.PhoneNumber);
+            command.AddParameter("@userCode", user.UserCode);
+            command.AddParameter("@registrationDateTime", user.RegistrationDateTime);
+            command.AddParameter("@isActive", user.IsActive ?? true);
+            command.AddParameter("@fingerprintEnabled", user.FingerprintEnabled ?? false);
+
+            user.Id = await command.ExecuteScalarAsync<int>(cancellationToken);
+
+            return user;
+        }
+
         protected override IUser SetEntity(IDataReader reader)
         {
             return new User
             {
                 Id = reader.ReadInt32("Id"),
                 FirstName = reader.ReadString("FirstName"),
-                LastName = reader.ReadString("FirstName"),
+                LastName = reader.ReadString("LastName"),
                 PhoneNumber = reader.ReadString("PhoneNumber"),
                 Username = reader.ReadString("Username"),
                 Email = reader.ReadString("Email"),
-                UserCode = reader.ReadInt64("UserCode"),
+                UserCode = reader.ReadString("UserCode"),
                 PasswordHash = reader.ReadByteArray("PasswordHash"),
                 PasswordSalt = reader.ReadByteArray("PasswordSalt"),
                 FingerprintEnabled = reader.ReadBoolean("FingerprintEnabled"),
@@ -46,7 +72,6 @@ namespace Noandishan.IrpsApi.Repositories.User
                 Barcode = reader.ReadByteArray("Barcode"),
                 BarcodeMimeType = reader.ReadString("BarcodeMimeType"),
                 RegistrationDateTime = reader["RegistrationDateTime"] is DateTime ? (DateTime)reader["RegistrationDateTime"] : new DateTime(),
-                RegistrationCode = reader.ReadString("RegistrationCode"),
                 IsActive = reader.ReadBoolean("IsActive")
             };
         }

@@ -34,7 +34,7 @@ namespace IrpsApi.Framework.User
             set;
         }
 
-        long UserCode
+        string UserCode
         {
             get;
             set;
@@ -58,11 +58,12 @@ namespace IrpsApi.Framework.User
             set;
         }
 
-        bool FingerprintEnabled
+        bool? FingerprintEnabled
         {
             get;
             set;
         }
+
         byte[] Image
         {
             get;
@@ -88,12 +89,6 @@ namespace IrpsApi.Framework.User
         }
 
         DateTime RegistrationDateTime
-        {
-            get;
-            set;
-        }
-
-        string RegistrationCode
         {
             get;
             set;

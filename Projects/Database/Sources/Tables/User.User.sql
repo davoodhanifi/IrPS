@@ -5,7 +5,7 @@ CREATE TABLE [User].[User](
 	[PhoneNumber] [varchar](16) NOT NULL,
 	[Username] [varchar](255) NULL,
 	[Email] [varchar](255) NULL,
-	[UserCode] [bigint] NOT NULL,
+	[UserCode] [nvarchar](16) NOT NULL,
 	[PasswordHash] [binary](32) NULL,
 	[PasswordSalt] [binary](32) NULL,
 	[FingerprintEnabled] [bit] NOT NULL,

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using IrpsApi.Framework.System;
@@ -24,6 +23,16 @@ namespace IrpsApi.Api.Controllers.System
         [HttpGet("{id}", Name = "GetOtp")]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return UnprocessableEntity(ModelState);
+            }
+
             var item = await _otpRepository.GetAsync(id, cancellationToken);
             if (item == null)
             {
