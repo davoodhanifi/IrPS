@@ -18,7 +18,7 @@ namespace IrpsApi.Api.Controllers.User
             _userRepository = userRepository;
         }
 
-        [HttpGet(Name = "GetByPhoneNumber")]
+        [HttpGet("getbyphonenumber/{phoneNumber}", Name = "GetByPhoneNumber")]
         public async Task<IActionResult> GetByPhoneNumber(string phoneNumber, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(phoneNumber))
@@ -34,6 +34,35 @@ namespace IrpsApi.Api.Controllers.User
             try
             {
                 var user = await _userRepository.GetByPhoneNumberAsync(phoneNumber, cancellationToken);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(user);
+            }
+            catch
+            {
+                return StatusCode(500, "Error in processing");
+            }
+        }
+
+        [HttpGet("getbyusercode/{userCode}", Name = "GetByUserCode")]
+        public async Task<IActionResult> GetByUserCode(string userCode, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(userCode))
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return UnprocessableEntity(ModelState);
+            }
+
+            try
+            {
+                var user = await _userRepository.GetByUserCodeAsync(userCode, cancellationToken);
                 if (user == null)
                 {
                     return NotFound();

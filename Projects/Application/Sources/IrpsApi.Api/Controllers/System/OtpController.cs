@@ -42,7 +42,7 @@ namespace IrpsApi.Api.Controllers.System
             return Ok(item);
         }
 
-        [HttpGet(Name = "CheckOtp")]
+        [HttpGet("check")]
         public async Task<IActionResult> CheckOtp(string phoneNumber, string password, CancellationToken cancellationToken)
         {
             var otp = await _otpRepository.CheckAsync(phoneNumber, password, cancellationToken);

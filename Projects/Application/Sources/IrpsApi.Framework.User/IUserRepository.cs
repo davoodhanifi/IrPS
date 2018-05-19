@@ -5,7 +5,9 @@ namespace IrpsApi.Framework.User
 {
     public interface IUserRepository : IEntityRepository<IUser>
     {
-        Task<IUser> GetByPhoneNumberAsync(string phoneNumber, CancellationToken cancelationToken);
+        Task<IUser> GetByPhoneNumberAsync(string phoneNumber, CancellationToken cancellationToken);
+
+        Task<IUser> GetByUserCodeAsync(string userCode, CancellationToken cancellationToken);
 
         Task<IUser> GetAsync(int id, CancellationToken cancellationToken);
 

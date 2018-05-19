@@ -27,6 +27,20 @@ namespace Noandishan.IrpsApi.Repositories.User
             return null;
         }
 
+        public async Task<IUser> GetByUserCodeAsync(string userCode, CancellationToken cancellationToken)
+        {
+            var command = GetCommand();
+            command.CommandText = "SELECT * From [User].[User] WHERE [UserCode] = @userCode AND [IsActive] = 1";
+
+            command.AddParameter("@userCode", userCode);
+
+            using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+                if (await reader.ReadAsync(cancellationToken))
+                    return SetEntity(reader);
+
+            return null;
+        }
+
         public Task<IUser> GetAsync(int id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
