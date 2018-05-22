@@ -17,6 +17,7 @@
   </ItemGroup>-->
 
   <ItemGroup>
+    <ProjectReference Include="..\IrpsApi.Framework.Accounting\IrpsApi.Framework.Accounting.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework.Core\IrpsApi.Framework.Core.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework.User\IrpsApi.Framework.User.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework.System\IrpsApi.Framework.System.csproj" />

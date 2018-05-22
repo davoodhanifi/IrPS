@@ -53,3 +53,5 @@ C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreap
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Framework.User.pdb
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.dll
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\obj\Debug\netcoreapp2.0\IrpsApi.Api.pdb
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Framework.Accounting.dll
+C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Api\bin\Debug\netcoreapp2.0\IrpsApi.Framework.Accounting.pdb

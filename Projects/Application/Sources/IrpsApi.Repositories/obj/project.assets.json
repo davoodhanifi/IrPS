@@ -259,6 +259,19 @@
           "bin/placeholder/IrpsApi.Framework.dll": {}
         }
       },
+      "IrpsApi.Framework.Accounting/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "IrpsApi.Framework": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/IrpsApi.Framework.Accounting.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IrpsApi.Framework.Accounting.dll": {}
+        }
+      },
       "IrpsApi.Framework.Core/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -946,6 +959,11 @@
       "path": "../IrpsApi.Framework/IrpsApi.Framework.csproj",
       "msbuildProject": "../IrpsApi.Framework/IrpsApi.Framework.csproj"
     },
+    "IrpsApi.Framework.Accounting/1.0.0": {
+      "type": "project",
+      "path": "../IrpsApi.Framework.Accounting/IrpsApi.Framework.Accounting.csproj",
+      "msbuildProject": "../IrpsApi.Framework.Accounting/IrpsApi.Framework.Accounting.csproj"
+    },
     "IrpsApi.Framework.Core/1.0.0": {
       "type": "project",
       "path": "../IrpsApi.Framework.Core/IrpsApi.Framework.Core.csproj",
@@ -964,6 +982,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "IrpsApi.Framework.Accounting >= 1.0.0",
       "IrpsApi.Framework.Core >= 1.0.0",
       "IrpsApi.Framework.System >= 1.0.0",
       "IrpsApi.Framework.User >= 1.0.0",
@@ -1007,6 +1026,9 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
+            "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounting\\IrpsApi.Framework.Accounting.csproj": {
+              "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounting\\IrpsApi.Framework.Accounting.csproj"
+            },
             "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj": {
               "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj"
             },
