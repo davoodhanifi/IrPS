@@ -4,18 +4,19 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
+using AutoMapper;
 
 namespace IrpsApi.Api
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
-
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -23,8 +24,9 @@ namespace IrpsApi.Api
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
-            services.AddSingleton(_ => Configuration);
+            services.AddSingleton(_ => _configuration);
             services.RegisterComponents();
+            services.AddAutoMapper();
             services.AddMvcCore().AddAuthorization().AddJsonFormatters();
         }
 

@@ -1019,8 +1019,6 @@
         "netstandard2.0"
       ],
       "sources": {
-        "C:\\Projects\\Nuget": {},
-        "http://nuget.corp.mabnadp.com/nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

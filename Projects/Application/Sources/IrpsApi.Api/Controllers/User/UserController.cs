@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using IrpsApi.Api.ViewModels.User;
 using IrpsApi.Framework.User;
 using Microsoft.AspNetCore.Mvc;
@@ -21,86 +21,87 @@ namespace IrpsApi.Api.Controllers.User
         [HttpGet("getbyphonenumber/{phoneNumber}", Name = "GetByPhoneNumber")]
         public async Task<IActionResult> GetByPhoneNumber(string phoneNumber, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(phoneNumber))
-            {
-                return BadRequest();
-            }
-
             if (!ModelState.IsValid)
             {
                 return UnprocessableEntity(ModelState);
             }
 
+            if (string.IsNullOrEmpty(phoneNumber))
+            {
+                return BadRequest("Phone Number Not Defined!");
+            }
+         
             try
             {
                 var user = await _userRepository.GetByPhoneNumberAsync(phoneNumber, cancellationToken);
                 if (user == null)
                 {
-                    return NotFound();
+                    return NotFound("Not Found User By This Phone Number");
                 }
 
-                return Ok(user);
+                var userViewModel = Mapper.Map<UserModel>(user);
+                return Ok(userViewModel);
             }
             catch
             {
-                return StatusCode(500, "Error in processing");
+                return StatusCode(500, "Error In Processing");
             }
         }
 
         [HttpGet("getbyusercode/{userCode}", Name = "GetByUserCode")]
         public async Task<IActionResult> GetByUserCode(string userCode, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(userCode))
-            {
-                return BadRequest();
-            }
-
             if (!ModelState.IsValid)
             {
                 return UnprocessableEntity(ModelState);
+            }
+
+            if (string.IsNullOrEmpty(userCode))
+            {
+                return BadRequest("User Codes Not Defined!");
             }
 
             try
             {
                 var user = await _userRepository.GetByUserCodeAsync(userCode, cancellationToken);
                 if (user == null)
-                {
-                    return NotFound();
-                }
+                    return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound, "User Not Found!");
 
-                return Ok(user);
+                var userViewModel = Mapper.Map<UserModel>(user);
+                return Ok(userViewModel);
             }
             catch
             {
-                return StatusCode(500, "Error in processing");
+                return StatusCode(500, "Error In Processing");
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]UserModel userModel, CancellationToken cancellationToken) 
         {
-            if (userModel == null || userModel.PhoneNumber == null)
-            {
-                return BadRequest();
-            }
-
             if (!ModelState.IsValid)
             {
                 return UnprocessableEntity(ModelState);
             }
 
-            var user = await _userRepository.GetByPhoneNumberAsync(userModel.PhoneNumber, cancellationToken);
-            if (user != null)
-                throw new Exception("User Exists Already!");
-
+            if (userModel?.PhoneNumber == null)
+            {
+                return BadRequest("Phone Number Not Defined!");
+            }
+           
             try
             {
+                var user = await _userRepository.GetByPhoneNumberAsync(userModel.PhoneNumber, cancellationToken);
+                if (user != null)
+                    return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status422UnprocessableEntity, "User Exist Already!");
+
                 user = await _userRepository.CreateAsync(userModel, cancellationToken);
-                return CreatedAtRoute("GetByPhoneNumber", new { phoneNumber = user.PhoneNumber }, userModel);
+                var userViewModel = Mapper.Map<UserModel>(user);
+                return CreatedAtRoute("GetByPhoneNumber", new { phoneNumber = userViewModel.PhoneNumber }, userViewModel);
             }
             catch (Exception e)
             {
-                return StatusCode(500, "Error in processing");
+                return StatusCode(500, "Error In Processing");
             }
         }
     }

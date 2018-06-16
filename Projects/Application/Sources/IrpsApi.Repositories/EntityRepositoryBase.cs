@@ -10,6 +10,7 @@ namespace Noandishan.IrpsApi.Repositories
     public abstract class EntityRepositoryBase<TEntity> : IEntityRepository<TEntity>, IRepository where TEntity : IEntity
     {
         private readonly IConfiguration _configuration;
+        private readonly IDictionary<int, TEntity> _entityCache = new Dictionary<int, TEntity>();
 
         public EntityRepositoryBase(IConfiguration configuration)
         {
@@ -99,6 +100,79 @@ namespace Noandishan.IrpsApi.Repositories
         protected virtual void SetEntityCore(TEntity entity, IDataReader reader)
         {
             entity.Id = reader.ReadInt32("Id");
+        }
+
+        protected int ExecuteNonQuery(DataCommand command)
+        {
+            var rowsAffected = command.ExecuteNonQuery();
+
+            return rowsAffected;
+        }
+
+        protected T ExecuteScalar<T>(DataCommand command)
+        {
+            var reader = (T)command.ExecuteScalar();
+
+            return reader;
+        }
+
+        protected IDataReader ExecuteReader(DataCommand command)
+        {
+            var reader = command.ExecuteReader();
+
+            return reader;
+        }
+
+
+        protected TEntity FetchEntity(DataCommand command)
+        {
+            using (var reader = ExecuteReader(command))
+            {
+                var entity = ReadSingleEntity(reader);
+
+                if (entity == null)
+                    return default(TEntity);
+
+                return CacheEntity(entity);
+            }
+        }
+
+        protected ICollection<TEntity> FetchEntities(DataCommand command)
+        {
+            var entities = new List<TEntity>();
+
+            using (var reader = ExecuteReader(command))
+                foreach (var entity in ReadMultipleEntities(reader))
+                    entities.Add(CacheEntity(entity));
+
+            return entities;
+        }
+
+        private TEntity CacheEntity(TEntity entity)
+        {
+            TEntity cachedEntity;
+
+            // If this entity already exists in cache, return the cached one for consistency
+            if (_entityCache.TryGetValue(entity.Id, out cachedEntity))
+                return cachedEntity;
+
+            _entityCache[entity.Id] = entity;
+
+            return entity;
+        }
+
+        private TEntity ReadSingleEntity(IDataReader reader)
+        {
+            if (!reader.Read())
+                return default(TEntity);
+
+            return SetEntity(reader);
+        }
+
+        private IEnumerable<TEntity> ReadMultipleEntities(IDataReader reader)
+        {
+            while (reader.Read())
+                yield return SetEntity(reader);
         }
 
         protected abstract TEntity SetEntity(IDataReader reader);

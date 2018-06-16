@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using IrpsApi.Api.ViewModels.System;
 using IrpsApi.Framework.System;
 using IrpsApi.Framework.User;
 using Microsoft.AspNetCore.Mvc;
@@ -23,23 +25,24 @@ namespace IrpsApi.Api.Controllers.System
         [HttpGet("{id}", Name = "GetOtp")]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken)
         {
-            if (id <= 0)
-            {
-                return BadRequest();
-            }
-
             if (!ModelState.IsValid)
             {
                 return UnprocessableEntity(ModelState);
             }
 
+            if (id <= 0)
+            {
+                return BadRequest("Bad Id!");
+            }
+
             var item = await _otpRepository.GetAsync(id, cancellationToken);
             if (item == null)
             {
-                return NotFound();
+                return NotFound("Item Not Exist!");
             }
 
-            return Ok(item);
+            var itemViewModel = Mapper.Map<OtpModel>(item);
+            return Ok(itemViewModel);
         }
 
         [HttpGet("check")]
@@ -64,14 +67,14 @@ namespace IrpsApi.Api.Controllers.System
         [HttpPost]
         public async Task<IActionResult> Post(string phoneNumber, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(phoneNumber))
-            {
-                return BadRequest();
-            }
-
             if (!ModelState.IsValid)
             {
                 return UnprocessableEntity(ModelState);
+            }
+
+            if (string.IsNullOrEmpty(phoneNumber))
+            {
+                return BadRequest("Phone Number Not Defined!");
             }
 
             try
@@ -79,11 +82,12 @@ namespace IrpsApi.Api.Controllers.System
                 _otpRepository.DeleteAsync(cancellationToken);
 
                 var otp = await _otpRepository.CreateAsync(phoneNumber, cancellationToken);
-                return CreatedAtRoute("GetOtp", new { id = otp.Id }, otp);
+                var otpViewModel = Mapper.Map<OtpModel>(otp);
+                return CreatedAtRoute("GetOtp", new { id = otpViewModel.Id }, otpViewModel);
             }
             catch
             {
-                return StatusCode(500, "Error in processing");
+                return StatusCode(500, "Error In Processing");
             }
         }
     }

@@ -1,9 +1,10 @@
 CREATE TABLE [Accounting].[Transaction](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[FromUserCode] [bigint] NOT NULL,
-	[ToUserCode] [bigint] NOT NULL,
+	[FromUserCode] [nvarchar](16) NULL,
+	[ToUserCode] [nvarchar](16) NOT NULL,
 	[Amount] [decimal](19,4) NOT NULL,
 	[DateTime] [datetime] NOT NULL,
+	[TransactionType] [tinyint] NOT NULL,
 	[Notes] [nvarchar](max) NULL,
  CONSTRAINT [PK_Transaction] PRIMARY KEY CLUSTERED 
 (

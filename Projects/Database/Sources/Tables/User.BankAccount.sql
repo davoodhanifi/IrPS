@@ -1,6 +1,6 @@
 CREATE TABLE [User].[BankAccount](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserCode] [bigint] NOT NULL,
+	[UserCode] [nvarchar](16) NOT NULL,
 	[BankName] [nvarchar](128) NULL,
 	[AccountOwner] [nvarchar](256) NULL,
 	[ShebaCode] [nvarchar](32) NULL,

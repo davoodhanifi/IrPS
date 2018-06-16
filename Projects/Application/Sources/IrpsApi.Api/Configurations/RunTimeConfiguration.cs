@@ -14,7 +14,10 @@ namespace IrpsApi.Api.Configurations
         {
             // Accounting
             services.AddScoped(typeof(IBalance), typeof(Balance));
+            services.AddScoped(typeof(ITransaction), typeof(Transaction));
+
             services.AddScoped(typeof(IBalanceRepository), typeof(BalanceRepository));
+            services.AddScoped(typeof(ITransactionRepository), typeof(TransactionRepository));
 
             // System
             services.AddScoped(typeof(IOtp), typeof(Otp));
