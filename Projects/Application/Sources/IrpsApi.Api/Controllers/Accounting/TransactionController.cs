@@ -37,7 +37,6 @@ namespace IrpsApi.Api.Controllers.Accounting
                 return BadRequest("User Code Not Defined!");
             }
 
-           
             try
             {
                 var user = await _userRepository.GetByUserCodeAsync(userCode, cancellationToken);

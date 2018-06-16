@@ -5,6 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using AutoMapper;
+using Swashbuckle.AspNetCore.Swagger;
+using System.Reflection;
+using System.IO;
+using System;
 
 namespace IrpsApi.Api
 {
@@ -27,6 +31,26 @@ namespace IrpsApi.Api
             services.AddSingleton(_ => _configuration);
             services.RegisterComponents();
             services.AddAutoMapper();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                    {
+                        Title = "IrPS API.",
+                        Version ="v1",
+                        Description = "API For Iranian Payment Service",
+                        Contact = new Contact
+                        {
+                             Name = "Davood Hanifi",
+                             Email = "davood.hanifi[at]gmail.com",
+                        }
+                    });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+
             services.AddMvcCore().AddAuthorization().AddJsonFormatters();
         }
 
@@ -37,6 +61,12 @@ namespace IrpsApi.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "IrPs API v1");
+            });
 
             app.UseMvc();
         }
