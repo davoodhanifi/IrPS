@@ -2,138 +2,152 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
-using IrpsApi.Api.ViewModels.Accounting;
+using IrpsApi.Api.ExpandOptionsHelpers;
+using IrpsApi.Api.Models.Accounting;
+using IrpsApi.Api.Models.Accounts;
 using IrpsApi.Framework.Accounting;
-using IrpsApi.Framework.User;
+using IrpsApi.Framework.Accounting.Repositories;
+using IrpsApi.Framework.Accounts.Repositories;
+using Mabna.WebApi.Common;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace IrpsApi.Api.Controllers.Accounting
 {
-    [Route("api/[controller]")]
-    public class TransactionController : ControllerBase<IUser>
+    public class TransactionController : RequiresAuthenticationApiControllerBase
     {
-        private readonly ITransactionRepository _transactionRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IAccountRepository _accountRepository;
         private readonly IBalanceRepository _balanceRepository;
+        private readonly ITransactionRepository _transactionRepository;
 
-        public TransactionController(ITransactionRepository transactionRepository, IUserRepository userRepository, IBalanceRepository balanceRepository)
+        public TransactionController(ITransactionRepository transactionRepository, IAccountRepository accountRepository, IBalanceRepository balanceRepository)
         {
             _transactionRepository = transactionRepository;
-            _userRepository = userRepository;
+            _accountRepository = accountRepository;
             _balanceRepository = balanceRepository;
         }
 
-        [HttpGet("getallbyusercode/{userCode}", Name = "GetTranscationsByUserCode")]
-        public async Task<IActionResult> GetByUserCode(string userCode, CancellationToken cancellationToken)
+        /// <summary>
+        /// Get user transactions.
+        /// </summary>
+        /// <response code="404">invalid_account_id</response>  
+        /// <response code="403">forbidden</response>
+        [HttpGet]
+        [Route("accounting/{account_id}/transactions")]
+        [SwaggerResponse(200, type : typeof(IEnumerable<TransactionModel>))]
+        [SwaggerResponse(404)]
+        [SwaggerResponse(403)]
+        public async Task<ActionResult<IEnumerable<TransactionModel>>> GetAllTransactionsAsync([FromRoute(Name = "account_id")] string accountId, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
-            if (!ModelState.IsValid)
-            {
-                return UnprocessableEntity(ModelState);
-            }
+            if (accountId != Session.AccountId)
+                return Forbid();
 
-            if (string.IsNullOrEmpty(userCode))
-            {
-                return BadRequest("User Code Not Defined!");
-            }
+            var account = await _accountRepository.GetAsync(accountId, cancellationToken);
+            if (account == null)
+                return NotFound("invalid_account_id");
 
-            try
-            {
-                var user = await _userRepository.GetByUserCodeAsync(userCode, cancellationToken);
-                if (user == null)
-                    return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound, "User Not Found!");
+            var transactions = await _transactionRepository.GetAllTransactionsAsync(accountId, cancellationToken);
+            var result = new List<TransactionModel>();
+            foreach (var transaction in transactions)
+                result.Add(await transaction.ToTransactionModelAsync(GetExpandOptions(expandOptions), cancellationToken));
 
-                var transactions = await _transactionRepository.GetAllByUserCodeAsync(userCode, cancellationToken);
-                var transactionsViewModels = Mapper.Map<IEnumerable<TransactionModel>>(transactions);
-                return Ok(transactionsViewModels);
-            }
-            catch(Exception e)
-            {
-                return StatusCode(500, "Error In Processing");
-            }
+            return Ok(result);
         }
 
+        /// <summary>
+        /// Add new transaction.
+        /// </summary>
+        /// <response code="422">missing_from_account, missing_to_account, missing_transaction_type, invalid_amount, not_enough_credit, rollback_transaction</response>  
+        /// <response code="403">forbidden</response>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]TransactionModel transactionModel, CancellationToken cancellationToken)
+        [Route("accounting/transactions/add")]
+        [SwaggerResponse(200, type: typeof(SessionModel))]
+        [SwaggerResponse(422)]
+        [SwaggerResponse(403)]
+        public async Task<ActionResult<TransactionModel>> AddTransactionAsync([FromBody] InputTransactionModel transactionModel, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
-            if (!ModelState.IsValid)
-            {
-                return UnprocessableEntity(ModelState);
-            }
+            if (transactionModel.FromAccount.Id != Session.AccountId)
+                return Forbid();
 
-            if (transactionModel?.TransactionType == null || transactionModel?.TransactionType == TransactionType.None)
-            {
-                return BadRequest("Transaction Type Not Defined!");
-            }
+            if (transactionModel?.Type == null || transactionModel?.Type.Id == TransactionTypeIds.None)
+                throw new UnprocessableEntityException("missing_transaction_type", "Transaction Type Not Defined!");
 
-            if (transactionModel?.TransactionType == TransactionType.Payment && transactionModel?.FromUserCode == null)
-            {
-                return BadRequest("First User Not Defined!");
-            }
+            if (transactionModel?.Amount <= 0M)
+                throw new UnprocessableEntityException("invalid_amount", "Amount Must Be Positive!");
 
-            if (transactionModel?.ToUserCode == null)
-            {
-                return BadRequest("Second User Not Defined!");
-            }
+            var oldFromUserBalance = await _balanceRepository.GetByAccountIdAsync(transactionModel.FromAccount.Id, cancellationToken);
+            if (oldFromUserBalance == null || oldFromUserBalance.CurrentBalance < transactionModel.Amount)
+                throw new UnprocessableEntityException("not_enough_credit", "Amount Must Be Positive!");
 
-            if (transactionModel?.Amount == null || transactionModel?.Amount == 0)
-            {
-                return BadRequest("Amount Must Be Positive!");
-            }
-           
+            var dateTimeNow = DateTime.Now;
+
+            var transaction = _transactionRepository.Create();
+            transaction.FromAccountId = transactionModel.FromAccount.Id;
+            transaction.ToAccountId = transactionModel.ToAccount.Id;
+            transaction.Amount = transactionModel.Amount;
+            transaction.DateTime = dateTimeNow;
+            transaction.Description = transactionModel.Description;
+            transaction.TypeId = transactionModel.Type.Id;
+            transaction.OnlinePaymentId = transactionModel.OnlinePaymentId;
+
+            var newFromUserBalance = _balanceRepository.Create();
+            // Get 2th user balance
+            var oldToUserBalance = await _balanceRepository.GetByAccountIdAsync(transactionModel.ToAccount.Id, cancellationToken);
+            var newtoUserBalance = _balanceRepository.Create();
+
             try
             {
-                var toUser = await _userRepository.GetByUserCodeAsync(transactionModel.ToUserCode, cancellationToken);
-                if (toUser == null)
-                    return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound, "Second User Not Found!");
+                // Save Transaction
+                await _transactionRepository.SaveAsync(transaction, cancellationToken);
 
-                if (transactionModel.TransactionType == TransactionType.Payment)
+                // Update 1th user balance
+                newFromUserBalance.AccountId = transactionModel.FromAccount.Id;
+                newFromUserBalance.DateTime = dateTimeNow;
+                newFromUserBalance.CurrentBalance = oldFromUserBalance.CurrentBalance - transaction.Amount;
+                newFromUserBalance.IsActive = true;
+                newFromUserBalance.Description = $"{transactionModel.Type.Title} به کاربر با شناسه : {transactionModel.ToAccount.Id}";
+                await _balanceRepository.SaveAsync(newFromUserBalance, cancellationToken);
+
+                // Disable 1th user balance
+                oldFromUserBalance.IsActive = false;
+                await _balanceRepository.UpdateAsync(oldFromUserBalance, cancellationToken);
+
+                // Update 2th user balance
+                newtoUserBalance.AccountId = transactionModel.ToAccount.Id;
+                newtoUserBalance.DateTime = dateTimeNow;
+                newtoUserBalance.CurrentBalance = (oldToUserBalance?.CurrentBalance ?? 0) + transaction.Amount;
+                newtoUserBalance.IsActive = true;
+                newtoUserBalance.Description = $"{transactionModel.Type.Title} از کاربر با شناسه : {transactionModel.FromAccount.Id}";
+                await _balanceRepository.SaveAsync(newtoUserBalance, cancellationToken);
+
+                // Disable 2th user balance if not null
+                if (oldToUserBalance != null)
                 {
-                    var fromUser = await _userRepository.GetByUserCodeAsync(transactionModel.FromUserCode, cancellationToken);
-                    if (fromUser == null)
-                        return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound, "First User Not Found!");
-
-                    var fromUserBalance = await _balanceRepository.GetByUserCodeAsync(transactionModel.FromUserCode, cancellationToken);
-                    if (fromUserBalance == null || fromUserBalance.CurrentBalance < transactionModel.Amount)
-                        return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status422UnprocessableEntity, "First User Not Enough Credit!");
+                    oldToUserBalance.IsActive = false;
+                    await _balanceRepository.UpdateAsync(oldToUserBalance, cancellationToken);
                 }
 
-                var transaction = await _transactionRepository.CreateAsync(transactionModel, cancellationToken);
-
-                if (transaction != null)
-                {
-                    if (transactionModel.TransactionType == TransactionType.Payment)
-                    {
-                        var fromUserBalance = await _balanceRepository.GetByUserCodeAsync(transactionModel.FromUserCode, cancellationToken);
-
-                        var fromBalance = new BalanceModel
-                        {
-                            UserCode = transactionModel.FromUserCode,
-                            CurrentBalance = (fromUserBalance?.CurrentBalance ?? 0) - transactionModel.Amount,
-                            IsActive = true
-                        };
-
-                        await _balanceRepository.CreateAsync(fromBalance, cancellationToken);
-                    }
-
-                    var toUserBalance = await _balanceRepository.GetByUserCodeAsync(transactionModel.ToUserCode, cancellationToken);
-
-                    var toBalance = new BalanceModel
-                    {
-                        UserCode = transactionModel.ToUserCode,
-                        CurrentBalance = (toUserBalance?.CurrentBalance ?? 0) + transactionModel.Amount,
-                        IsActive = true
-                    };
-
-                    await _balanceRepository.CreateAsync(toBalance, cancellationToken);
-                }
-
-                var transactionViewModel = Mapper.Map<TransactionModel>(transaction);
-                return CreatedAtRoute("GetTranscationsByUserCode", new { userCode = transactionViewModel.ToUserCode }, transactionViewModel);
+                return Ok(await transaction.ToTransactionModelAsync(GetExpandOptions(expandOptions), cancellationToken));
             }
-            catch (Exception e)
+            catch
             {
-                return StatusCode(500, "Error In Processing");
+                // Rollback transaction
+                await _transactionRepository.DeleteAsync(transaction, cancellationToken);
+
+                // Rollback from user balances
+                await _balanceRepository.DeleteAsync(newFromUserBalance, cancellationToken);
+                oldFromUserBalance.IsActive = true;
+                await _balanceRepository.UpdateAsync(oldFromUserBalance, cancellationToken);
+
+                // Rollback to user balances
+                await _balanceRepository.DeleteAsync(newtoUserBalance, cancellationToken);
+                if (oldToUserBalance != null)
+                {
+                    oldToUserBalance.IsActive = true;
+                    await _balanceRepository.UpdateAsync(oldToUserBalance, cancellationToken);
+                }
+
+                throw new UnprocessableEntityException("rollback_transaction", "Error in transaction!");
             }
         }
     }

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Kavenegar</id>
+    <version>1.1.2</version>
+    <title>Kavenegar</title>
+    <authors>Kavenegar Team, Bagher Sohrabi, Ardavan</authors>
+    <owners>Kavenegar Team</owners>
+    <projectUrl>https://github.com/KaveNegar/kavenegar-csharp</projectUrl>
+    <iconUrl>https://kavenegar.com/public/images/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Kavenegar API in .NET</description>
+    <summary>Kavenegr REST API libarary SMS and Call gateway API</summary>
+    <releaseNotes>Add call text to speech feature</releaseNotes>
+    <tags>REST SMS voice TTS OTP API Verification kavenegar Voicesms</tags>
+  </metadata>
+</package>

@@ -1,0 +1,33 @@
+﻿CREATE TABLE [Accounts].[AccountHistory]
+    (
+      [History_ID] [INT] IDENTITY(1, 1) NOT NULL ,
+      [History_DateTime] [DATETIME] NOT NULL ,
+      [History_Action] INT NOT NULL ,
+      [Id] [INT] NULL,
+	  [TypeId] [int] NOT NULL,
+	  [EntityTypeId] [int] NULL,
+	  [UserCode] [nvarchar](16) NOT NULL,
+	  [Username] [nvarchar](255) NULL,
+	  [PasswordHash] [nvarchar](max) NULL,
+	  [Email] [nvarchar](255) NULL,
+	  [Mobile] [nvarchar](255) NULL,
+	  [CreationDateTime] [datetime] NOT NULL,
+	  [EmailVerificationStatusId] [INT] NOT NULL,
+	  [MobileVerificationStatusId] [INT] NOT NULL,
+	  [EmailVerificationToken] [nvarchar](max) NULL,
+	  [EmailVerificationTokenExpirationDate] [datetime] NULL,
+	  [MobileVerificationToken] [nvarchar](max) NULL,
+	  [MobileVerificationTokenExpirationDate] [datetime] NULL,
+	  [StateId] [int] NOT NULL,
+	  [StateNotes] [nvarchar](max) NULL,
+	  [Roles] NVARCHAR(max) NULL, 
+	  [Permissions] NVARCHAR(max) NULL,
+	  [VerificationStatusId] INT NOT NULL,
+	  [ReferrerAccountId] INT NULL,
+      [RecordVersion] [VARBINARY](8) NULL,
+      [RecordState] [INT] NULL,
+      [RecordInsertDateTime] [DATETIME] NULL,
+      [RecordUpdateDateTime] [DATETIME] NULL,
+      [RecordDeleteDateTime] [DATETIME] NULL
+    )
+ON  [PRIMARY] TEXTIMAGE_ON [PRIMARY]

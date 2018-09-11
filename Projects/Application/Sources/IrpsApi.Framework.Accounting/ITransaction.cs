@@ -2,15 +2,15 @@
 
 namespace IrpsApi.Framework.Accounting
 {
-    public interface ITransaction : IEntity
+    public interface ITransaction : IRecord
     {
-        string FromUserCode
+        string FromAccountId
         {
             get;
             set;
         }
 
-        string ToUserCode
+        string ToAccountId
         {
             get;
             set;
@@ -28,13 +28,19 @@ namespace IrpsApi.Framework.Accounting
             set;
         }
 
-        TransactionType TransactionType
+        string Description
         {
             get;
             set;
         }
 
-        string Notes
+        string TypeId
+        {
+            get;
+            set;
+        }
+
+        string OnlinePaymentId
         {
             get;
             set;

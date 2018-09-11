@@ -2,7 +2,7 @@ CREATE TABLE [System].[Feedback](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Subject] [nvarchar](max) NOT NULL,
 	[Text] [nvarchar](max) NOT NULL,
-	[UserCode] [nvarchar](16) NOT NULL,
+	[AccountId] [int] NOT NULL,
 	[DateTime] [datetime] NOT NULL
 CONSTRAINT [PK_Feedback] PRIMARY KEY CLUSTERED 
 (

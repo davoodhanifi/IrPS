@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Swashbuckle</id>
+    <version>6.0.0-beta7</version>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <authors>Richard Morris</authors>
+    <owners>Richard Morris</owners>
+    <licenseUrl>https://github.com/domaindrivendev/Swashbuckle/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/domaindrivendev/Swashbuckle</projectUrl>
+    <description>Swashbuckle - Swagger for WebApi (for AspNet 5.0)</description>
+    <summary>Next generation of Swashbuckle, targeting AspNet 5.0 (vNext)</summary>
+    <tags>Swagger SwaggerUi Documentation Discovery Help WebApi AspNet vNext</tags>
+    <dependencies>
+      <group targetFramework="DNX4.5.1">
+        <dependency id="Microsoft.AspNet.Mvc" version="6.0.0-beta7" />
+        <dependency id="Microsoft.AspNet.StaticFiles" version="1.0.0-beta7" />
+        <dependency id="Microsoft.AspNet.FileProviders.Embedded" version="1.0.0-beta7" />
+      </group>
+      <group targetFramework="DNXCore5.0">
+        <dependency id="Microsoft.AspNet.Mvc" version="6.0.0-beta7" />
+        <dependency id="Microsoft.AspNet.StaticFiles" version="1.0.0-beta7" />
+        <dependency id="Microsoft.AspNet.FileProviders.Embedded" version="1.0.0-beta7" />
+        <dependency id="System.Xml.XPath" version="4.0.0-beta" />
+      </group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="mscorlib" targetFramework="DNX4.5.1" />
+      <frameworkAssembly assemblyName="System" targetFramework="DNX4.5.1" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework="DNX4.5.1" />
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="DNX4.5.1" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

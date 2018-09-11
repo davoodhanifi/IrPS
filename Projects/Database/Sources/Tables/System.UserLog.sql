@@ -1,6 +1,6 @@
 CREATE TABLE [System].[UserLog](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserCode] [nvarchar](16) NOT NULL,
+	[AccountId] [int] NOT NULL,
 	[DateTime] [datetime] NOT NULL,
 	[Action] [nvarchar](max) NOT NULL,
  CONSTRAINT [PK_UserLog] PRIMARY KEY CLUSTERED 

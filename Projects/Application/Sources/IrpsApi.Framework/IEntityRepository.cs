@@ -1,37 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace IrpsApi.Framework
 {
-    public interface IEntityRepository<TEntity> : IEntityRepository where TEntity : IEntity
+    public interface IEntityRepository<TEntity> where TEntity : IEntity
     {
-        new TEntity Create();
+        TEntity Get(string id);
 
-        void Insert(TEntity entity);
-
-        void Update(TEntity entity);
-
-        void Upsert(TEntity entity);
-
-        void Delete(TEntity entity);
-
-        TEntity Get(int id);
-
-        IEnumerable<TEntity> GetAll();
-
-        IEnumerable<TEntity> GetAll(IEnumerable<int> ids);
-
-        IEnumerable<TEntity> GetAll(EntityQuery<TEntity> query);
-
-        int GetCount(EntityQuery<TEntity> query);
-    }
-
-    public interface IEntityRepository
-    {
-        IEntity Create();
-
-        void Insert(IEntity entity);
-
-        Type GetEntityType();
+        Task<TEntity> GetAsync(string id, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

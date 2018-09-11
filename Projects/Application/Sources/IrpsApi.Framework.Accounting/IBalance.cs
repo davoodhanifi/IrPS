@@ -2,9 +2,9 @@
 
 namespace IrpsApi.Framework.Accounting
 {
-    public interface IBalance : IEntity
+    public interface IBalance : IRecord
     {
-        string UserCode
+        string AccountId
         {
             get;
             set;
@@ -28,7 +28,7 @@ namespace IrpsApi.Framework.Accounting
             set;
         }
 
-        string Notes
+        string Description
         {
             get;
             set;

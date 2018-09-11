@@ -2,7 +2,7 @@ CREATE TABLE [System].[Message](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Title] [nvarchar](max) NOT NULL,
 	[Text] [nvarchar](max) NOT NULL,
-	[UserId] [int] NULL,
+	[AccountId] [int] NOT NULL,
 	[DateTime] [datetime] NOT NULL,
 	[Status] [tinyint] NOT NULL,
 CONSTRAINT [PK_Message] PRIMARY KEY CLUSTERED 

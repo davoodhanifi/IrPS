@@ -21,32 +21,114 @@
     <MakeDir Directories="$(BuildDatabaseBinPath)" />
     <ItemGroup>
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Accounting.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Core.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Accounts.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Bank.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\System.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\User.sql" />
       
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounting.Balance.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounting.Transaction.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Core.Country.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Core.Province.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounting.TransactionType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.Account.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.AccountEntityType.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.AccountHistory.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.AccountState.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.AccountType.Sql" />    
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.Contact.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.ContactHistory.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.ContactType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.Country.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.Document.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.DocumentType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.GenderType.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.LegalProfile.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.LegalProfileHistory.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.PersonProfile.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.PersonProfileHistory.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.Province.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.Session.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.SessionState.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.SessionType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.VerificationStatus.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.Bank.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccount.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccountHistory.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccountOnlineLinkStatus.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccountType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Configuration.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Date.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Feedback.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Message.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Otp.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.SystemLog.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.SystemLogParameter.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.UserLog.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.UserLogParameter.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\User.BankAccount.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\User.User.sql" />
       
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Core.Country.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Core.Province.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.SessionState.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounting.TransactionType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.Account.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.AccountEntityType.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.AccountState.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.AccountType.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.ContactType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.Country.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.DocumentType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.GenderType.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.Province.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.SessionType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.VerificationStatus.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Bank.Bank.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Bank.BankAccountLinkStatus.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Bank.BankAccountType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\System.Configuration.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\System.Date.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Indexes\System.Date.IX_GregorianDate.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Indexes\System.Date.IX_JalaliDate.sql" />
+
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounting.Transaction_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounting.Transaction_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounting.TransactionType_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounting.TransactionType_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Account_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Account_Insert.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Account_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.AccountEntityType_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.AccountEntityType_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.AccountState_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.AccountState_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Contact_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Contact_Insert.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Contact_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.ContactType_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.ContactType_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Country_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Country_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Document_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Document_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.DocumentType_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.DocumentType_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.GenderType_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.GenderType_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.LegalProfile_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.LegalProfile_Insert.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.LegalProfile_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PersonProfile_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PersonProfile_Insert.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PersonProfile_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Province_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Province_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Session_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Session_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.SessionState_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.SessionState_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.SessionType_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.SessionType_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.VerificationStatus_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.VerificationStatus_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.Bank_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.Bank_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccount_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccount_Insert.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccount_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountOnlineLinkStatus_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountOnlineLinkStatus_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountType_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountType_Update.sql" />
     </ItemGroup>
     <MergeTextFiles InputFiles="@(InstallFiles)" OutputFile="$(BuildDatabaseBinPath)\Install.sql.temp" Delimiter="&#13;&#10;GO&#13;&#10;" />
     <ItemGroup>
@@ -70,11 +152,6 @@
       <UpdateFiles Include="$(BuildDatabaseSourcesPath)\Updates\vNext\*.sql" Condition="'$(Configuration)' != 'Release'" />
     </ItemGroup>
     <MergeTextFiles InputFiles="@(UpdateFiles)" OutputFile="$(BuildDatabaseBinPath)\Update.sql.temp" Delimiter="&#13;&#10;&#13;&#10;" />
-    <ItemGroup>
-      <Tokens Include="Product2">
-        <ReplacementValue>$(Product)</ReplacementValue>
-      </Tokens>
-    </ItemGroup>
     <TemplateFile Template="$(BuildDatabaseBinPath)\Update.sql.temp" OutputFileName="$(BuildDatabaseBinPath)\Update.sql" Tokens="@(Tokens)" />
     <Delete Files="$(BuildDatabaseBinPath)\Update.sql.temp" />
   </Target>

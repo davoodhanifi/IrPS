@@ -1,17 +1,14 @@
 ﻿using System;
 using IrpsApi.Framework.Accounting;
+using Noandishan.IrpsApi.Repositories.Common.Generated;
+using Noandishan.IrpsApi.Repositories.Common.QueryGenerator;
 
 namespace Noandishan.IrpsApi.Repositories.Accounting
 {
-    public class Balance : IBalance
+    [Table("Balance", "Accounting")]
+    public class Balance : GeneratedQueryRecord, IBalance
     {
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public string UserCode
+        public string AccountId
         {
             get;
             set;
@@ -35,15 +32,10 @@ namespace Noandishan.IrpsApi.Repositories.Accounting
             set;
         }
 
-        public string Notes
+        public string Description
         {
             get;
             set;
-        }
-
-        public void EnsureLoaded()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,23 +1,20 @@
 ﻿using System;
 using IrpsApi.Framework.Accounting;
+using Noandishan.IrpsApi.Repositories.Common.Generated;
+using Noandishan.IrpsApi.Repositories.Common.QueryGenerator;
 
 namespace Noandishan.IrpsApi.Repositories.Accounting
 {
-    public class Transaction : ITransaction
+    [Table("Transaction", "Accounting")]
+    public class Transaction : GeneratedQueryRecord, ITransaction
     {
-        public int Id
+        public string FromAccountId
         {
             get;
             set;
         }
 
-        public string FromUserCode
-        {
-            get;
-            set;
-        }
-
-        public string ToUserCode
+        public string ToAccountId
         {
             get;
             set;
@@ -35,21 +32,22 @@ namespace Noandishan.IrpsApi.Repositories.Accounting
             set;
         }
 
-        public TransactionType TransactionType
+        public string Description
         {
             get;
             set;
         }
 
-        public string Notes
+        public string TypeId
         {
             get;
             set;
         }
 
-        public void EnsureLoaded()
+        public string OnlinePaymentId
         {
-            throw new NotImplementedException();
+            get;
+            set;
         }
     }
 }

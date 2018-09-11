@@ -1,15 +1,11 @@
-﻿using System;
-
-namespace IrpsApi.Framework
+﻿namespace IrpsApi.Framework
 {
     public interface IEntity
     {
-        int Id
+        string Id
         {
             get;
             set;
         }
-
-        void EnsureLoaded();
     }
 }

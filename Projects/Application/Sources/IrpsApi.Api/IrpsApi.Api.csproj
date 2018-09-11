@@ -1,11 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.0\IrpsApi.Api.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,12 +23,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="6.2.2" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Kavenegar.Core" Version="1.0.1-alpha2" />
     <PackageReference Include="Mabna.WebApi.AspNetCore.v1" Version="1.0.0-beta06" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0-preview1-35029" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="3.0.0" />
     <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
   </ItemGroup>
 
@@ -27,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IrpsApi.Framework.Accounts\IrpsApi.Framework.Accounts.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework.System\IrpsApi.Framework.System.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework\IrpsApi.Framework.csproj" />
     <ProjectReference Include="..\IrpsApi.Repositories\IrpsApi.Repositories.csproj" />
@@ -35,6 +48,9 @@
   <ItemGroup>
     <Reference Include="Mabna.Data.v1">
       <HintPath>..\..\Libraries\Mabna.Data.v1.dll</HintPath>
+    </Reference>
+    <Reference Include="Mabna.MessagingQueueSdk.v1">
+      <HintPath>..\..\Libraries\Mabna.MessagingQueueSdk.v1.dll</HintPath>
     </Reference>
   </ItemGroup>
 

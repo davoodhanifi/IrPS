@@ -1,11 +1,17 @@
 CREATE TABLE [Accounting].[Transaction](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[FromUserCode] [nvarchar](16) NULL,
-	[ToUserCode] [nvarchar](16) NOT NULL,
+	[FromAccountId] [int] NOT NULL,
+	[ToAccountId] [int] NOT NULL,
 	[Amount] [decimal](19,4) NOT NULL,
 	[DateTime] [datetime] NOT NULL,
-	[TransactionType] [tinyint] NOT NULL,
-	[Notes] [nvarchar](max) NULL,
+	[Description] [nvarchar](MAX) NULL,
+	[TypeId] [int] NOT NULL,
+	[OnlinePaymentId] [int] NULL,
+	[RecordVersion] TIMESTAMP ,
+	[RecordState] INT NOT NULL CONSTRAINT [DF_Transaction_RecordState] DEFAULT 0,
+	[RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_Transaction_RecordInsertDateTime] DEFAULT GETDATE(),
+	[RecordUpdateDateTime] DATETIME NULL ,
+	[RecordDeleteDateTime] DATETIME NULL 
  CONSTRAINT [PK_Transaction] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
