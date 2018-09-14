@@ -57,7 +57,7 @@ namespace IrpsApi.Api.Controllers.Accounting
         /// <summary>
         /// Add new transaction.
         /// </summary>
-        /// <response code="422">missing_from_account, missing_to_account, missing_transaction_type, invalid_amount, not_enough_credit, rollback_transaction</response>  
+        /// <response code="422">missing_transaction_type, invalid_method, invalid_amount, not_enough_credit, rollback_transaction</response>  
         /// <response code="403">forbidden</response>
         [HttpPost]
         [Route("accounting/transactions/add")]
@@ -71,6 +71,9 @@ namespace IrpsApi.Api.Controllers.Accounting
 
             if (transactionModel?.Type == null || transactionModel?.Type.Id == TransactionTypeIds.None)
                 throw new UnprocessableEntityException("missing_transaction_type", "Transaction Type Not Defined!");
+
+            if (transactionModel.Type.Id == TransactionTypeIds.IncreaseCredit)
+                throw new UnprocessableEntityException("invalid_method", "Invalid Method For Increase Credit!");
 
             if (transactionModel?.Amount <= 0M)
                 throw new UnprocessableEntityException("invalid_amount", "Amount Must Be Positive!");
@@ -146,6 +149,81 @@ namespace IrpsApi.Api.Controllers.Accounting
                     oldToUserBalance.IsActive = true;
                     await _balanceRepository.UpdateAsync(oldToUserBalance, cancellationToken);
                 }
+
+                throw new UnprocessableEntityException("rollback_transaction", "Error in transaction!");
+            }
+        }
+
+        /// <summary>
+        /// Increase user credit.
+        /// </summary>
+        /// <response code="422">missing_transaction_type, invalid_method, mismatch_accounts, invalid_amount, rollback_transaction</response>  
+        /// <response code="403">forbidden</response>
+        [HttpPost]
+        [Route("accounting/transactions/credit/increase")]
+        [SwaggerResponse(200, type: typeof(SessionModel))]
+        [SwaggerResponse(422)]
+        [SwaggerResponse(403)]
+        public async Task<ActionResult<TransactionModel>> IncreaseCreditAsync([FromBody] InputTransactionModel transactionModel, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
+        {
+            if (transactionModel.FromAccount.Id != Session.AccountId)
+                return Forbid();
+
+            if (transactionModel?.Type == null || transactionModel?.Type.Id == TransactionTypeIds.None)
+                throw new UnprocessableEntityException("missing_transaction_type", "Transaction Type Not Defined!");
+
+            if (transactionModel.Type.Id != TransactionTypeIds.IncreaseCredit)
+                throw new UnprocessableEntityException("invalid_method", "Invalid Method!");
+
+            if (transactionModel.FromAccount.Id != transactionModel.ToAccount.Id)
+                throw new UnprocessableEntityException("mismatch_accounts", "Mismatch In From Account With To Account!");
+
+            if (transactionModel?.Amount <= 0M)
+                throw new UnprocessableEntityException("invalid_amount", "Amount Must Be Positive!");
+
+            var oldUserBalance = await _balanceRepository.GetByAccountIdAsync(transactionModel.FromAccount.Id, cancellationToken);
+
+            var dateTimeNow = DateTime.Now;
+
+            var transaction = _transactionRepository.Create();
+            transaction.FromAccountId = transactionModel.FromAccount.Id;
+            transaction.ToAccountId = transactionModel.ToAccount.Id;
+            transaction.Amount = transactionModel.Amount;
+            transaction.DateTime = dateTimeNow;
+            transaction.Description = transactionModel.Description;
+            transaction.TypeId = transactionModel.Type.Id;
+            transaction.OnlinePaymentId = transactionModel.OnlinePaymentId;
+
+            var newUserBalance = _balanceRepository.Create();
+           
+            try
+            {
+                // Save Transaction
+                await _transactionRepository.SaveAsync(transaction, cancellationToken);
+
+                // Disable user balance
+                oldUserBalance.IsActive = false;
+                await _balanceRepository.UpdateAsync(oldUserBalance, cancellationToken);
+
+                // Update user balance
+                newUserBalance.AccountId = transactionModel.FromAccount.Id;
+                newUserBalance.DateTime = dateTimeNow;
+                newUserBalance.CurrentBalance = (oldUserBalance?.CurrentBalance ?? 0) + transaction.Amount;
+                newUserBalance.IsActive = true;
+                newUserBalance.Description = "افزایش اعتبار";
+                await _balanceRepository.SaveAsync(newUserBalance, cancellationToken);
+
+                return Ok(await transaction.ToTransactionModelAsync(GetExpandOptions(expandOptions), cancellationToken));
+            }
+            catch
+            {
+                // Rollback transaction
+                await _transactionRepository.DeleteAsync(transaction, cancellationToken);
+
+                // Rollback user balances
+                await _balanceRepository.DeleteAsync(newUserBalance, cancellationToken);
+                oldUserBalance.IsActive = true;
+                await _balanceRepository.UpdateAsync(oldUserBalance, cancellationToken);
 
                 throw new UnprocessableEntityException("rollback_transaction", "Error in transaction!");
             }
