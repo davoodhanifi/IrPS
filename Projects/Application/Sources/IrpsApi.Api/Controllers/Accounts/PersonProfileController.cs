@@ -20,7 +20,7 @@ namespace IrpsApi.Api.Controllers.Accounts
         }
 
         /// <summary>
-        /// Get person profile.
+        /// Get person profile by account id.
         /// </summary>
         /// <response code="404">invalid_account_id</response>  
         /// <response code="403">forbidden</response>
@@ -37,6 +37,32 @@ namespace IrpsApi.Api.Controllers.Accounts
             var account = await _accountRepository.GetAsync(accountId, cancellationToken);
             if (account == null)
                 return NotFound("invalid_account_id");
+
+            var profile = await _personProfileRepository.GetAsync(account, cancellationToken);
+            if (profile == null)
+                return NotFound();
+
+            return Ok(await profile.ToPersonProfileModelAsync(GetExpandOptions(expandOptions), cancellationToken));
+        }
+
+        /// <summary>
+        /// Get person profile by user code.
+        /// </summary>
+        /// <response code="404">invalid_user_code</response>  
+        /// <response code="403">forbidden</response>
+        [HttpGet]
+        [Route("accounts/{account_id}/profile/person/limited")]
+        [SwaggerResponse(200, type: typeof(LimitedPersonProfileModel))]
+        [SwaggerResponse(404)]
+        [SwaggerResponse(403)]
+        public async Task<ActionResult<LimitedPersonProfileModel>> GetPersonProfileByUserCodeAsync([FromRoute(Name = "account_id")]string accountId, [FromQuery(Name = "user_code")]string userCode, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken = default)
+        {
+            if (accountId != Session.AccountId)
+                return Forbid();
+
+            var account = await _accountRepository.GetByUserCodeAsync(userCode, cancellationToken);
+            if (account == null)
+                return NotFound("invalid_user_code");
 
             var profile = await _personProfileRepository.GetAsync(account, cancellationToken);
             if (profile == null)
