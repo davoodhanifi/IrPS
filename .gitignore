@@ -4,6 +4,7 @@ Projects/Database/Bin/
 Projects/Application/Sources/IrpsApi.Api/ConnectionStrings.config
 Projects/Database/Publish/
 Projects/Package
+Projects/Application/Sources/.vs/
 
 bin
 obj
@@ -18,7 +19,7 @@ Build/npm-debug.log
 _ReSharper.*
 *.suo
 *.user
-.vs
+.vs/
 
 # .NET Core
 project.lock.json
