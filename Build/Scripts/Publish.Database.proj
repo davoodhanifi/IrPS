@@ -19,7 +19,6 @@
     <ItemGroup>
       <DatabaseScripts Include="$(BuildDatabaseBinPath)\Install.sql" />
       <DatabaseScripts Include="$(BuildDatabaseBinPath)\Update.sql" />
-      <DatabaseScripts Include="$(BuildDatabaseBinPath)\v2-To-v3.sql" />
     </ItemGroup>
     <Copy SourceFiles="@(DatabaseScripts)" DestinationFolder="$(BuildDatabasePublishPath)" />
   </Target>

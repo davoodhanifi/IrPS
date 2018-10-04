@@ -1,11 +1,8 @@
 DECLARE @FromVersion NVARCHAR(MAX)
 DECLARE @ToVersion NVARCHAR(MAX)
 
-DECLARE @Product NVARCHAR(MAX)
-SELECT @Product = [TextValue] FROM [System].[Configuration] WHERE [Key] = 'System.Product'
-
-SELECT @FromVersion = '0.1'
-SELECT @ToVersion = '0.2'
+SELECT @FromVersion = '1.0'
+SELECT @ToVersion = '1.1'
 
 IF ((SELECT [TextValue] FROM [System].[Configuration] WHERE [Key] = 'System.Version') = @FromVersion)
 BEGIN

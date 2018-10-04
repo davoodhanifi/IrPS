@@ -6,37 +6,38 @@
   </PropertyGroup>
 
   <Import Project="Build.Application.proj" Condition="'$(ImportedBuildApplication)' == ''" />
-  <Import Project="Test.Application.proj" Condition="'$(ImportedTestApplication)' == ''" />
 
   <PropertyGroup>
     <Configuration>Release</Configuration>
-    <MvcBuildViews>True</MvcBuildViews>
   </PropertyGroup>
 
   <PropertyGroup>
-    <BuildApplicationSourcesWebSitePath>$(BuildApplicationSourcesPath)\Sabadyar.Web.Site</BuildApplicationSourcesWebSitePath>
+    <BuildApplicationSourcesWebSitePath>$(BuildApplicationSourcesPath)\IrpsApi.sln</BuildApplicationSourcesWebSitePath>
     <BuildApplicationPublishPath>$(BuildApplicationPath)\Publish</BuildApplicationPublishPath>
   </PropertyGroup>
 
   <Target Name="PublishApplicationFiles">
-    <RemoveDir Directories="$(BuildApplicationPublishPath)" />
-    <MSBuild Projects="$(BuildApplicationSourcesWebSitePath)\Sabadyar.Web.Site.csproj" Targets="ResolveReferences;_CopyWebApplication" Properties="Configuration=$(Configuration);WebProjectOutputDir=$(BuildApplicationPublishPath);OutDir=$(BuildApplicationPublishPath)\Bin\" />
+     <RemoveDir Directories="$(BuildApplicationPublishPath)\" />
+     <ItemGroup>
+      <LibraryFiles Include="$(BuildApplicationBinPath)\**\*.dll" />
+      <LibraryFiles Include="$(BuildApplicationBinPath)\**\*.pdb" />
+      <LibraryFiles Include="$(BuildApplicationLibrariesPath)\**\*.dll" />
+      <LibraryFiles Include="$(BuildApplicationLibrariesPath)\**\*.pdb" />
+      <LibraryFiles Include="$(BuildApplicationSourcesPath)\**\*.dll" />
+      <LibraryFiles Include="$(BuildApplicationSourcesPath)\**\*.pdb" />
+      <LibraryFiles Include="$(BuildApplicationSourcesPath)\**\*.json" />
+      <LibraryFiles Include="$(BuildApplicationBinPath)\**\*.dll.config" />
+    </ItemGroup>
+    <Copy SourceFiles="@(LibraryFiles)" DestinationFolder="$(BuildApplicationPublishPath)" />
   </Target>
 
-  <Target Name="UpdateWebConfig">
-    <XmlUpdate XmlFileName="$(BuildApplicationPublishPath)\Web.config" XPath="/configuration/system.web/compilation/@debug" Value="false" />
-    <XmlUpdate XmlFileName="$(BuildApplicationPublishPath)\Web.config" XPath="/configuration/system.web/customErrors/@mode" Value="On" />
-  </Target>
-
-  <Target Name="GenerateManifest">
-    <GenerateManifest BaseDirectory="$(BuildApplicationPublishPath)" AppName="$(Product)" AppVersion="$(ApplicationVersion)" OutputFile="$(BuildApplicationPublishPath)\Application.manifest" />
+   <Target Name="GenerateManifest">
+    <GenerateManifest BaseDirectory="$(BuildApplicationPublishPath)" AppVersion="$(ApplicationVersion)" OutputFile="$(BuildApplicationPublishPath)\Application.manifest" />
   </Target>
 
   <Target Name="PublishApplication">
     <CallTarget Targets="BuildApplication" />
-    <CallTarget Targets="TestApplication" />
     <CallTarget Targets="PublishApplicationFiles" />
-    <CallTarget Targets="UpdateWebConfig" />
     <CallTarget Targets="GenerateManifest" />
   </Target>
 

@@ -14,10 +14,6 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <Product>$(Product)</Product> 
-  </PropertyGroup>
-
-  <PropertyGroup>
     <Version Condition="'$(Version)' == ''">0.1</Version>
   </PropertyGroup>
 

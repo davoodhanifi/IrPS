@@ -135,9 +135,6 @@
       <Tokens Include="Version">
         <ReplacementValue>$(DatabaseVersion)</ReplacementValue>
       </Tokens>
-      <Tokens Include="Product">
-        <ReplacementValue>$(Product)</ReplacementValue>
-      </Tokens>
     </ItemGroup>
     <TemplateFile Template="$(BuildDatabaseBinPath)\Install.sql.temp" OutputFileName="$(BuildDatabaseBinPath)\Install.sql" Tokens="@(Tokens)" />
     <Delete Files="$(BuildDatabaseBinPath)\Install.sql.temp" />
@@ -146,7 +143,7 @@
   <Target Name="CreateUpdateScript">
     <MakeDir Directories="$(BuildDatabaseBinPath)" />
     <ItemGroup>
-      <UpdateFiles Include="$(BuildDatabaseSourcesPath)\Updates\v0.1-To-v0.2.sql" />
+      <UpdateFiles Include="$(BuildDatabaseSourcesPath)\Updates\v1.0-To-v1.1.sql" />
     </ItemGroup>
     <ItemGroup>
       <UpdateFiles Include="$(BuildDatabaseSourcesPath)\Updates\vNext\*.sql" Condition="'$(Configuration)' != 'Release'" />
