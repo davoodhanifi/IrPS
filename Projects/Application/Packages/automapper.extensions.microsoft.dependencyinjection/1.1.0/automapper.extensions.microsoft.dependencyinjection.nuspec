@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>AutoMapper.Extensions.Microsoft.DependencyInjection</id>
+    <version>1.1.0</version>
+    <authors>Jimmy Bogard</authors>
+    <owners>Jimmy Bogard</owners>
+    <licenseUrl>https://github.com/AutoMapper/AutoMapper/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>http://automapper.org/</projectUrl>
+    <iconUrl>https://s3.amazonaws.com/automapper/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>AutoMapper extensions for ASP.NET Core</description>
+    <summary>AutoMapper extensions for ASP.NET Core</summary>
+    <copyright>Copyright Jimmy Bogard</copyright>
+    <tags></tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.1">
+        <dependency id="Microsoft.Extensions.DependencyModel" version="[1.0.0, )" />
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="[1.0.0, )" />
+        <dependency id="AutoMapper" version="[5.0.2, )" />
+      </group>
+      <group targetFramework=".NETStandard1.1">
+        <dependency id="NETStandard.Library" version="[1.6.0, )" />
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="[1.0.0, )" />
+        <dependency id="AutoMapper" version="[5.0.2, )" />
+      </group>
+      <group targetFramework=".NETStandard1.6">
+        <dependency id="NETStandard.Library" version="[1.6.0, )" />
+        <dependency id="Microsoft.Extensions.DependencyModel" version="[1.0.0, )" />
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="[1.0.0, )" />
+        <dependency id="AutoMapper" version="[5.0.2, )" />
+      </group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Runtime" targetFramework=".NETFramework4.5.1" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

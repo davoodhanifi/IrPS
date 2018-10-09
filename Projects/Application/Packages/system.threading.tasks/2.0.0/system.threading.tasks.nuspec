@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>System.Threading.Tasks</id>
+    <version>2.0</version>
+    <title>Task Parallel Library for Silverlight</title>
+    <authors>Robert McLaws,Jrmie "Garuma" Laval</authors>
+    <owners>Robert McLaws</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This package is a port of the Mono version of the *complete* Task Parallel Library (not a subset) to all Silverlight platforms, including Windows Phone 7.X. This version contains more classes (and is namespace compatible with the BCL) compared to the PortableTPL project.
+
+This project supercedes the TaskParallelLibrary.WP7 package.</description>
+    <summary />
+  </metadata>
+</package>
