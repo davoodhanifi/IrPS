@@ -12673,7 +12673,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Projects\\irps-v1\\Projects\\Application\\Packages": {},
+    "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Packages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -12682,17 +12682,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Api\\IrpsApi.Api.csproj",
+      "projectUniqueName": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Api\\IrpsApi.Api.csproj",
       "projectName": "IrpsApi.Api",
-      "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Api\\IrpsApi.Api.csproj",
-      "packagesPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Packages",
-      "outputPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Api\\obj\\",
+      "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Api\\IrpsApi.Api.csproj",
+      "packagesPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Packages",
+      "outputPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\NuGet.Config",
+        "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\NuGet.Config",
         "C:\\Users\\Davood\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -12705,17 +12705,17 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj": {
-              "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj"
+            "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj": {
+              "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj"
             },
-            "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounts\\IrpsApi.Framework.Accounts.csproj": {
-              "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounts\\IrpsApi.Framework.Accounts.csproj"
+            "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounts\\IrpsApi.Framework.Accounts.csproj": {
+              "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounts\\IrpsApi.Framework.Accounts.csproj"
             },
-            "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Repositories\\IrpsApi.Repositories.csproj": {
-              "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Repositories\\IrpsApi.Repositories.csproj"
+            "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Repositories\\IrpsApi.Repositories.csproj": {
+              "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Repositories\\IrpsApi.Repositories.csproj"
             },
-            "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj": {
-              "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj"
+            "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj": {
+              "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj"
             }
           }
         }

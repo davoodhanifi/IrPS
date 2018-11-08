@@ -6955,21 +6955,21 @@
     ]
   },
   "packageFolders": {
-    "C:\\Projects\\irps-v1\\Projects\\Application\\Packages": {},
+    "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Packages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "restore": {
       "projectUniqueName": "microsoft.visualstudio.web.codegeneration.tools-netcoreapp2.1-[2.0.1, )",
       "projectName": "microsoft.visualstudio.web.codegeneration.tools-netcoreapp2.1-[2.0.1, )",
-      "projectPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Api\\IrpsApi.Api.csproj",
-      "packagesPath": "C:\\Projects\\irps-v1\\Projects\\Application\\Packages",
+      "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Api\\IrpsApi.Api.csproj",
+      "packagesPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Packages",
       "projectStyle": "DotnetCliTool",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Projects\\irps-v1\\Projects\\Application\\Sources\\NuGet.Config",
+        "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\NuGet.Config",
         "C:\\Users\\Davood\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

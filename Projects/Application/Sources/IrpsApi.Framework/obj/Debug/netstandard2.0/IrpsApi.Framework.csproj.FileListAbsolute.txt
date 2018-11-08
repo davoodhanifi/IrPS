@@ -25,3 +25,12 @@ C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\net
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.dll
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.pdb
 C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.csprojAssemblyReference.cache
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\bin\Debug\netstandard2.0\IrpsApi.Framework.deps.json
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\bin\Debug\netstandard2.0\IrpsApi.Framework.dll
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\bin\Debug\netstandard2.0\IrpsApi.Framework.pdb
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.csproj.CoreCompileInputs.cache
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.AssemblyInfoInputs.cache
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.AssemblyInfo.cs
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.dll
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.pdb
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.csprojResolveAssemblyReference.cache
