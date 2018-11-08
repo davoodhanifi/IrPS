@@ -68,7 +68,7 @@ namespace IrpsApi.Api.Controllers.Accounts
             session.MobileTokenExpirationDateTime = DateTime.Now.AddMinutes(5);
             session = await _sessionRepository.SaveAsync(session, cancellationToken);
             
-            _smsService.SendVerificationSms(session.Mobile, session.MobileToken);
+            //_smsService.SendVerificationSms(session.Mobile, session.MobileToken);
 
             return Ok(await session.ToSessionModelAsync(GetExpandOptions(expandOptions), cancellationToken));
         }

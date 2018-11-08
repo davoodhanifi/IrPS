@@ -7,6 +7,14 @@ namespace IrpsApi.Api.Models.Accounts
     [DataContract(Name = "session")]
     public class SessionModel: RecordModel
     {
+        // Todo : Remove this prop and send with sms.
+        [DataMember(Name = "mobile_token")]
+        public string MobileToken
+        {
+            get;
+            set;
+        }
+
         [DataMember(Name = "access_token")]
         public string AccessToken
         {
