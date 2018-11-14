@@ -77,9 +77,11 @@ namespace IrpsApi.Api.Controllers.Accounts
         /// Mobile login.
         /// </summary>
         /// <response code="422">invlaid_session_id, invalid_token</response>  
+        /// <response code="404">invlaid_session_id</response>  
         [HttpPost]
         [Route("accounts/sessions/{session_id}/mobilelogin")]
         [SwaggerResponse(200, type : typeof(SessionModel))]
+        [SwaggerResponse(404)]
         [SwaggerResponse(422)]
         public async Task<ActionResult<SessionModel>> MobileLoginAsync([FromRoute(Name = "session_id")]string sessionId, [FromForm][Required] string token, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken)
         {
@@ -153,5 +155,32 @@ namespace IrpsApi.Api.Controllers.Accounts
 
             return Ok(await session.ToSessionModelAsync(GetExpandOptions(expandOptions), cancellationToken));
         }
+
+        /// <summary>
+        /// Mobile logout.
+        /// </summary>
+        /// <response code="404">invlaid_session_id</response>  
+        /// <response code="403">inactive_account</response>  
+        [HttpDelete]
+        [Route("accounts/sessions/{session_id}/mobilelogout")]
+        [SwaggerResponse(200, type: typeof(SessionModel))]
+        [SwaggerResponse(404)]
+        [SwaggerResponse(403)]
+        public async Task<ActionResult<SessionModel>> MobileLogoutAsync([FromRoute(Name = "session_id")]string sessionId, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken)
+        {
+            var session = await _sessionRepository.GetAsync(sessionId, cancellationToken);
+            if (session == null)
+                return NotFound("invlaid_session_id");
+
+            if (session.AccountId == null)
+                return Error(HttpStatusCode.Forbidden, "inactive_account", "Forbidden: Closing session of client is not allowed.");
+
+            session.StateId = SessionStateIds.Closed;
+            session.InvalidateDateTime = DateTime.Now;
+            session = await _sessionRepository.SaveAsync(session, cancellationToken);
+
+            return Ok(await session.ToSessionModelAsync(GetExpandOptions(expandOptions), cancellationToken));
+        }
+
     }
 }
