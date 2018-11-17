@@ -198,12 +198,15 @@ namespace IrpsApi.Api.Controllers.Accounting
            
             try
             {
+                // Disable user balance
+                if (oldUserBalance != null)
+                {
+                    oldUserBalance.IsActive = false;
+                    await _balanceRepository.UpdateAsync(oldUserBalance, cancellationToken);
+                }
+
                 // Save Transaction
                 await _transactionRepository.SaveAsync(transaction, cancellationToken);
-
-                // Disable user balance
-                oldUserBalance.IsActive = false;
-                await _balanceRepository.UpdateAsync(oldUserBalance, cancellationToken);
 
                 // Update user balance
                 newUserBalance.AccountId = transactionModel.FromAccount.Id;
@@ -222,8 +225,11 @@ namespace IrpsApi.Api.Controllers.Accounting
 
                 // Rollback user balances
                 await _balanceRepository.DeleteAsync(newUserBalance, cancellationToken);
-                oldUserBalance.IsActive = true;
-                await _balanceRepository.UpdateAsync(oldUserBalance, cancellationToken);
+                if (oldUserBalance != null)
+                {
+                    oldUserBalance.IsActive = true;
+                    await _balanceRepository.UpdateAsync(oldUserBalance, cancellationToken);
+                }
 
                 throw new UnprocessableEntityException("rollback_transaction", "Error in transaction!");
             }
