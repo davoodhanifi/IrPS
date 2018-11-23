@@ -55,14 +55,14 @@ namespace IrpsApi.Api.Models
             return new RecordModel
             {
                 Id = record.Id,
-                Meta = new RecordMetadataModel
-                {
-                    Version = record.RecordVersion,
-                    State = (Common.RecordState)(int)record.RecordState,
-                    InsertDateTime = record.RecordInsertDateTime.ConvertToString(true),
-                    UpdateDateTime = record.RecordUpdateDateTime.ConvertToString(true),
-                    DeleteDateTime = record.RecordDeleteDateTime.ConvertToString(true)
-                }
+                //Meta = new RecordMetadataModel
+                //{
+                //    Version = record.RecordVersion,
+                //    State = (Common.RecordState)(int)record.RecordState,
+                //    InsertDateTime = record.RecordInsertDateTime.ConvertToString(true),
+                //    UpdateDateTime = record.RecordUpdateDateTime.ConvertToString(true),
+                //    DeleteDateTime = record.RecordDeleteDateTime.ConvertToString(true)
+                //}
             };
         }
 

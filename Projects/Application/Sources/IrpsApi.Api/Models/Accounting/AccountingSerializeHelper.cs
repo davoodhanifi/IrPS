@@ -37,6 +37,11 @@ namespace IrpsApi.Api.Models.Accounting
         public static async Task<TransactionModel> ToTransactionModelAsync(this ITransaction transaction, IExpandOptionCollection expandOptions, CancellationToken cancellationToken = default)
         {
             var model = Mapper.Map<TransactionModel>(transaction);
+            //model.Id = transaction.Id;
+            //model.Meta = transaction.GetRecordMetadataModel();
+
+            //if (transaction.RecordState == Framework.RecordState.Deleted)
+            //    return model;
 
             if (expandOptions.TryGetExpandOption<IAccount>("from_account", out var fromAccountExpandOption))
             {
