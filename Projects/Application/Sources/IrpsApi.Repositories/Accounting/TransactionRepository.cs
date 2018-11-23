@@ -35,5 +35,27 @@ namespace Noandishan.IrpsApi.Repositories.Accounting
                 return await connection.QueryAsync<Transaction>(new CommandDefinition(query, new { AccountId = accountId}, cancellationToken: cancellationToken));
             }
         }
+
+        public async Task<ITransaction> GetTransactionAsync(string accountId, int transactionId, CancellationToken cancellationToken)
+        {
+            using (var connection = GetConnection())
+            {
+                const string query = @"SELECT [Id],
+                                              [FromAccountId],
+                                              [ToAccountId],
+                                              [Amount],
+                                              [DateTime],
+                                              [Description],
+                                              [TypeId],
+                                              [OnlinePaymentId]
+                                       FROM [Accounting].[Transaction] 
+                                       WHERE [Id] = @TransactionId AND 
+                                             ([FromAccountId] = @AccountId OR
+                                             [ToAccountId] = @AccountId)
+                                       ORDER BY [DateTime] DESC";
+
+                return await connection.QueryFirstOrDefaultAsync<Transaction>(new CommandDefinition(query, new { AccountId = accountId, TransactionId = transactionId}, cancellationToken: cancellationToken));
+            }
+        }
     }
 }

@@ -59,6 +59,33 @@ namespace IrpsApi.Api.Controllers.Accounting
         }
 
         /// <summary>
+        /// Get user transaction.
+        /// </summary>
+        /// <response code="404">invalid_account_id, invalid_transaction_id</response>  
+        /// <response code="403">forbidden</response>
+        [HttpGet]
+        [Route("accounting/{account_id}/transactions/{transaction_id}")]
+        [SwaggerResponse(200, type: typeof(TransactionModel))]
+        [SwaggerResponse(404)]
+        [SwaggerResponse(403)]
+        public async Task<ActionResult<TransactionModel>> GetTransactionsAsync([FromRoute(Name = "account_id")] string accountId, [FromRoute(Name = "transaction_id")] int transactionId, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
+        {
+            if (accountId != Session.AccountId)
+                return Forbid();
+
+            var account = await _accountRepository.GetAsync(accountId, cancellationToken);
+            if (account == null)
+                return NotFound("invalid_account_id");
+
+            var transaction = await _transactionRepository.GetTransactionAsync(accountId,transactionId, cancellationToken);
+
+            if (transaction == null)
+                return NotFound("invalid_transaction_id");
+
+            return Ok(await transaction.ToTransactionModelAsync(GetExpandOptions(expandOptions), cancellationToken));
+        }
+
+        /// <summary>
         /// Add new transaction.
         /// </summary>
         /// <response code="422">missing_transaction_type, invalid_method, invalid_amount, not_enough_credit, rollback_transaction</response>  
