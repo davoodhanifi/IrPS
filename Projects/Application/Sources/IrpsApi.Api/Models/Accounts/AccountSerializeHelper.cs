@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using IrpsApi.Api.ExpandOptionsHelpers;
-using IrpsApi.Api.Models.Accounting;
 using IrpsApi.Framework.Accounts;
 using Mabna.WebApi.Common;
 

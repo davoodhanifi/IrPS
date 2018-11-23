@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using IrpsApi.Api.ExpandOptionsHelpers;
 using IrpsApi.Api.Models.Accounting;
-using IrpsApi.Framework.Accounting;
 using IrpsApi.Framework.Accounting.Repositories;
 using IrpsApi.Framework.Accounts.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +18,8 @@ namespace IrpsApi.Api.Controllers.Accounting
         {
             _accountRepository = accountRepository;
             _balanceRepository = balanceRepository;
+
+            ExpandEngines.Add("account", _accountRepository.GetAsync);
         }
 
         /// <summary>

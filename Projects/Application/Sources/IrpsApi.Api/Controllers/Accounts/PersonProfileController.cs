@@ -17,6 +17,8 @@ namespace IrpsApi.Api.Controllers.Accounts
         {
             _accountRepository = accountRepository;
             _personProfileRepository = personProfileRepository;
+
+            ExpandEngines.Add("account", _accountRepository.GetAsync);
         }
 
         /// <summary>

@@ -92,13 +92,6 @@ namespace IrpsApi.Api.Models.Accounts
             set;
         }
 
-        [DataMember(Name = "profile")]
-        public ProfileModel Profile
-        {
-            get;
-            set;
-        }
-
         [DataMember(Name = "roles")]
         public string Roles
         {
