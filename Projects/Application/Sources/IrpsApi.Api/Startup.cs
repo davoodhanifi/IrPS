@@ -124,7 +124,7 @@ namespace IrpsApi.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "IrPs API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "IrPS API v1");
             });
 
             app.UseBufferedRequestBody();

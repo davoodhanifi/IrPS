@@ -22,6 +22,7 @@ namespace IrpsApi.Api.Configurations
             services.AddSingleton<IAccountRepository, AccountRepository>();
             services.AddSingleton<IPersonProfileRepository, PersonProfileRepository>();
             services.AddSingleton<ITransactionRepository, TransactionRepository>();
+            services.AddSingleton<ITransactionTypeRepository, TransactionTypeRepository>();
             services.AddSingleton<IBalanceRepository, BalanceRepository>();
         }
 

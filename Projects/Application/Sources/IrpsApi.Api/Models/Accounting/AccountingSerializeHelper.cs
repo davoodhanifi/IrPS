@@ -16,7 +16,8 @@ namespace IrpsApi.Api.Models.Accounting
         {
             CreateMap<ITransaction, TransactionModel>()
                 .ForPath(q => q.FromAccount.Id, c => c.MapFrom(iAccount => iAccount.FromAccountId))
-                .ForPath(q => q.ToAccount.Id, c => c.MapFrom(iAccount => iAccount.ToAccountId));
+                .ForPath(q => q.ToAccount.Id, c => c.MapFrom(iAccount => iAccount.ToAccountId))
+                .ForPath(q => q.Type.Id, c => c.MapFrom(iType => iType.TypeId));
 
             CreateMap<IBalance, BalanceModel>()
                 .ForPath(q => q.Account.Id, c => c.MapFrom(iAccount => iAccount.AccountId));
@@ -51,8 +52,14 @@ namespace IrpsApi.Api.Models.Accounting
 
             if (expandOptions.TryGetExpandOption<IAccount>("to_account", out var toAccountExpandOption))
             {
-                var acc = await toAccountExpandOption.Engine.GetEntityAsync(transaction.FromAccountId, cancellationToken);
+                var acc = await toAccountExpandOption.Engine.GetEntityAsync(transaction.ToAccountId, cancellationToken);
                 model.ToAccount = acc.ToAccountModel();
+            }
+
+            if (expandOptions.TryGetExpandOption<ITransactionType>("type", out var typeExpandOption))
+            {
+                var type = await typeExpandOption.Engine.GetEntityAsync(transaction.TypeId, cancellationToken);
+                model.Type = type.ToTransactionTypeModel();
             }
 
             return model;
@@ -69,6 +76,11 @@ namespace IrpsApi.Api.Models.Accounting
             }
 
             return model;
+        }
+
+        public static TransactionTypeModel ToTransactionTypeModel(this ITransactionType transactionType)
+        {
+            return Mapper.Map<TransactionTypeModel>(transactionType);
         }
     }
 }

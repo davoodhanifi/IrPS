@@ -3,7 +3,7 @@ using IrpsApi.Api.Models.Common;
 
 namespace IrpsApi.Api.Models.Accounting
 {
-    [DataContract]
+    [DataContract(Name = "transaction_type")]
     public class TransactionTypeModel : RecordModel
     {
         [DataMember(Name = "title")]
