@@ -15,6 +15,8 @@ namespace IrpsApi.Api.ExpandOptionsHelpers
                 return Task.CompletedTask;
 
             bindingContext.Model = new ExpandOptions(expands.ToString().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+            bindingContext.Result = ModelBindingResult.Success(bindingContext.Model);
+
             return Task.CompletedTask;
         }
     }

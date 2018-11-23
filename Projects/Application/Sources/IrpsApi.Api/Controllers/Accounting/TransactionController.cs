@@ -20,11 +20,15 @@ namespace IrpsApi.Api.Controllers.Accounting
         private readonly IBalanceRepository _balanceRepository;
         private readonly ITransactionRepository _transactionRepository;
 
-        public TransactionController(ITransactionRepository transactionRepository, IAccountRepository accountRepository, IBalanceRepository balanceRepository)
+        public TransactionController(ITransactionRepository transactionRepository, IAccountRepository accountRepository, IBalanceRepository balanceRepository, ITransactionTypeRepository transactionTypeRepository)
         {
             _transactionRepository = transactionRepository;
             _accountRepository = accountRepository;
             _balanceRepository = balanceRepository;
+
+            ExpandEngines.Add("from_account", _accountRepository.GetAsync);
+            ExpandEngines.Add("to_account", _accountRepository.GetAsync);
+            ExpandEngines.Add("type", transactionTypeRepository.GetAsync);
         }
 
         /// <summary>
