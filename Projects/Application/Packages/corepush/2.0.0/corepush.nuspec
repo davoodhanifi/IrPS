@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>CorePush</id>
+    <version>2.0.0</version>
+    <authors>Andrei M</authors>
+    <owners>Andrei M</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/andrei-m-code/CorePush</projectUrl>
+    <description>.NET Core C# Push Notifications for Android Google Firebase Messaging (FCM) and Apple push notifications (APN).</description>
+    <releaseNotes>- Target framework changed to netstandard2.0
+      - ApnSender now uses publisher profile instead of certificates
+      - ApnSender uses WinHttpHandler for HTTP/2 requests and thus can only be used on Windows unfortunately. Once there is a cross-plat option, it will be updated.
+      - Firebase cloud messaging now is the only option to send Android push notifications
+      - GCM is gone</releaseNotes>
+    <tags>push-notifications apn gcm fcm firebase android-push-notifications ios-push-notifications</tags>
+    <repository type="git" url="https://github.com/andrei-m-code/CorePush" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Newtonsoft.Json" version="12.0.1" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http.WinHttpHandler" version="4.5.1" exclude="Build,Analyzers" />
+        <dependency id="System.Security.Cryptography.Cng" version="4.5.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

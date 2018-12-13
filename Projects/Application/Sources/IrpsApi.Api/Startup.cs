@@ -35,6 +35,7 @@ namespace IrpsApi.Api
             services.Configure<ConnectionStringsOption>(_configuration.GetSection("ConnectionStrings"));
             services.Configure<ApiSessions>(_configuration.GetSection("ApiSessions"));
             services.Configure<SmsSettings>(_configuration.GetSection("SMS"));
+            services.Configure<FcmSettings>(_configuration.GetSection("FCM"));
 
             services.RegisterConnectionStrings();
             services.RegisterRepositories();

@@ -1,4 +1,5 @@
-﻿using IrpsApi.Api.Security;
+﻿using IrpsApi.Api.Models.Accounts;
+using IrpsApi.Api.Security;
 using IrpsApi.Api.Services;
 using IrpsApi.Framework.Accounting.Repositories;
 using IrpsApi.Framework.Accounts.Repositories;
@@ -24,6 +25,7 @@ namespace IrpsApi.Api.Configurations
             services.AddSingleton<ITransactionRepository, TransactionRepository>();
             services.AddSingleton<ITransactionTypeRepository, TransactionTypeRepository>();
             services.AddSingleton<IBalanceRepository, BalanceRepository>();
+            services.AddSingleton<IPushTargetRepository, PushTargetRepository>();
         }
 
         public static void RegisterServices(this IServiceCollection services)
@@ -32,6 +34,7 @@ namespace IrpsApi.Api.Configurations
             //AddMessagingClient(services);
             //AddMessagingQueueSmsService(services);
             services.AddSingleton<ISmsService, SmsService>();
+            services.AddSingleton<IFcmService, FcmService>();
         }
 
         //private static void AddMessagingQueueSmsService(IServiceCollection services)

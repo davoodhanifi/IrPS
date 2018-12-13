@@ -439,6 +439,59 @@ CREATE TABLE [Accounts].[Province] (
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+CREATE TABLE [Accounts].[PushTarget](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[AccountId] [int] NOT NULL,
+	[Token] [nvarchar](max) NOT NULL,
+	[TypeId] [int] NOT NULL,
+	[PlatformUniqueId] [nvarchar](255) NOT NULL,
+	[PlatformName] [nvarchar](255) NOT NULL,
+	[PlatformVersion] [nvarchar](255) NOT NULL,
+	[RegistrationDateTime] [datetime] NOT NULL,
+	[StatusId] [int] NOT NULL ,
+	[RecordVersion] TIMESTAMP ,
+	[RecordState] INT NOT NULL CONSTRAINT [DF_PushTarget_RecordState] DEFAULT 0,
+	[RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_PushTarget_RecordInsertDateTime] DEFAULT GETDATE(),
+	[RecordUpdateDateTime] DATETIME NULL ,
+	[RecordDeleteDateTime] DATETIME NULL,
+CONSTRAINT [PK_PushTarget] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+CREATE TABLE [Accounts].[PushTargetType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](max) NOT NULL,
+	[TitleEn] [varchar](max) NULL,
+	[RecordVersion] TIMESTAMP ,
+	[RecordState] INT NOT NULL CONSTRAINT [DF_PushTargetType_RecordState] DEFAULT 0,
+	[RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_PushTargetType_RecordInsertDateTime] DEFAULT GETDATE(),
+	[RecordUpdateDateTime] DATETIME NULL ,
+	[RecordDeleteDateTime] DATETIME NULL ,
+ CONSTRAINT [PK_PushTargetType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+CREATE TABLE [Accounts].[PushTargetStatus](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](max) NOT NULL,
+	[TitleEn] [varchar](max) NULL,
+	[RecordVersion] TIMESTAMP ,
+	[RecordState] INT NOT NULL CONSTRAINT [DF_PushTargetStatus_RecordState] DEFAULT 0,
+	[RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_PushTargetStatus_RecordInsertDateTime] DEFAULT GETDATE(),
+	[RecordUpdateDateTime] DATETIME NULL ,
+	[RecordDeleteDateTime] DATETIME NULL ,
+CONSTRAINT [PK_PushTargetStatus] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
 CREATE TABLE [Accounts].[Session](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[AccessToken] [nvarchar](255) NOT NULL,
@@ -1092,6 +1145,18 @@ INSERT INTO [Accounts].[Province] ([Id], [CountryId], [Title], [TitleEn]) VALUES
 INSERT INTO [Accounts].[Province] ([Id], [CountryId], [Title], [TitleEn]) VALUES(30, 1, N'یزد', NULL)
 INSERT INTO [Accounts].[Province] ([Id], [CountryId], [Title], [TitleEn]) VALUES(31, 1, N'البرز', NULL)
 SET IDENTITY_INSERT [Accounts].[Province] OFF
+
+GO
+SET IDENTITY_INSERT [Accounts].[PushTargetType] ON 
+INSERT [Accounts].[PushTargetType] ([Id], [Title], [TitleEn]) VALUES (1, N'اندروید', 'Android')
+INSERT [Accounts].[PushTargetType] ([Id], [Title], [TitleEn]) VALUES (2, N'آی او اس', 'ios')
+SET IDENTITY_INSERT [Accounts].[PushTargetType] OFF
+
+GO
+SET IDENTITY_INSERT [Accounts].[PushTargetStatus] ON 
+INSERT [Accounts].[PushTargetStatus] ([Id], [Title], [TitleEn]) VALUES (1, N'فعال', 'Active')
+INSERT [Accounts].[PushTargetStatus] ([Id], [Title], [TitleEn]) VALUES (2, N'غیر فعال', 'Deactive')
+SET IDENTITY_INSERT [Accounts].[PushTargetStatus] OFF
 
 GO
 SET IDENTITY_INSERT [Accounts].[SessionType] ON
@@ -1850,6 +1915,141 @@ BEGIN
         END
         
         UPDATE [Accounts].[Province] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
+CREATE TRIGGER [Accounts].[PushTarget_Delete] ON [Accounts].[PushTarget]
+            INSTEAD OF DELETE
+AS
+BEGIN
+                
+    SET NOCOUNT ON;
+                
+    IF EXISTS ( SELECT  *
+                FROM    DELETED
+                WHERE   RecordState > 1 )
+        BEGIN
+            RAISERROR ('Cannot update deleted records',16,1)
+            ROLLBACK TRANSACTION
+            RETURN
+        END
+                
+    UPDATE  [Accounts].[PushTarget]
+    SET     [RecordDeleteDateTime] = GETDATE() ,
+            [RecordState] = 2
+    WHERE   [Id] IN ( SELECT    [Id]
+                        FROM      DELETED )
+END
+GO
+CREATE TRIGGER [Accounts].[PushTarget_Update] ON [Accounts].[PushTarget]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [Accounts].[PushTarget] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
+CREATE TRIGGER [Accounts].[PushTargetType_Delete] ON [Accounts].[PushTargetType]
+            INSTEAD OF DELETE
+AS
+BEGIN
+                
+    SET NOCOUNT ON;
+                
+    IF EXISTS ( SELECT  *
+                FROM    DELETED
+                WHERE   RecordState > 1 )
+        BEGIN
+            RAISERROR ('Cannot update deleted records',16,1)
+            ROLLBACK TRANSACTION
+            RETURN
+        END
+                
+    UPDATE  [Accounts].[PushTargetType]
+    SET     [RecordDeleteDateTime] = GETDATE() ,
+            [RecordState] = 2
+    WHERE   [Id] IN ( SELECT    [Id]
+                        FROM      DELETED )
+END
+GO
+CREATE TRIGGER [Accounts].[PushTargetType_Update] ON [Accounts].[PushTargetType]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [Accounts].[PushTargetType] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
+CREATE TRIGGER [Accounts].[PushTargetStatus_Delete] ON [Accounts].[PushTargetStatus]
+            INSTEAD OF DELETE
+AS
+BEGIN
+                
+    SET NOCOUNT ON;
+                
+    IF EXISTS ( SELECT  *
+                FROM    DELETED
+                WHERE   RecordState > 1 )
+        BEGIN
+            RAISERROR ('Cannot update deleted records',16,1)
+            ROLLBACK TRANSACTION
+            RETURN
+        END
+                
+    UPDATE  [Accounts].[PushTargetStatus]
+    SET     [RecordDeleteDateTime] = GETDATE() ,
+            [RecordState] = 2
+    WHERE   [Id] IN ( SELECT    [Id]
+                        FROM      DELETED )
+END
+GO
+CREATE TRIGGER [Accounts].[PushTargetStatus_Update] ON [Accounts].[PushTargetStatus]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [Accounts].[PushTargetStatus] 
         SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
         WHERE [Id] IN (SELECT [Id] FROM INSERTED)
     END

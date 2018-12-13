@@ -45,6 +45,9 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.PersonProfile.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.PersonProfileHistory.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.Province.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.PushTarget.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.PushTargetType.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.PushTargetStatus.Sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.Session.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.SessionState.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounts.SessionType.sql" />
@@ -73,6 +76,8 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.DocumentType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.GenderType.Sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.Province.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.PushTargetType.Sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.PushTargetStatus.Sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.SessionType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.VerificationStatus.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Bank.Bank.sql" />
@@ -112,6 +117,12 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PersonProfile_Update.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Province_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Province_Update.sql" />
+       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTarget_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTarget_Update.sql" />
+       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTargetType_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTargetType_Update.sql" />
+       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTargetStatus_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTargetStatus_Update.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Session_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Session_Update.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.SessionState_Delete.sql" />

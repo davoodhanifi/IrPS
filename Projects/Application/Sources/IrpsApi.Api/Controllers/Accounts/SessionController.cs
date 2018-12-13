@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,6 +13,7 @@ using IrpsApi.Api.Services;
 using IrpsApi.Api.ValidationHelpers;
 using IrpsApi.Framework.Accounts;
 using IrpsApi.Framework.Accounts.Repositories;
+using Mabna.WebApi.AspNetCore;
 using Mabna.WebApi.Common;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -20,14 +24,18 @@ namespace IrpsApi.Api.Controllers.Accounts
     {
         private readonly ISessionRepository _sessionRepository;
         private readonly IAccountRepository _accountRepository;
+        private readonly IPushTargetRepository _pushTargetRepository;
         private readonly ISmsService _smsService;
         private static readonly Regex MobileValidator = new Regex(@"^\d+$");
 
-        public SessionController(ISessionRepository sessionRepository, IAccountRepository accountRepository, ISmsService smsService)
+        public SessionController(ISessionRepository sessionRepository, IAccountRepository accountRepository, ISmsService smsService, IPushTargetRepository pushTargetRepository)
         {
             _sessionRepository = sessionRepository;
             _accountRepository = accountRepository;
             _smsService = smsService;
+            _pushTargetRepository = pushTargetRepository;
+
+            ExpandEngines.Add("account", _accountRepository.GetAsync);
         }
 
         /// <summary>
@@ -182,5 +190,75 @@ namespace IrpsApi.Api.Controllers.Accounts
             return Ok(await session.ToSessionModelAsync(GetExpandOptions(expandOptions), cancellationToken));
         }
 
+        /// <summary>
+        /// Create push target.
+        /// </summary>
+        /// <response code="403">forbidden</response>
+        /// <response code="422">invalid_type_id, invalid_status_id</response>
+        [HttpPost]
+        [Route("accounts/{account_id}/pushtargets")]
+        [SwaggerResponse(200, type: typeof(PushTargetModel))]
+        [SwaggerResponse(422)]
+        public async Task<ActionResult<PushTargetModel>> CreatePushTargetAsync([FromRoute(Name = "account_id")]string accountId, [FromBody]InputPushTargetModel model, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken)
+        {
+            if (accountId != Session.AccountId)
+                return Forbid();
+
+            var pushTarget = model.ToPushTarget();
+            pushTarget.RegistrationDateTime = DateTime.Now;
+
+            var validTypeIds = new[]
+            {
+                //Android
+                "1" ,
+                //IOS
+                "2"
+            };
+
+            var validStatusIds = new[]
+            {
+                "1", "2"
+            };
+
+            if (validTypeIds.All(t => t != pushTarget.TypeId))
+                throw new UnprocessableEntityException("invalid_type_id", "valid type_ids are ", string.Join(",", validTypeIds));
+
+            if (validStatusIds.All(t => t != pushTarget.StatusId))
+                throw new UnprocessableEntityException("invalid_status_id", "valid status_ids are ", string.Join(",", validStatusIds));
+
+            pushTarget = await _pushTargetRepository.SaveAsync(pushTarget, cancellationToken);
+            return Ok(await pushTarget.ToPushTargetModelAsync(GetExpandOptions(expandOptions), cancellationToken));
+
+        }
+
+        /// <summary>
+        /// Delete push target.
+        /// </summary>
+        /// <response code="403">forbidden</response>
+        [HttpDelete]
+        [Route("accounts/{account_id}/pushtargets")]
+        [SwaggerResponse(200, type: typeof(IEnumerable<PushTargetModel>))]
+        [SwaggerResponse(403)]
+        public async Task<ActionResult<IEnumerable<PushTargetModel>>> DeletePushTargetAsync([FromRoute(Name = "account_id")]string accountId, [FromBody]InputPushTargetDeleteModel pushTargetModel, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken)
+        {
+            if (accountId != Session.AccountId)
+                return Forbid();
+
+            var pushTargets = (await _pushTargetRepository.GetAllByTokenAndAccountIdAsync(pushTargetModel.Token, accountId, cancellationToken)).ToList();
+
+            if (pushTargets.Any(item => item.AccountId != accountId))
+                return Forbid();
+
+            var result = new List<PushTargetModel>();
+            foreach (var pushTarget in pushTargets)
+            {
+                await _pushTargetRepository.UpdateStatusByTokenAsync(pushTarget.Token, "2", cancellationToken);
+
+                pushTarget.StatusId = "2";
+                result.Add(await pushTarget.ToPushTargetModelAsync(GetExpandOptions(expandOptions), cancellationToken));
+            }
+
+            return Ok(result);
+        }
     }
 }

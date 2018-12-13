@@ -20,6 +20,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="CorePush" Version="2.0.0" />
     <PackageReference Include="Kavenegar.Core" Version="1.0.1-alpha2" />
     <PackageReference Include="Mabna.WebApi.AspNetCore.v1" Version="1.0.0-beta06" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2" />

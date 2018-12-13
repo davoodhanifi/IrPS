@@ -7,6 +7,6 @@ namespace IrpsApi.Framework.Accounts.Repositories
     {
         Task<ISession> GetLastNotVerifiedSessionByMobile(string mobile, CancellationToken cancellationToken);
 
-        Task<ISession> GetByTokenAsync(string token, CancellationToken cancellationToken);
+        Task<ISession> GetByTokenAsync(string token, CancellationToken cancellationToken = default);
     }
 }

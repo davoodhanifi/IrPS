@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using IrpsApi.Api.ExpandOptionsHelpers;
 using IrpsApi.Api.Models.Accounting;
 using IrpsApi.Api.Models.Accounts;
+using IrpsApi.Api.Models.Fcm;
+using IrpsApi.Api.Services;
 using IrpsApi.Framework.Accounting;
 using IrpsApi.Framework.Accounting.Repositories;
 using IrpsApi.Framework.Accounts.Repositories;
@@ -19,12 +21,14 @@ namespace IrpsApi.Api.Controllers.Accounting
         private readonly IAccountRepository _accountRepository;
         private readonly IBalanceRepository _balanceRepository;
         private readonly ITransactionRepository _transactionRepository;
+        private readonly IFcmService _fcmService;
 
-        public TransactionController(ITransactionRepository transactionRepository, IAccountRepository accountRepository, IBalanceRepository balanceRepository, ITransactionTypeRepository transactionTypeRepository)
+        public TransactionController(ITransactionRepository transactionRepository, IAccountRepository accountRepository, IBalanceRepository balanceRepository, ITransactionTypeRepository transactionTypeRepository, IFcmService fcmService)
         {
             _transactionRepository = transactionRepository;
             _accountRepository = accountRepository;
             _balanceRepository = balanceRepository;
+            _fcmService = fcmService;
 
             ExpandEngines.Add("from_account", _accountRepository.GetAsync);
             ExpandEngines.Add("to_account", _accountRepository.GetAsync);
@@ -160,6 +164,12 @@ namespace IrpsApi.Api.Controllers.Accounting
                     oldToUserBalance.IsActive = false;
                     await _balanceRepository.UpdateAsync(oldToUserBalance, cancellationToken);
                 }
+
+                _fcmService.Send(transactionModel.ToAccount, new NotificationModel
+                {
+                    Title = "نت‌پی",
+                    Body = $"مبلغ {transactionModel.Amount}، به شما پرداخت شد."
+                });
 
                 return Ok(await transaction.ToTransactionModelAsync(GetExpandOptions(expandOptions), cancellationToken));
             }

@@ -19,6 +19,11 @@ namespace IrpsApi.Api.Models.Accounts
             CreateMap<IPersonProfile, PersonProfileModel>()
                 .ForPath(q => q.Account.Id, c => c.MapFrom(i => i.AccountId));
             CreateMap<InputProfileModel, IPersonProfile>();
+            CreateMap<IPushTarget, PushTargetModel>()
+                .ForPath(q => q.Account.Id, c => c.MapFrom(i => i.AccountId))
+                .ForPath(q => q.Type.Id, c => c.MapFrom(i => i.TypeId))
+                .ForPath(q => q.Status.Id, c => c.MapFrom(i => i.StatusId));
+            CreateMap<InputPushTargetModel, IPushTarget>();
         }
     }
 
@@ -70,6 +75,24 @@ namespace IrpsApi.Api.Models.Accounts
         public static IPersonProfile ToPersonProfile(this InputProfileModel model)
         {
             return Mapper.Map<IPersonProfile>(model);
+        }
+
+        public static IPushTarget ToPushTarget(this InputPushTargetModel model)
+        {
+            return Mapper.Map<IPushTarget>(model);
+        }
+
+        public static async Task<PushTargetModel> ToPushTargetModelAsync(this IPushTarget pushTarget, IExpandOptionCollection expandOptions, CancellationToken cancellationToken = default)
+        {
+            var model = Mapper.Map<PushTargetModel>(pushTarget);
+
+            if (expandOptions.TryGetExpandOption<IAccount>("account", out var accountExpandOption))
+            {
+                var acc = await accountExpandOption.Engine.GetEntityAsync(pushTarget.AccountId, cancellationToken);
+                model.Account = acc.ToAccountModel();
+            }
+
+            return model;
         }
     }
 }

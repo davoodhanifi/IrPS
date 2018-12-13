@@ -5,6 +5,6 @@ namespace IrpsApi.Framework.Accounting.Repositories
 {
     public interface IBalanceRepository : IEditableEntityRepository<IBalance>
     {
-        Task<IBalance> GetByAccountIdAsync(string accountId, CancellationToken cancellationToken);
+        Task<IBalance> GetByAccountIdAsync(string accountId, CancellationToken cancellationToken = default);
     }
 }
