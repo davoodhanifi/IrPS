@@ -24,6 +24,10 @@ namespace IrpsApi.Api.Models.Accounts
                 .ForPath(q => q.Type.Id, c => c.MapFrom(i => i.TypeId))
                 .ForPath(q => q.Status.Id, c => c.MapFrom(i => i.StatusId));
             CreateMap<InputPushTargetModel, IPushTarget>();
+            CreateMap<IDocument, DocumentModel>()
+                .ForPath(q => q.Account.Id, c => c.MapFrom(i => i.AccountId))
+                .ForPath(q => q.Type.Id, c => c.MapFrom(i => i.TypeId));
+            CreateMap<InputDocumentModel, IDocument>();
         }
     }
 
@@ -92,6 +96,29 @@ namespace IrpsApi.Api.Models.Accounts
                 model.Account = acc.ToAccountModel();
             }
 
+            return model;
+        }
+
+        public static IDocument ToDocument(this InputDocumentModel model)
+        {
+            return Mapper.Map<IDocument>(model);
+        }
+
+        public static IDocumentType ToDocumentType(this DocumentTypeModel model)
+        {
+            return Mapper.Map<IDocumentType>(model);
+        }
+
+        public static async Task<DocumentModel> ToDocumentModelAsync(this IDocument document, IExpandOptionCollection expandOptions, CancellationToken cancellationToken = default)
+        {
+            var model = Mapper.Map<DocumentModel>(document);
+
+            if (expandOptions.TryGetExpandOption<IAccount>("account", out var accountExpandOption))
+            {
+                var acc = await accountExpandOption.Engine.GetEntityAsync(document.AccountId, cancellationToken);
+                model.Account = acc.ToAccountModel();
+            }
+           
             return model;
         }
     }

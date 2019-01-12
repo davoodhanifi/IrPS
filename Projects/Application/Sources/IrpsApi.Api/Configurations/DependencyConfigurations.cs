@@ -26,6 +26,7 @@ namespace IrpsApi.Api.Configurations
             services.AddSingleton<ITransactionTypeRepository, TransactionTypeRepository>();
             services.AddSingleton<IBalanceRepository, BalanceRepository>();
             services.AddSingleton<IPushTargetRepository, PushTargetRepository>();
+            services.AddSingleton<IDocumentRepository, DocumentRepository>();
         }
 
         public static void RegisterServices(this IServiceCollection services)
