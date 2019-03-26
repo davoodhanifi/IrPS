@@ -415,6 +415,20 @@
           "bin/placeholder/IrpsApi.Framework.Accounts.dll": {}
         }
       },
+      "IrpsApi.Framework.Bank/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "IrpsApi.Framework": "1.0.0",
+          "IrpsApi.Framework.Accounts": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/IrpsApi.Framework.Bank.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IrpsApi.Framework.Bank.dll": {}
+        }
+      },
       "IrpsApi.Framework.System/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -1682,6 +1696,11 @@
       "path": "../IrpsApi.Framework.Accounts/IrpsApi.Framework.Accounts.csproj",
       "msbuildProject": "../IrpsApi.Framework.Accounts/IrpsApi.Framework.Accounts.csproj"
     },
+    "IrpsApi.Framework.Bank/1.0.0": {
+      "type": "project",
+      "path": "../IrpsApi.Framework.Bank/IrpsApi.Framework.Bank.csproj",
+      "msbuildProject": "../IrpsApi.Framework.Bank/IrpsApi.Framework.Bank.csproj"
+    },
     "IrpsApi.Framework.System/1.0.0": {
       "type": "project",
       "path": "../IrpsApi.Framework.System/IrpsApi.Framework.System.csproj",
@@ -1694,6 +1713,7 @@
       "IrpsApi.Framework >= 1.0.0",
       "IrpsApi.Framework.Accounting >= 1.0.0",
       "IrpsApi.Framework.Accounts >= 1.0.0",
+      "IrpsApi.Framework.Bank >= 1.0.0",
       "IrpsApi.Framework.System >= 1.0.0",
       "Microsoft.Extensions.Configuration.Abstractions >= 2.1.1",
       "NETStandard.Library >= 2.0.3",
@@ -1739,6 +1759,9 @@
             },
             "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounts\\IrpsApi.Framework.Accounts.csproj": {
               "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounts\\IrpsApi.Framework.Accounts.csproj"
+            },
+            "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Bank\\IrpsApi.Framework.Bank.csproj": {
+              "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Bank\\IrpsApi.Framework.Bank.csproj"
             },
             "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounting\\IrpsApi.Framework.Accounting.csproj": {
               "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounting\\IrpsApi.Framework.Accounting.csproj"

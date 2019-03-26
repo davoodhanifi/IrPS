@@ -55,7 +55,6 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.Bank.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccount.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccountHistory.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccountOnlineLinkStatus.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccountType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Configuration.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Feedback.sql" />
@@ -81,7 +80,6 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.SessionType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.VerificationStatus.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Bank.Bank.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Bank.BankAccountLinkStatus.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Bank.BankAccountType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\System.Configuration.sql" />
 
@@ -117,11 +115,11 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PersonProfile_Update.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Province_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Province_Update.sql" />
-       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTarget_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTarget_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTarget_Update.sql" />
-       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTargetType_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTargetType_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTargetType_Update.sql" />
-       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTargetStatus_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTargetStatus_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.PushTargetStatus_Update.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Session_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounts.Session_Update.sql" />
@@ -136,8 +134,6 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccount_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccount_Insert.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccount_Update.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountOnlineLinkStatus_Delete.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountOnlineLinkStatus_Update.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountType_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountType_Update.sql" />
     </ItemGroup>

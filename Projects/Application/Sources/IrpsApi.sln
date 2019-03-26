@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IrpsApi.Framework.Accountin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IrpsApi.Framework.Accounts", "IrpsApi.Framework.Accounts\IrpsApi.Framework.Accounts.csproj", "{EB2DE550-1701-4118-B84B-77D6BE994A35}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IrpsApi.Framework.Bank", "IrpsApi.Framework.Bank\IrpsApi.Framework.Bank.csproj", "{343FA9BC-9B5F-43A8-AEF0-717A7F7AC799}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{EB2DE550-1701-4118-B84B-77D6BE994A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB2DE550-1701-4118-B84B-77D6BE994A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB2DE550-1701-4118-B84B-77D6BE994A35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{343FA9BC-9B5F-43A8-AEF0-717A7F7AC799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{343FA9BC-9B5F-43A8-AEF0-717A7F7AC799}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{343FA9BC-9B5F-43A8-AEF0-717A7F7AC799}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{343FA9BC-9B5F-43A8-AEF0-717A7F7AC799}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

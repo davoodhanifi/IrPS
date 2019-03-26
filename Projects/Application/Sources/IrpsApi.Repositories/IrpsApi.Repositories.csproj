@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\IrpsApi.Framework.Accounting\IrpsApi.Framework.Accounting.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework.Accounts\IrpsApi.Framework.Accounts.csproj" />
+    <ProjectReference Include="..\IrpsApi.Framework.Bank\IrpsApi.Framework.Bank.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework.System\IrpsApi.Framework.System.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework\IrpsApi.Framework.csproj" />
   </ItemGroup>

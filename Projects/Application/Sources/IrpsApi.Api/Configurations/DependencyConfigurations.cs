@@ -3,6 +3,7 @@ using IrpsApi.Api.Security;
 using IrpsApi.Api.Services;
 using IrpsApi.Framework.Accounting.Repositories;
 using IrpsApi.Framework.Accounts.Repositories;
+using IrpsApi.Framework.Bank.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Noandishan.IrpsApi.Repositories.Accounting;
 using Noandishan.IrpsApi.Repositories.Accounts;
@@ -27,6 +28,7 @@ namespace IrpsApi.Api.Configurations
             services.AddSingleton<IBalanceRepository, BalanceRepository>();
             services.AddSingleton<IPushTargetRepository, PushTargetRepository>();
             services.AddSingleton<IDocumentRepository, DocumentRepository>();
+            services.AddSingleton<IBankAccountRepository, BankAccountRepository>();
         }
 
         public static void RegisterServices(this IServiceCollection services)

@@ -254,17 +254,17 @@ GO
 CREATE TABLE [Accounts].[Document]
     (
       [Id] [INT] IDENTITY(1, 1)  NOT NULL ,
-      [AccountId] INT NOT NULL ,
-      [DateTime] DATETIME NOT NULL ,
-      [TypeId] INT NOT NULL ,
-      [Title] NVARCHAR(MAX) NOT NULL ,
-      [TitleEn] NVARCHAR(MAX) NULL ,
-      [MimeType] NVARCHAR(MAX) NOT NULL ,
-      [Data] VARBINARY(MAX) NOT NULL ,
-      [Note] NVARCHAR(MAX) NULL,
-      [FileName] NVARCHAR(MAX) NOT NULL,
+      [AccountId] [int] NOT NULL ,
+      [DateTime] [datetime] NOT NULL,
+      [TypeId] [int] NOT NULL ,
+      [Title] [nvarchar](MAX) NULL ,
+      [TitleEn] [nvarchar](MAX) NULL ,
+      [MimeType] [nvarchar](MAX) NOT NULL ,
+      [Data] [varbinary](MAX) NOT NULL ,
+      [Note][nvarchar](MAX) NULL,
+      [FileName] [nvarchar](MAX) NULL,
       [RecordVersion] TIMESTAMP ,
-      [RecordState] INT NOT NULL CONSTRAINT [DF_Document_RecordState] DEFAULT 0,
+      [RecordState] [int] NOT NULL CONSTRAINT [DF_Document_RecordState] DEFAULT 0,
       [RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_Document_RecordInsertDateTime] DEFAULT GETDATE(),
       [RecordUpdateDateTime] DATETIME NULL ,
       [RecordDeleteDateTime] DATETIME NULL ,
@@ -589,14 +589,13 @@ GO
 CREATE TABLE [Bank].[BankAccount](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[AccountId] [int] NOT NULL,
-	[BankId] [int] NOT NULL,
-	[Number] [nvarchar](max) NOT NULL,
+	[BankId] [int] NULL,
+	[Number] [nvarchar](max) NULL,
+	[Iban] [NVARCHAR](MAX) NOT NULL, 
 	[BranchName] [NVARCHAR](MAX) NULL,
 	[BranchNameEn] [VARCHAR](MAX) NULL,
 	[BranchCode] [NVARCHAR](MAX) NULL,
 	[TypeId] [INT] NULL,
-	[Iban] [NVARCHAR](MAX) NULL, 
-	[OnlineLinkStatusId] [int] NOT NULL,
 	[Notes] NVARCHAR(MAX) NULL,
 	[RecordVersion] TIMESTAMP ,
 	[RecordState] INT NOT NULL CONSTRAINT [DF_BankAccount_RecordState] DEFAULT 0,
@@ -620,31 +619,17 @@ CREATE TABLE [Bank].[BankAccountHistory]
       [AccountId] [INT] NULL,
       [BankId] [INT] NULL,
       [Number] [NVARCHAR](MAX) NULL,
+      [Iban] [NVARCHAR](MAX) NULL,
       [BranchName] [NVARCHAR](MAX) NULL,
       [BranchNameEn] [VARCHAR](MAX) NULL,
       [BranchCode] [NVARCHAR](MAX) NULL,
       [TypeId] [INT] NULL,
-      [Iban] [NVARCHAR](MAX) NULL,
-	  [OnlineLinkStatusId] [int] NULL DEFAULT 1,
       [Notes] NVARCHAR(MAX) NULL,
       [RecordVersion] [VARBINARY](8) NULL,
       [RecordState] [INT] NULL,
       [RecordInsertDateTime] [DATETIME] NULL,
       [RecordUpdateDateTime] [DATETIME] NULL,
       [RecordDeleteDateTime] [DATETIME] NULL
-    )
-ON  [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-CREATE TABLE [Bank].[BankAccountOnlineLinkStatus]
-    (
-      [Id] [INT] IDENTITY(1, 1) NOT NULL,
-      [Title] [NVARCHAR](MAX) NOT NULL,
-      [TitleEn] [VARCHAR](MAX) NULL, 
-      [RecordVersion] TIMESTAMP,
-      [RecordState] INT NOT NULL CONSTRAINT [DF_BankAccountOnlineLinkStatus_RecordState] DEFAULT 0,
-      [RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_BankAccountOnlineLinkStatus_RecordInsertDateTime] DEFAULT GETDATE(),
-      [RecordUpdateDateTime] DATETIME NULL,
-      [RecordDeleteDateTime] DATETIME NULL,
     )
 ON  [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
@@ -1092,18 +1077,10 @@ INSERT INTO [Accounts].[DocumentType]
 VALUES
 (1, N'شناسنامه'),
 (2, N'کارت ملی'),
-(3, N'مدرک تحصیلی'),
-(4, N'پاسپورت'),
-(5, N'آگهی ثبت'),
-(6, N'آگهی تغییرات'),
-(7, N'وکالتنامه'),
-(8, N'نمونه امضا'),
-(9, N'عکس'),
-(10, N'قرارداد اعتباری'),
-(11, N'قرارداد آنلاین'),
-(12, N'فرم افتتاح حساب'),
-(13, N'فرم‌های پیشخوان')
-
+(3, N'آواتار'),
+(4, N'کارت ماشین'),
+(5, N'گواهینامه'),
+(6, N'مدرک تاکسیرانی')
 SET IDENTITY_INSERT	 [Accounts].[DocumentType] OFF
 GO
 SET IDENTITY_INSERT [Accounts].[GenderType] ON 
@@ -1207,16 +1184,6 @@ VALUES
 (27,'ir.bank.khavarmiane', N'بانک خاورمیانه', null)
 
 SET IDENTITY_INSERT [Bank].[Bank] OFF
-GO
-SET IDENTITY_INSERT [Bank].[BankAccountOnlineLinkStatus] ON
-
-INSERT INTO [Bank].[BankAccountOnlineLinkStatus]
-(Id, Title, TitleEn) Values
-(1, N'وصل نشده', 'Not Linked'),
-(2, N'وصل شده', 'Linked'),
-(3, N'قطع شده', 'Unlinked')
-
-SET IDENTITY_INSERT [Bank].[BankAccountOnlineLinkStatus] OFF
 GO
 SET IDENTITY_INSERT [Bank].[BankAccountType] ON
 
@@ -2337,51 +2304,6 @@ BEGIN
               
         INSERT INTO [Bank].[BankAccountHistory]
         SELECT GETDATE(), 1, * FROM INSERTED
-    END
-END
-GO
-CREATE TRIGGER [Bank].[BankAccountOnlineLinkStatus_Delete] ON [Bank].[BankAccountOnlineLinkStatus]
-            INSTEAD OF DELETE
-AS
-BEGIN
-                
-    SET NOCOUNT ON;
-                
-    IF EXISTS ( SELECT  *
-                FROM    DELETED
-                WHERE   RecordState > 1 )
-        BEGIN
-            RAISERROR ('Cannot update deleted records',16,1)
-            ROLLBACK TRANSACTION
-            RETURN
-        END
-                
-    UPDATE  [Bank].[BankAccountOnlineLinkStatus]
-    SET     [RecordDeleteDateTime] = GETDATE() ,
-            [RecordState] = 2
-    WHERE   [Id] IN ( SELECT    [Id]
-                        FROM      DELETED )
-END
-GO
-CREATE TRIGGER [Bank].[BankAccountOnlineLinkStatus_Update] ON [Bank].[BankAccountOnlineLinkStatus]
-				FOR UPDATE
-AS
-BEGIN
-        
-    SET NOCOUNT ON;
-        
-    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
-    BEGIN
-        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
-        BEGIN
-        RAISERROR ('Cannot update deleted records',16,1)
-        ROLLBACK TRANSACTION
-        RETURN
-        END
-        
-        UPDATE [Bank].[BankAccountOnlineLinkStatus] 
-        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
-        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
     END
 END
 GO
