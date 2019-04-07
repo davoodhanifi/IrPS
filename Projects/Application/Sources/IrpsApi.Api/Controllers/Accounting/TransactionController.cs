@@ -101,8 +101,8 @@ namespace IrpsApi.Api.Controllers.Accounting
         [SwaggerResponse(403)]
         public async Task<ActionResult<TransactionModel>> AddTransactionAsync([FromBody] InputTransactionModel transactionModel, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
-            if (transactionModel.FromAccount.Id != Session.AccountId)
-                return Forbid();
+            //if (transactionModel.FromAccount.Id != Session.AccountId)
+            //    return Forbid();
 
             if (transactionModel?.Type == null || transactionModel?.Type.Id == TransactionTypeIds.None)
                 throw new UnprocessableEntityException("missing_transaction_type", "Transaction Type Not Defined!");
@@ -167,7 +167,7 @@ namespace IrpsApi.Api.Controllers.Accounting
 
                 _fcmService.Send(transactionModel.ToAccount, new NotificationModel
                 {
-                    Title = "نت‌پی",
+                    Title = "پولینو",
                     Body = $"مبلغ {transactionModel.Amount}، به شما پرداخت شد."
                 });
 

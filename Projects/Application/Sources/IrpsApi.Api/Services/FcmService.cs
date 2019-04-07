@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using CorePush.Google;
 using IrpsApi.Api.Configurations;
 using IrpsApi.Api.Models.Accounts;
 using IrpsApi.Api.Models.Fcm;
-using IrpsApi.Framework.Accounts;
 using IrpsApi.Framework.Accounts.Repositories;
 using Microsoft.Extensions.Options;
 
