@@ -21,11 +21,11 @@ namespace IrpsApi.Api.Models.Bank
         }
     }
 
-    internal static class AccountSerializeHelper
+    internal static class BankAccountSerializeHelper
     {
         private static readonly IMapper Mapper;
 
-        static AccountSerializeHelper()
+        static BankAccountSerializeHelper()
         {
             var config = new MapperConfiguration(cfg =>
             {

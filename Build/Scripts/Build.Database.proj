@@ -23,6 +23,7 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Accounting.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Accounts.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Bank.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Operation.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\System.sql" />
       
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Accounting.Balance.sql" />
@@ -56,6 +57,9 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccount.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccountHistory.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccountType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Operation.Request.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Operation.RequestStatus.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Operation.RequestType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Configuration.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Feedback.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Message.sql" />
@@ -81,6 +85,8 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.VerificationStatus.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Bank.Bank.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Bank.BankAccountType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Operation.RequestStatus.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Operation.RequestType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\System.Configuration.sql" />
 
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounting.Transaction_Delete.sql" />
@@ -136,6 +142,12 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccount_Update.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountType_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountType_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.Request_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.Request_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.RequestStatus_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.RequestStatus_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.RequestType_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.RequestType_Update.sql" />
     </ItemGroup>
     <MergeTextFiles InputFiles="@(InstallFiles)" OutputFile="$(BuildDatabaseBinPath)\Install.sql.temp" Delimiter="&#13;&#10;GO&#13;&#10;" />
     <ItemGroup>

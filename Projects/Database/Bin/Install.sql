@@ -4,6 +4,8 @@ CREATE SCHEMA [Accounts] AUTHORIZATION [dbo]
 GO
 CREATE SCHEMA [Bank] AUTHORIZATION [dbo]
 GO
+CREATE SCHEMA [Operation] AUTHORIZATION	 [dbo]
+GO
 CREATE SCHEMA [System] AUTHORIZATION [dbo]
 GO
 CREATE TABLE [Accounting].[Balance](
@@ -596,6 +598,7 @@ CREATE TABLE [Bank].[BankAccount](
 	[BranchNameEn] [VARCHAR](MAX) NULL,
 	[BranchCode] [NVARCHAR](MAX) NULL,
 	[TypeId] [INT] NULL,
+	[DailyPayment] [bit] NULL,
 	[Notes] NVARCHAR(MAX) NULL,
 	[RecordVersion] TIMESTAMP ,
 	[RecordState] INT NOT NULL CONSTRAINT [DF_BankAccount_RecordState] DEFAULT 0,
@@ -624,6 +627,7 @@ CREATE TABLE [Bank].[BankAccountHistory]
       [BranchNameEn] [VARCHAR](MAX) NULL,
       [BranchCode] [NVARCHAR](MAX) NULL,
       [TypeId] [INT] NULL,
+	  [DailyPayment] [bit] NULL,
       [Notes] NVARCHAR(MAX) NULL,
       [RecordVersion] [VARBINARY](8) NULL,
       [RecordState] [INT] NULL,
@@ -643,6 +647,59 @@ CREATE TABLE [Bank].[BankAccountType]
       [RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_BankAccountType_RecordInsertDateTime] DEFAULT GETDATE(),
       [RecordUpdateDateTime] DATETIME NULL,
       [RecordDeleteDateTime] DATETIME NULL,
+    )
+ON  [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+CREATE TABLE [Operation].[Request](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[AccountId] [int] NOT NULL,
+	[TypeId] [int] NOT NULL,
+	[StatusId] [int] NOT NULL,
+    [DateTime] [DateTime] NOT NULL,
+	[Parameters] [NVARCHAR] (MAX) NULL,
+	[Comments] [NVARCHAR] (MAX) NULL,
+	[RecordVersion] [timestamp] NOT NULL,
+	[RecordState] [int] NOT NULL CONSTRAINT [DF_Request_RecordState] DEFAULT 0,
+	[RecordInsertDateTime] [datetime] NOT NULL CONSTRAINT [DF_Request_RecordInsertDateTime] DEFAULT GETDATE(),
+	[RecordUpdateDateTime] [datetime] NULL,
+	[RecordDeleteDateTime] [datetime] NULL,
+ CONSTRAINT [PK_Request] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+CREATE TABLE [Operation].[RequestStatus]
+    (
+      [Id] [int] IDENTITY(1,1) NOT NULL,
+      [Title] [NVARCHAR](MAX) NOT NULL ,
+      [TitleEn] [VARCHAR](MAX) NULL ,
+      [RecordVersion] TIMESTAMP ,
+      [RecordState] INT NOT NULL CONSTRAINT [DF_RequestStatus_RecordState] DEFAULT 0,
+      [RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_RequestStatus_RecordInsertDateTime] DEFAULT GETDATE(),
+      [RecordUpdateDateTime] DATETIME NULL ,
+      [RecordDeleteDateTime] DATETIME NULL ,
+      CONSTRAINT [PK_RequestStatus] PRIMARY KEY CLUSTERED ( [Id] ASC )
+        WITH ( PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF,
+               IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON,
+               ALLOW_PAGE_LOCKS = ON ) ON [PRIMARY]
+    )
+ON  [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+CREATE TABLE [Operation].[RequestType]
+    (
+      [Id] [int] IDENTITY(1,1) NOT NULL,
+      [Title] [NVARCHAR](MAX) NOT NULL ,
+      [TitleEn] [VARCHAR](MAX) NULL ,
+      [RecordVersion] TIMESTAMP ,
+      [RecordState] INT NOT NULL CONSTRAINT [DF_RequestType_RecordState] DEFAULT 0,
+      [RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_RequestType_RecordInsertDateTime] DEFAULT GETDATE(),
+      [RecordUpdateDateTime] DATETIME NULL ,
+      [RecordDeleteDateTime] DATETIME NULL ,
+      CONSTRAINT [PK_RequestType] PRIMARY KEY CLUSTERED ( [Id] ASC )
+        WITH ( PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF,
+               IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON,
+               ALLOW_PAGE_LOCKS = ON ) ON [PRIMARY]
     )
 ON  [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
@@ -1192,6 +1249,22 @@ INSERT  INTO [Bank].[BankAccountType]
 VALUES
         ( 1, N'کوتاه مدت' ),
         ( 2, N'جاری' )
+GO
+SET IDENTITY_INSERT [Operation].[RequestStatus] ON
+INSERT INTO [Operation].[RequestStatus] (Id, Title, TitleEn)
+VALUES (1, N'در انتظار اقدام', 'Pending'),
+       (2, N'در حال اقدام', 'In Progress'),
+       (3, N'انجام شده', 'Completed'),
+       (4, N'لغو شده', 'Canceled'),
+       (5, N'رد شده', 'Rejected')
+SET IDENTITY_INSERT [Operation].[RequestStatus] OFF
+GO
+SET IDENTITY_INSERT [Operation].[RequestType] ON
+INSERT INTO [Operation].[RequestType] (Id, Title)
+VALUES (1, N'درخواست پرداخت وجه'),
+	   (2, N'درخواست کپی اطلاعات کاربری'),
+       (3, N'درخواست مراجعه حضوری احراز هویت')
+SET IDENTITY_INSERT [Operation].[RequestType] OFF
 GO
 INSERT [System].[Configuration] ([Key], [TextValue], [Tags]) VALUES (N'System.Version', N'0.1', N'system internal')
 INSERT [System].[Configuration] ([Key], [TextValue], [Tags]) VALUES (N'System.UniqueId', NEWID(), N'system internal')
@@ -2347,6 +2420,141 @@ BEGIN
         END
         
         UPDATE [Bank].[BankAccountType] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
+CREATE TRIGGER [Operation].[Request_Delete] ON [Operation].[Request]
+            INSTEAD OF DELETE
+AS
+BEGIN
+                
+    SET NOCOUNT ON;
+                
+    IF EXISTS ( SELECT  *
+                FROM    DELETED
+                WHERE   RecordState > 1 )
+        BEGIN
+            RAISERROR ('Cannot update deleted records',16,1)
+            ROLLBACK TRANSACTION
+            RETURN
+        END
+                
+    UPDATE  [Operation].[Request]
+    SET     [RecordDeleteDateTime] = GETDATE() ,
+            [RecordState] = 2
+    WHERE   [Id] IN ( SELECT    [Id]
+                        FROM      DELETED )
+END
+GO
+CREATE TRIGGER [Operation].[Request_Update] ON [Operation].[Request]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [Operation].[Request] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
+CREATE TRIGGER [Operation].[RequestStatus_Delete] ON [Operation].[RequestStatus]
+            INSTEAD OF DELETE
+AS
+BEGIN
+                
+    SET NOCOUNT ON;
+                
+    IF EXISTS ( SELECT  *
+                FROM    DELETED
+                WHERE   RecordState > 1 )
+        BEGIN
+            RAISERROR ('Cannot update deleted records',16,1)
+            ROLLBACK TRANSACTION
+            RETURN
+        END
+                
+    UPDATE  [Operation].[RequestStatus]
+    SET     [RecordDeleteDateTime] = GETDATE() ,
+            [RecordState] = 2
+    WHERE   [Id] IN ( SELECT    [Id]
+                        FROM      DELETED )
+END
+GO
+CREATE TRIGGER [Operation].[RequestStatus_Update] ON [Operation].[RequestStatus]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [Operation].[RequestStatus] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
+CREATE TRIGGER [Operation].[RequestType_Delete] ON [Operation].[RequestType]
+            INSTEAD OF DELETE
+AS
+BEGIN
+                
+    SET NOCOUNT ON;
+                
+    IF EXISTS ( SELECT  *
+                FROM    DELETED
+                WHERE   RecordState > 1 )
+        BEGIN
+            RAISERROR ('Cannot update deleted records',16,1)
+            ROLLBACK TRANSACTION
+            RETURN
+        END
+                
+    UPDATE  [Operation].[RequestType]
+    SET     [RecordDeleteDateTime] = GETDATE() ,
+            [RecordState] = 2
+    WHERE   [Id] IN ( SELECT    [Id]
+                        FROM      DELETED )
+END
+GO
+CREATE TRIGGER [Operation].[RequestType_Update] ON [Operation].[RequestType]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [Operation].[RequestType] 
         SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
         WHERE [Id] IN (SELECT [Id] FROM INSERTED)
     END

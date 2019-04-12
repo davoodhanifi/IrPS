@@ -51,8 +51,7 @@ namespace Noandishan.IrpsApi.Repositories.Accounting
                                        FROM [Accounting].[Transaction] 
                                        WHERE [Id] = @TransactionId AND 
                                              ([FromAccountId] = @AccountId OR
-                                             [ToAccountId] = @AccountId)
-                                       ORDER BY [DateTime] DESC";
+                                             [ToAccountId] = @AccountId)";
 
                 return await connection.QueryFirstOrDefaultAsync<Transaction>(new CommandDefinition(query, new { AccountId = accountId, TransactionId = transactionId}, cancellationToken: cancellationToken));
             }

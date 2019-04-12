@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IrpsApi.Framework.Accounts\IrpsApi.Framework.Accounts.csproj" />
+    <ProjectReference Include="..\IrpsApi.Framework.Operations\IrpsApi.Framework.Operation.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework.System\IrpsApi.Framework.System.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework\IrpsApi.Framework.csproj" />
     <ProjectReference Include="..\IrpsApi.Repositories\IrpsApi.Repositories.csproj" />

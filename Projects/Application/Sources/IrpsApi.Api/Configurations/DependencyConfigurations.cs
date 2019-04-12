@@ -4,10 +4,14 @@ using IrpsApi.Api.Services;
 using IrpsApi.Framework.Accounting.Repositories;
 using IrpsApi.Framework.Accounts.Repositories;
 using IrpsApi.Framework.Bank.Repositories;
+using IrpsApi.Framework.Operation;
+using IrpsApi.Framework.Operation.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Noandishan.IrpsApi.Repositories.Accounting;
 using Noandishan.IrpsApi.Repositories.Accounts;
+using Noandishan.IrpsApi.Repositories.Bank;
 using Noandishan.IrpsApi.Repositories.ConnectionStrings;
+using Noandishan.IrpsApi.Repositories.Operation;
 
 namespace IrpsApi.Api.Configurations
 {
@@ -29,6 +33,9 @@ namespace IrpsApi.Api.Configurations
             services.AddSingleton<IPushTargetRepository, PushTargetRepository>();
             services.AddSingleton<IDocumentRepository, DocumentRepository>();
             services.AddSingleton<IBankAccountRepository, BankAccountRepository>();
+            services.AddSingleton<IRequestStatusRepository, RequestStatusRepository>();
+            services.AddSingleton<IRequestTypeRepository, RequestTypeRepository>();
+            services.AddSingleton<IRequestRepository, RequestRepository>();
         }
 
         public static void RegisterServices(this IServiceCollection services)

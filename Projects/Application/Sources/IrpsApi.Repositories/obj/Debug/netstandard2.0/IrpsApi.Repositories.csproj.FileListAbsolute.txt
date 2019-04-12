@@ -11,11 +11,15 @@ E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.pdb
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.Accounting.dll
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.Accounts.dll
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.Bank.dll
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.dll
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.Operation.dll
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.System.dll
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Mabna.Data.v1.dll
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.Accounting.pdb
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.Accounts.pdb
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.Bank.pdb
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.Operation.pdb
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.System.pdb
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.pdb
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.csprojResolveAssemblyReference.cache
@@ -24,5 +28,3 @@ E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.AssemblyInfo.cs
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.dll
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.pdb
-E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.Bank.dll
-E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\IrpsApi.Framework.Bank.pdb

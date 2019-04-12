@@ -98,15 +98,15 @@ namespace IrpsApi.Api.Models.Accounts
 
             return model;
         }
+        
+        public static IDocumentType ToDocumentType(this DocumentTypeModel model)
+        {
+            return Mapper.Map<IDocumentType>(model);
+        }
 
         public static IDocument ToDocument(this InputDocumentModel model)
         {
             return Mapper.Map<IDocument>(model);
-        }
-
-        public static IDocumentType ToDocumentType(this DocumentTypeModel model)
-        {
-            return Mapper.Map<IDocumentType>(model);
         }
 
         public static async Task<DocumentModel> ToDocumentModelAsync(this IDocument document, IExpandOptionCollection expandOptions, CancellationToken cancellationToken = default)

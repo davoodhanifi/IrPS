@@ -6,6 +6,6 @@ namespace IrpsApi.Framework.Bank.Repositories
 {
     public interface IBankAccountRepository : IEditableEntityRepository<IBankAccount>
     {
-        Task<IBankAccount> GetBankAccountAsync(IAccount account, CancellationToken cancellationToken = default);
+        Task<IBankAccount> GetBankAccountAsync(string accountId, CancellationToken cancellationToken = default);
     }
 }

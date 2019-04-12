@@ -41,7 +41,7 @@ namespace IrpsApi.Api.Controllers.Bank
             if (account == null)
                 return NotFound("invalid_account_id");
 
-            var bankAccount = await _bankAccountRepository.GetBankAccountAsync(account, cancellationToken);
+            var bankAccount = await _bankAccountRepository.GetBankAccountAsync(accountId, cancellationToken);
             if (bankAccount == null)
                 return NotFound();
 
@@ -67,7 +67,7 @@ namespace IrpsApi.Api.Controllers.Bank
             if (account == null)
                 return NotFound("invalid_account_id");
 
-            var existingBankAccount = await _bankAccountRepository.GetBankAccountAsync(account, cancellationToken);
+            var existingBankAccount = await _bankAccountRepository.GetBankAccountAsync(accountId, cancellationToken);
 
             var bankAccount = model.ToBankAccount();
             bankAccount.AccountId = accountId;

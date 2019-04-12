@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IrpsApi.Api.ExpandOptionsHelpers;
@@ -96,7 +97,7 @@ namespace IrpsApi.Api.Controllers.Accounting
         /// <response code="403">forbidden</response>
         [HttpPost]
         [Route("accounting/transactions/add")]
-        [SwaggerResponse(200, type: typeof(SessionModel))]
+        [SwaggerResponse(200, type: typeof(TransactionModel))]
         [SwaggerResponse(422)]
         [SwaggerResponse(403)]
         public async Task<ActionResult<TransactionModel>> AddTransactionAsync([FromBody] InputTransactionModel transactionModel, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
@@ -202,7 +203,7 @@ namespace IrpsApi.Api.Controllers.Accounting
         /// <response code="403">forbidden</response>
         [HttpPost]
         [Route("accounting/transactions/credit/increase")]
-        [SwaggerResponse(200, type: typeof(SessionModel))]
+        [SwaggerResponse(200, type: typeof(TransactionModel))]
         [SwaggerResponse(422)]
         [SwaggerResponse(403)]
         public async Task<ActionResult<TransactionModel>> IncreaseCreditAsync([FromBody] InputTransactionModel transactionModel, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
