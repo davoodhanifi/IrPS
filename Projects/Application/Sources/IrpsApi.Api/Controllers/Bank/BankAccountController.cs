@@ -34,6 +34,9 @@ namespace IrpsApi.Api.Controllers.Bank
         [SwaggerResponse(403)]
         public async Task<ActionResult<BankAccountModel>> GetUserBankAccountAsync([FromRoute(Name = "account_id")]string accountId, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 
@@ -60,6 +63,9 @@ namespace IrpsApi.Api.Controllers.Bank
         [SwaggerResponse(403)]
         public async Task<ActionResult<BankAccountModel>> PutUserBankAccountAsync([FromRoute(Name = "account_id")]string accountId, [FromBody]InputBankAccountModel model, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 

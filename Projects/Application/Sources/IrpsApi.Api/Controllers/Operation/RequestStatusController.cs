@@ -25,6 +25,9 @@ namespace IrpsApi.Api.Controllers.Operation
         [Route("operation/requestStatuses")]
         public async Task<ActionResult<IEnumerable<RequestStatusModel>>> GetRequestStatusesAsync(CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var statuses = await _requestStatusRepository.GetAllRequestStatusesAsync(cancellationToken);
             return Ok(statuses.Select(item => item.ToRequestStatusModel()).ToList());
         }

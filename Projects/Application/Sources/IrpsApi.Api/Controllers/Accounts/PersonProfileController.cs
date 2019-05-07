@@ -33,6 +33,9 @@ namespace IrpsApi.Api.Controllers.Accounts
         [SwaggerResponse(403)]
         public async Task<ActionResult<PersonProfileModel>> GetPersonProfileAsync([FromRoute(Name = "account_id")]string accountId, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 
@@ -59,6 +62,9 @@ namespace IrpsApi.Api.Controllers.Accounts
         [SwaggerResponse(403)]
         public async Task<ActionResult<LimitedPersonProfileModel>> GetPersonProfileByUserCodeAsync([FromRoute(Name = "account_id")]string accountId, [FromQuery(Name = "user_code")]string userCode, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 
@@ -85,6 +91,9 @@ namespace IrpsApi.Api.Controllers.Accounts
         [SwaggerResponse(403)]
         public async Task<ActionResult<PersonProfileModel>> PutPersonProfileAsync([FromRoute(Name = "account_id")]string accountId, [FromBody]InputProfileModel model, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 

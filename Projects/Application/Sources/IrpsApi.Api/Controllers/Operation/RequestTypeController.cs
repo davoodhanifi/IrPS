@@ -24,6 +24,9 @@ namespace IrpsApi.Api.Controllers.Operation
         [Route("operation/requesttypes")]
         public async Task<ActionResult<IEnumerable<RequestTypeModel>>> GetRequestTypesAsync(CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var types = await _requestTypeRepository.GetAllRequestTypesAsync(cancellationToken);
             return Ok(types.Select(item => item.ToRequestTypeModel()).ToList());
         }

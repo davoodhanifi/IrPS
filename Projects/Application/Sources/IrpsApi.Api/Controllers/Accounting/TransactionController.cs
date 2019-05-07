@@ -48,6 +48,9 @@ namespace IrpsApi.Api.Controllers.Accounting
         [SwaggerResponse(403)]
         public async Task<ActionResult<IEnumerable<TransactionModel>>> GetAllTransactionsAsync([FromRoute(Name = "account_id")] string accountId, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 
@@ -75,6 +78,9 @@ namespace IrpsApi.Api.Controllers.Accounting
         [SwaggerResponse(403)]
         public async Task<ActionResult<TransactionModel>> GetTransactionsAsync([FromRoute(Name = "account_id")] string accountId, [FromRoute(Name = "transaction_id")] int transactionId, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 
@@ -102,21 +108,24 @@ namespace IrpsApi.Api.Controllers.Accounting
         [SwaggerResponse(403)]
         public async Task<ActionResult<TransactionModel>> AddTransactionAsync([FromBody] InputTransactionModel transactionModel, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             //if (transactionModel.FromAccount.Id != Session.AccountId)
             //    return Forbid();
 
             if (transactionModel?.Type == null || transactionModel?.Type.Id == TransactionTypeIds.None)
-                throw new UnprocessableEntityException("missing_transaction_type", "Transaction Type Not Defined!");
+                return UnprocessableEntity(new UnprocessableEntityException("missing_transaction_type", "Transaction Type Not Defined!"));
 
             if (transactionModel.Type.Id == TransactionTypeIds.IncreaseCredit)
-                throw new UnprocessableEntityException("invalid_method", "Invalid Method For Increase Credit!");
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_method", "Invalid Method For Increase Credit!"));
 
             if (transactionModel?.Amount <= 0M)
-                throw new UnprocessableEntityException("invalid_amount", "Amount Must Be Positive!");
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_amount", "Amount Must Be Positive!"));
 
             var oldFromUserBalance = await _balanceRepository.GetByAccountIdAsync(transactionModel.FromAccount.Id, cancellationToken);
             if (oldFromUserBalance == null || oldFromUserBalance.CurrentBalance < transactionModel.Amount)
-                throw new UnprocessableEntityException("not_enough_credit", "Amount Must Be Positive!");
+                return UnprocessableEntity(new UnprocessableEntityException("not_enough_credit", "Amount Must Be Positive!"));
 
             var dateTimeNow = DateTime.Now;
 
@@ -192,7 +201,7 @@ namespace IrpsApi.Api.Controllers.Accounting
                     await _balanceRepository.UpdateAsync(oldToUserBalance, cancellationToken);
                 }
 
-                throw new UnprocessableEntityException("rollback_transaction", "Error in transaction!");
+                return UnprocessableEntity(new UnprocessableEntityException("rollback_transaction", "Error in transaction!"));
             }
         }
 
@@ -208,20 +217,23 @@ namespace IrpsApi.Api.Controllers.Accounting
         [SwaggerResponse(403)]
         public async Task<ActionResult<TransactionModel>> IncreaseCreditAsync([FromBody] InputTransactionModel transactionModel, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (transactionModel.FromAccount.Id != Session.AccountId)
                 return Forbid();
 
             if (transactionModel?.Type == null || transactionModel?.Type.Id == TransactionTypeIds.None)
-                throw new UnprocessableEntityException("missing_transaction_type", "Transaction Type Not Defined!");
+                return UnprocessableEntity(new UnprocessableEntityException("missing_transaction_type", "Transaction Type Not Defined!"));
 
             if (transactionModel.Type.Id != TransactionTypeIds.IncreaseCredit)
-                throw new UnprocessableEntityException("invalid_method", "Invalid Method!");
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_method", "Invalid Method!"));
 
             if (transactionModel.FromAccount.Id != transactionModel.ToAccount.Id)
-                throw new UnprocessableEntityException("mismatch_accounts", "Mismatch In From Account With To Account!");
+                return UnprocessableEntity(new UnprocessableEntityException("mismatch_accounts", "Mismatch In From Account With To Account!"));
 
             if (transactionModel?.Amount <= 0M)
-                throw new UnprocessableEntityException("invalid_amount", "Amount Must Be Positive!");
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_amount", "Amount Must Be Positive!"));
 
             var oldUserBalance = await _balanceRepository.GetByAccountIdAsync(transactionModel.FromAccount.Id, cancellationToken);
 
@@ -273,7 +285,7 @@ namespace IrpsApi.Api.Controllers.Accounting
                     await _balanceRepository.UpdateAsync(oldUserBalance, cancellationToken);
                 }
 
-                throw new UnprocessableEntityException("rollback_transaction", "Error in transaction!");
+                return UnprocessableEntity(new UnprocessableEntityException("rollback_transaction", "Error in transaction!"));
             }
         }
     }

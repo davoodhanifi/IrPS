@@ -36,6 +36,9 @@ namespace IrpsApi.Api.Controllers.Accounts
         [SwaggerResponse(403)]
         public async Task<ActionResult<DocumentModel>> GetDocumentAsync([FromRoute(Name = "account_id")]string accountId, [FromRoute(Name = "type_id")]string typeId, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 
@@ -64,6 +67,9 @@ namespace IrpsApi.Api.Controllers.Accounts
         [SwaggerResponse(403)]
         public async Task<ActionResult<DocumentModel>> AddDocumentAsync([FromRoute(Name = "account_id")]string accountId, [FromBody]InputDocumentModel documentModel, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 
@@ -72,12 +78,15 @@ namespace IrpsApi.Api.Controllers.Accounts
                 return NotFound("invalid_account_id");
 
             if (documentModel.Type == null || documentModel.Type.Id == DocumentTypeIds.None)
-                throw new UnprocessableEntityException("missing_document_type", "Document Type Not Defined!");
+                return UnprocessableEntity(new UnprocessableEntityException("missing_document_type", "Document Type Not Defined!"));
 
             if (documentModel.Type.Id == DocumentTypeIds.Avatar && !(string.Equals(documentModel.MimeType, "image/jpeg", StringComparison.OrdinalIgnoreCase)
                                                                   || string.Equals(documentModel.MimeType, "image/jpg", StringComparison.OrdinalIgnoreCase)
                                                                   || string.Equals(documentModel.MimeType, "image/png", StringComparison.OrdinalIgnoreCase)))
-                throw new UnprocessableEntityException("invalid_mime_type", "Avatar Mime Type Is Incorrect.");
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_mime_type", "Avatar Mime Type Is Incorrect."));
+
+            if (documentModel.Data == null)
+                return UnprocessableEntity(new UnprocessableEntityException("missing_file", "File is missing."));
 
             var document = _documentRepository.Create();
             document.AccountId = accountId;
@@ -86,7 +95,7 @@ namespace IrpsApi.Api.Controllers.Accounts
             document.Title = documentModel.Title;
             document.TitleEn = documentModel.TitleEn;
             document.MimeType = documentModel.MimeType;
-            document.Data = documentModel.Data ?? throw new UnprocessableEntityException("missing_file", "File is missing.");
+            document.Data = documentModel.Data;
             document.Note = documentModel.Note;
             document.FileName = documentModel.FileName;
 

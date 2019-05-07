@@ -1,20 +1,11 @@
-﻿using System.Runtime.Serialization;
-using IrpsApi.Api.Models.Accounts;
-using IrpsApi.Api.ValidationHelpers;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace IrpsApi.Api.Models.Bank
 {
     [DataContract]
     public class InputBankAccountModel
     {
-        [DataMember(Name = "account")]
-        [Required]
-        public AccountModel Account
-        {
-            get;
-            set;
-        }
-
         [DataMember(Name = "bank_id")]
         public BankModel BankId
         {

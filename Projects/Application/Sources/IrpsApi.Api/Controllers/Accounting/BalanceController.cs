@@ -34,6 +34,9 @@ namespace IrpsApi.Api.Controllers.Accounting
         [SwaggerResponse(403)]
         public async Task<ActionResult<BalanceModel>> GetBalanceAsync([FromRoute(Name = "account_id")] string accountId, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,10 +10,8 @@ using IrpsApi.Api.ExpandOptionsHelpers;
 using IrpsApi.Api.Models.Accounts;
 using IrpsApi.Api.Security;
 using IrpsApi.Api.Services;
-using IrpsApi.Api.ValidationHelpers;
 using IrpsApi.Framework.Accounts;
 using IrpsApi.Framework.Accounts.Repositories;
-using Mabna.WebApi.AspNetCore;
 using Mabna.WebApi.Common;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -50,8 +48,11 @@ namespace IrpsApi.Api.Controllers.Accounts
         [SwaggerResponse(429)]
         public async Task<ActionResult<SessionModel>> MobileLoginRequestAsync([FromForm][Required]string mobile, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (!MobileValidator.IsMatch(mobile))
-                throw new UnprocessableEntityException("invalid_mobile", "value of mobile is not a valid mobile number", "mobile");
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_mobile", "value of mobile is not a valid mobile number", "mobile"));
 
 #if !DEBUG
             var existingSession = await _sessionRepository.GetLastNotVerifiedSessionByMobile(mobile, cancellationToken);
@@ -98,7 +99,7 @@ namespace IrpsApi.Api.Controllers.Accounts
                 return NotFound("invlaid_session_id");
 
             if (session.MobileTokenExpirationDateTime < DateTime.Now || !session.MobileToken.Equals(token, StringComparison.OrdinalIgnoreCase) || session.StateId != SessionStateIds.NotVerified)
-                throw new UnprocessableEntityException("invalid_token");
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_token"));
 
             var account = await _accountRepository.GetByMobileAsync(session.Mobile, cancellationToken);
             if (account == null)
@@ -135,16 +136,19 @@ namespace IrpsApi.Api.Controllers.Accounts
         [SwaggerResponse(403)]
         public async Task<ActionResult<SessionModel>> LoginAsync([FromForm]string mobile, [FromForm]string username, [FromForm]string password, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (Session.AccountId != null)
                 return Unauthorized();
 
             var account = await _accountRepository.FindAccount(username, username, mobile, username, cancellationToken);
 
             if (account == null)
-                throw new UnprocessableEntityException("invalid_credential", "Username or password is not valid.");
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_credential", "Username or password is not valid."));
 
             if (!PasswordHash.ValidatePassword(password, account.PasswordHash))
-                throw new UnprocessableEntityException("invalid_credential", "Username or password is not valid.");
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_credential", "Username or password is not valid."));
 
             if (account.StateId != AccountStateIds.Active)
                 return Error(HttpStatusCode.Forbidden, "inactive_account", "account_state is not set to active");
@@ -176,6 +180,9 @@ namespace IrpsApi.Api.Controllers.Accounts
         [SwaggerResponse(403)]
         public async Task<ActionResult<SessionModel>> MobileLogoutAsync([FromRoute(Name = "session_id")]string sessionId, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var session = await _sessionRepository.GetAsync(sessionId, cancellationToken);
             if (session == null)
                 return NotFound("invlaid_session_id");
@@ -201,6 +208,9 @@ namespace IrpsApi.Api.Controllers.Accounts
         [SwaggerResponse(422)]
         public async Task<ActionResult<PushTargetModel>> CreatePushTargetAsync([FromRoute(Name = "account_id")]string accountId, [FromBody]InputPushTargetModel model, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 
@@ -221,10 +231,10 @@ namespace IrpsApi.Api.Controllers.Accounts
             };
 
             if (validTypeIds.All(t => t != pushTarget.TypeId))
-                throw new UnprocessableEntityException("invalid_type_id", "valid type_ids are ", string.Join(",", validTypeIds));
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_type_id", "valid type_ids are ", string.Join(",", validTypeIds)));
 
             if (validStatusIds.All(t => t != pushTarget.StatusId))
-                throw new UnprocessableEntityException("invalid_status_id", "valid status_ids are ", string.Join(",", validStatusIds));
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_status_id", "valid status_ids are ", string.Join(",", validStatusIds)));
 
             pushTarget = await _pushTargetRepository.SaveAsync(pushTarget, cancellationToken);
             return Ok(await pushTarget.ToPushTargetModelAsync(GetExpandOptions(expandOptions), cancellationToken));
@@ -241,6 +251,9 @@ namespace IrpsApi.Api.Controllers.Accounts
         [SwaggerResponse(403)]
         public async Task<ActionResult<IEnumerable<PushTargetModel>>> DeletePushTargetAsync([FromRoute(Name = "account_id")]string accountId, [FromBody]InputPushTargetDeleteModel pushTargetModel, [FromQuery(Name = "_expand")]ExpandOptions expandOptions, CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 

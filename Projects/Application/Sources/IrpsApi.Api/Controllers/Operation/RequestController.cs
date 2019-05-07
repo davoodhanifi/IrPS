@@ -47,6 +47,9 @@ namespace IrpsApi.Api.Controllers.Operation
         [SwaggerResponse(403)]
         public async Task<ActionResult<IEnumerable<RequestModel>>> GetAllRequestsAsync([FromRoute(Name = "account_id")] string accountId, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 
@@ -74,6 +77,9 @@ namespace IrpsApi.Api.Controllers.Operation
         [SwaggerResponse(403)]
         public async Task<ActionResult<RequestModel>> GetRequestAsync([FromRoute(Name = "account_id")] string accountId, [FromRoute(Name = "request_id")] int requestId, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (accountId != Session.AccountId)
                 return Forbid();
 
@@ -101,11 +107,14 @@ namespace IrpsApi.Api.Controllers.Operation
         [SwaggerResponse(403)]
         public async Task<ActionResult<RequestModel>> PostRequestAsync([FromBody] InputRequestModel requestModel, [FromQuery(Name = "_expand")] ExpandOptions expandOptions, CancellationToken cancellationToken = default)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             if (requestModel.Account.Id != Session.AccountId)
                 return Forbid();
 
             if (requestModel.Type == null)
-                throw new UnprocessableEntityException("missing_request_type", "Request Type Not Defined!");
+                return UnprocessableEntity(new UnprocessableEntityException("missing_request_type", "Request Type Not Defined!"));
 
             var dateTime = DateTime.Now;
             var accountId = requestModel.Account.Id;
@@ -114,18 +123,18 @@ namespace IrpsApi.Api.Controllers.Operation
             {
                 var bankAccount = await _bankAccountRepository.GetBankAccountAsync(accountId, cancellationToken);
                 if (bankAccount == null)
-                    throw new UnprocessableEntityException("missing_bank_account", "Bank Account Is Not Defined!");
+                   return UnprocessableEntity(new UnprocessableEntityException("missing_bank_account", "Bank Account Is Not Defined!"));
 
                 if (bankAccount.DailyPayment ?? false)
-                    throw new UnprocessableEntityException("active_daily_payment", "Daily Payment Is Activated!");
+                   return UnprocessableEntity(new UnprocessableEntityException("active_daily_payment", "Daily Payment Is Activated!"));
 
                 var existingRequest = await _requestRepository.GetRequestAsync(accountId, requestModel.Type.Id, dateTime.Date, cancellationToken);
                 if (existingRequest != null)
-                   throw new UnprocessableEntityException("duplicated_payment_request", "Pyament Request Is Duplicated!");
+                   return UnprocessableEntity(new UnprocessableEntityException("duplicated_payment_request", "Pyament Request Is Duplicated!"));
 
                 var balance = await _balanceRepository.GetByAccountIdAsync(accountId, cancellationToken);
                 if (balance.CurrentBalance <= 5000M)
-                    throw new UnprocessableEntityException("not_enough_credit", "Balance Amount Must Be More Than 5000 Toman!");
+                   return UnprocessableEntity(new UnprocessableEntityException("not_enough_credit", "Balance Amount Must Be More Than 5000 Toman!"));
             }
 
             var request = _requestRepository.Create();

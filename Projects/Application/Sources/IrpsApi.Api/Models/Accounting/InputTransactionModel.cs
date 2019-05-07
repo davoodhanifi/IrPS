@@ -1,6 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using IrpsApi.Api.Models.Accounts;
-using IrpsApi.Api.ValidationHelpers;
 
 namespace IrpsApi.Api.Models.Accounting
 {
