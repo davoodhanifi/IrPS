@@ -26,5 +26,12 @@ namespace IrpsApi.Api.Models.Accounts
             get;
             set;
         }
+
+        [DataMember(Name = "avatar")]
+        public DocumentModel Avatar
+        {
+            get;
+            set;
+        }
     }
 }

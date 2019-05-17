@@ -73,6 +73,12 @@ namespace IrpsApi.Api.Models.Accounts
                 model.Account = acc.ToAccountModel();
             }
 
+            if (expandOptions.TryGetExpandOption<IDocument>("avatar", out var avatarExpandOption))
+            {
+                var avatar = await avatarExpandOption.Engine.GetEntityAsync(profile.AccountId, cancellationToken);
+                model.Avatar = avatar.ToDocumentModel();
+            }
+
             return model;
         }
 
@@ -102,6 +108,11 @@ namespace IrpsApi.Api.Models.Accounts
         public static IDocumentType ToDocumentType(this DocumentTypeModel model)
         {
             return Mapper.Map<IDocumentType>(model);
+        }
+
+        public static DocumentModel ToDocumentModel(this IDocument documentModel)
+        {
+            return Mapper.Map<DocumentModel>(documentModel);
         }
 
         public static IDocument ToDocument(this InputDocumentModel model)
