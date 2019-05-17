@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IrpsApi.Api.ExpandOptionsHelpers;
+using IrpsApi.Api.Helpers;
 using IrpsApi.Api.Models.Accounting;
-using IrpsApi.Api.Models.Accounts;
 using IrpsApi.Api.Models.Fcm;
 using IrpsApi.Api.Services;
 using IrpsApi.Framework.Accounting;
@@ -13,6 +12,7 @@ using IrpsApi.Framework.Accounting.Repositories;
 using IrpsApi.Framework.Accounts.Repositories;
 using Mabna.WebApi.Common;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace IrpsApi.Api.Controllers.Accounting
@@ -175,10 +175,14 @@ namespace IrpsApi.Api.Controllers.Accounting
                     await _balanceRepository.UpdateAsync(oldToUserBalance, cancellationToken);
                 }
 
-                _fcmService.Send(transactionModel.ToAccount, new NotificationModel
+                _fcmService.Send(transactionModel.ToAccount, new AndroidPushMessageModel
                 {
-                    Title = "پولینو",
-                    Body = $"مبلغ {transactionModel.Amount}، به شما پرداخت شد."
+                    Notification = new NotificationModel
+                    {
+                        Title = "پولینو",
+                        Body = $"مبلغ {transactionModel.Amount.ToString("N0").ToPersianNumber()} تومان، به کیف پول شما واریز شد."
+                    },
+                    Data = JsonConvert.SerializeObject(transactionModel)
                 });
 
                 return Ok(await transaction.ToTransactionModelAsync(GetExpandOptions(expandOptions), cancellationToken));

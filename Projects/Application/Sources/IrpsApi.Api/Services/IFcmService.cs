@@ -6,6 +6,6 @@ namespace IrpsApi.Api.Services
 {
     public interface IFcmService
     {
-        void Send(AccountModel account, NotificationModel notification);
+        void Send(AccountModel account, AndroidPushMessageModel androidPushModel);
     }
 }
