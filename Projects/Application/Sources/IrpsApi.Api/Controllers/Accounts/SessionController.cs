@@ -104,11 +104,18 @@ namespace IrpsApi.Api.Controllers.Accounts
             var account = await _accountRepository.GetByMobileAsync(session.Mobile, cancellationToken);
             if (account == null)
             {
+                // Get unique user code
+                var userCodes = _accountRepository.GetAllUserCodesAsync(cancellationToken).Result.ToList();
+                string userCode;
+                do
+                {
+                    userCode = new Random().Next(0, 99999999).ToString("D8");
+                } while(userCodes.Contains(userCode));
+
                 account = _accountRepository.Create();
                 account.Mobile = session.Mobile;
                 account.MobileVerificationStatusId = VerificationStatusIds.Verified;
-                // Todo: Get unique usercode in account table.
-                account.UserCode = new Random().Next(0, 99999999).ToString("D8");
+                account.UserCode = userCode;
                 account.CreationDateTime = DateTime.Now;
                 account.TypeId = AccountTypeIds.NormalUser;
                 account.EmailVerificationStatusId = VerificationStatusIds.NotVerified;
