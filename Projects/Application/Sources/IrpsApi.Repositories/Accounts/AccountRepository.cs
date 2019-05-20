@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dapper;
@@ -55,6 +56,13 @@ namespace Noandishan.IrpsApi.Repositories.Accounts
             {
                 new FilterParameter("Mobile", mobile),
             }, cancellationToken: cancellationToken)).FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<string>> GetAllUserCodesAsync(CancellationToken cancellationToken = default)
+        {
+            return (await GetAsync(new IFilterParameter[]
+            {
+            }, cancellationToken: cancellationToken)).Select(item => item.UserCode);
         }
     }
 }

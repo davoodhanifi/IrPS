@@ -73,12 +73,6 @@ namespace IrpsApi.Api.Models.Accounts
                 model.Account = acc.ToAccountModel();
             }
 
-            if (expandOptions.TryGetExpandOption<IDocument>("avatar", out var avatarExpandOption))
-            {
-                var avatar = await avatarExpandOption.Engine.GetEntityAsync(profile.AccountId, cancellationToken);
-                model.Avatar = avatar.ToDocumentModel();
-            }
-
             return model;
         }
 

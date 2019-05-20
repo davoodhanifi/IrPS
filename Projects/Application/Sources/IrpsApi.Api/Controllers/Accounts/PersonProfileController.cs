@@ -13,16 +13,13 @@ namespace IrpsApi.Api.Controllers.Accounts
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IPersonProfileRepository _personProfileRepository;
-        private readonly IDocumentRepository _documentRepository;
 
-        public PersonProfileController(IAccountRepository accountRepository, IPersonProfileRepository personProfileRepository, IDocumentRepository documentRepository)
+        public PersonProfileController(IAccountRepository accountRepository, IPersonProfileRepository personProfileRepository)
         {
             _accountRepository = accountRepository;
             _personProfileRepository = personProfileRepository;
-            _documentRepository = documentRepository;
 
             ExpandEngines.Add("account", _accountRepository.GetAsync);
-            ExpandEngines.Add("avatar", _documentRepository.GetAsync);
         }
 
         /// <summary>

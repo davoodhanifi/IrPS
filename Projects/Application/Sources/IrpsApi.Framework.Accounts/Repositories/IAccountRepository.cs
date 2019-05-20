@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace IrpsApi.Framework.Accounts.Repositories
@@ -12,5 +13,7 @@ namespace IrpsApi.Framework.Accounts.Repositories
         Task<IAccount> GetByUserCodeAsync(string userCode, CancellationToken cancellationToken = default);
 
         Task<IAccount> GetByMobileAsync(string mobile, CancellationToken cancellationToken = default);
+
+        Task<IEnumerable<string>> GetAllUserCodesAsync(CancellationToken cancellationToken = default);
     }
 }
