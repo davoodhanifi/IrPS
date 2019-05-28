@@ -28,3 +28,4 @@ E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\IrpsApi.Repositories.AssemblyInfo.cs
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.dll
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\obj\Debug\netstandard2.0\Noandishan.IrpsApi.Repositories.pdb
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Repositories\bin\Debug\netstandard2.0\Mabna.Diagnostics.v1.dll

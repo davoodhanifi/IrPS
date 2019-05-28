@@ -10,6 +10,8 @@ using IrpsApi.Api.Services;
 using IrpsApi.Framework.Accounting;
 using IrpsApi.Framework.Accounting.Repositories;
 using IrpsApi.Framework.Accounts.Repositories;
+using IrpsApi.Framework.System;
+using IrpsApi.Framework.System.Repositories;
 using Mabna.WebApi.Common;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -22,13 +24,15 @@ namespace IrpsApi.Api.Controllers.Accounting
         private readonly IAccountRepository _accountRepository;
         private readonly IBalanceRepository _balanceRepository;
         private readonly ITransactionRepository _transactionRepository;
+        private readonly ILogRepository _logRepository;
         private readonly IFcmService _fcmService;
 
-        public TransactionController(ITransactionRepository transactionRepository, IAccountRepository accountRepository, IBalanceRepository balanceRepository, ITransactionTypeRepository transactionTypeRepository, IFcmService fcmService)
+        public TransactionController(ITransactionRepository transactionRepository, IAccountRepository accountRepository, IBalanceRepository balanceRepository, ITransactionTypeRepository transactionTypeRepository, ILogRepository logRepository, IFcmService fcmService)
         {
             _transactionRepository = transactionRepository;
             _accountRepository = accountRepository;
             _balanceRepository = balanceRepository;
+            _logRepository = logRepository;
             _fcmService = fcmService;
 
             ExpandEngines.Add("from_account", _accountRepository.GetAsync);
@@ -182,8 +186,10 @@ namespace IrpsApi.Api.Controllers.Accounting
                         Title = "پولینو",
                         Body = $"مبلغ {transactionModel.Amount.ToString("N0").ToPersianNumber()} تومان، به کیف پول شما واریز شد."
                     },
-                    Data = JsonConvert.SerializeObject(transactionModel)
+                    //Data = JsonConvert.SerializeObject(transactionModel)
                 });
+
+                _logRepository.InsertLog("Irps.API", LogLevelIds.Information, null, "Accounting.Transactions.AddTransaction", "Description", "عملیات پرداخت.", "IP", RemoteIpAddress);
 
                 return Ok(await transaction.ToTransactionModelAsync(GetExpandOptions(expandOptions), cancellationToken));
             }

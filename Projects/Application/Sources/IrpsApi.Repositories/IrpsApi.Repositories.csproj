@@ -38,6 +38,9 @@
     <Reference Include="Mabna.Data.v1">
       <HintPath>..\..\Libraries\Mabna.Data.v1.dll</HintPath>
     </Reference>
+    <Reference Include="Mabna.Diagnostics.v1">
+      <HintPath>..\..\Packages\mabna.diagnostics.v1\1.3.0\lib\netstandard2.0\Mabna.Diagnostics.v1.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
       <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration.abstractions\2.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
     </Reference>

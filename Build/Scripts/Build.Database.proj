@@ -63,11 +63,9 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Configuration.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Feedback.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Message.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.SystemLog.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.SystemLogParameter.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.UserLog.sql" />
-      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.UserLogParameter.sql" />
-      
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.Log.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\System.LogLevel.Sql" />
+
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.SessionState.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounting.TransactionType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.Account.sql" />
@@ -88,6 +86,7 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Operation.RequestStatus.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Operation.RequestType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\System.Configuration.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\System.LogLevel.Sql" />
 
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounting.Transaction_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Accounting.Transaction_Update.sql" />
@@ -148,6 +147,10 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.RequestStatus_Update.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.RequestType_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.RequestType_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\System.Log_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\System.Log_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\System.LogLevel_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\System.LogLevel_Update.sql" />
     </ItemGroup>
     <MergeTextFiles InputFiles="@(InstallFiles)" OutputFile="$(BuildDatabaseBinPath)\Install.sql.temp" Delimiter="&#13;&#10;GO&#13;&#10;" />
     <ItemGroup>

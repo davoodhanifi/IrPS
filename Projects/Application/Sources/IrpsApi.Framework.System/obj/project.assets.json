@@ -35,6 +35,19 @@
         "runtime": {
           "bin/placeholder/IrpsApi.Framework.dll": {}
         }
+      },
+      "IrpsApi.Framework.Accounts/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "IrpsApi.Framework": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/IrpsApi.Framework.Accounts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IrpsApi.Framework.Accounts.dll": {}
+        }
       }
     }
   },
@@ -183,11 +196,17 @@
       "type": "project",
       "path": "../IrpsApi.Framework/IrpsApi.Framework.csproj",
       "msbuildProject": "../IrpsApi.Framework/IrpsApi.Framework.csproj"
+    },
+    "IrpsApi.Framework.Accounts/1.0.0": {
+      "type": "project",
+      "path": "../IrpsApi.Framework.Accounts/IrpsApi.Framework.Accounts.csproj",
+      "msbuildProject": "../IrpsApi.Framework.Accounts/IrpsApi.Framework.Accounts.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "IrpsApi.Framework >= 1.0.0",
+      "IrpsApi.Framework.Accounts >= 1.0.0",
       "NETStandard.Library >= 2.0.3"
     ]
   },
@@ -226,6 +245,9 @@
           "projectReferences": {
             "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj": {
               "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj"
+            },
+            "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounts\\IrpsApi.Framework.Accounts.csproj": {
+              "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.Accounts\\IrpsApi.Framework.Accounts.csproj"
             }
           }
         }

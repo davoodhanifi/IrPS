@@ -446,7 +446,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "IrpsApi.Framework": "1.0.0"
+          "IrpsApi.Framework": "1.0.0",
+          "IrpsApi.Framework.Accounts": "1.0.0"
         },
         "compile": {
           "bin/placeholder/IrpsApi.Framework.System.dll": {}

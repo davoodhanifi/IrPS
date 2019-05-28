@@ -11,6 +11,8 @@ using IrpsApi.Api.Models.Accounts;
 using IrpsApi.Api.Models.Fcm;
 using IrpsApi.Api.Models.FcmModels;
 using IrpsApi.Framework.Accounts.Repositories;
+using IrpsApi.Framework.System;
+using IrpsApi.Framework.System.Repositories;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
@@ -20,11 +22,13 @@ namespace IrpsApi.Api.Services
     {
         private readonly IOptionsMonitor<FcmSettings> _settings;
         private readonly IPushTargetRepository _pushTargetRepository;
+        private readonly ILogRepository _logRepository;
 
-        public FcmService(IOptionsMonitor<FcmSettings> settings, IPushTargetRepository pushTargetRepository)
+        public FcmService(IOptionsMonitor<FcmSettings> settings, IPushTargetRepository pushTargetRepository, ILogRepository logRepository)
         {
             _settings = settings;
             _pushTargetRepository = pushTargetRepository;
+            _logRepository = logRepository;
         }
 
         public async void Send(AccountModel account, AndroidPushMessageModel androidPushModel)
@@ -69,6 +73,8 @@ namespace IrpsApi.Api.Services
 
                     if (!res.IsSuccessStatusCode)
                     {
+                        _logRepository.InsertLog("Irps.API", LogLevelIds.Error, null, "FcmService.SendNotification", "Description", "خطا در ارسال پوش نوتیفیکیشن.", "key", _settings.CurrentValue.ServerKey, "Notification", msg.Notification, "RegistrationIds", msg.ToRegistrationId, "Data", msg.Data, "body", msg.Notification.Body, "HttpStatusCode", res.StatusCode);
+
                         if (res.StatusCode >= (HttpStatusCode)500)
                             throw new RetryableException($"HTTP Error, StatusCode: {res.StatusCode}");
 
@@ -76,10 +82,14 @@ namespace IrpsApi.Api.Services
                             throw new StopConsumingException($"HTTP Error, StatusCode: {res.StatusCode}");
                     }
 
+                    _logRepository.InsertLog("Irps.API", LogLevelIds.Information, null, "FcmService.SendNotification", "Description", "ارسال پوش نوتیفیکیشن.", "key", _settings.CurrentValue.ServerKey, "Notification", msg.Notification, "RegistrationIds", msg.ToRegistrationId, "Data", msg.Data, "body", msg.Notification.Body);
+
                     var responseString = await res.Content.ReadAsStringAsync();
                     var response = JsonConvert.DeserializeObject<FcmResponseModel>(responseString);
                     if (response.Failure != 0)
                     {
+                        _logRepository.InsertLog("Irps.API", LogLevelIds.Error, null, "FcmService.SendNotification", "Description", "خطا در ارسال پوش نوتیفیکیشن، response.Failure.", "key", _settings.CurrentValue.ServerKey, "Notification", msg.Notification, "RegistrationIds", msg.ToRegistrationId, "Data", msg.Data, "body", msg.Notification.Body, "HttpStatusCode", res.StatusCode);
+
                         throw new InvalidMessageException($"android push failed, reg_ids: {msg.ToRegistrationId}, body: {msg.Notification.Body}");
                     }
                 }
