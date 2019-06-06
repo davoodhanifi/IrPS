@@ -10,6 +10,7 @@ CREATE TABLE [Accounts].[Document]
       [Data] [varbinary](MAX) NOT NULL ,
       [Note][nvarchar](MAX) NULL,
       [FileName] [nvarchar](MAX) NULL,
+      [DocumentUrl] [nvarchar](MAX) NULL,
       [RecordVersion] TIMESTAMP ,
       [RecordState] [int] NOT NULL CONSTRAINT [DF_Document_RecordState] DEFAULT 0,
       [RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_Document_RecordInsertDateTime] DEFAULT GETDATE(),

@@ -58,5 +58,11 @@ namespace IrpsApi.Framework.Accounts
             get;
             set;
         }
+
+        string DocumentUrl
+        {
+            get;
+            set;
+        }
     }
 }

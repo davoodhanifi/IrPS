@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using IrpsApi.Api.Configurations;
 using IrpsApi.Api.ExpandOptionsHelpers;
 using IrpsApi.Api.Models.Accounts;
 using IrpsApi.Framework.Accounts;
 using IrpsApi.Framework.Accounts.Repositories;
+using IrpsApi.Framework.System.Repositories;
 using Mabna.WebApi.Common;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace IrpsApi.Api.Controllers.Accounts
 {
-    public class AccountDocumentController : RequiresAuthenticationApiControllerBase
+    public class AccountDocumentController : DocumentApiControllerBase
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IDocumentRepository _documentRepository;
 
-        public AccountDocumentController(IAccountRepository accountRepository, IDocumentRepository documentRepository)
+        public AccountDocumentController(IAccountRepository accountRepository, IDocumentRepository documentRepository, IOptionsMonitor<MediaBaseUrlSettings> settings, ILogRepository logRepository) : base(settings, documentRepository, logRepository)
         {
             _accountRepository = accountRepository;
             _documentRepository = documentRepository;
@@ -46,11 +49,11 @@ namespace IrpsApi.Api.Controllers.Accounts
             if (account == null)
                 return NotFound("invalid_account_id");
 
-            var document = await _documentRepository.GetByDocumentTypeAsync(accountId, typeId, cancellationToken);
+            var document = await GetDocumentAsync(account, typeId, expandOptions, cancellationToken);
             if (document == null)
                 return NotFound("document_not_found", "There is no document for the account.");
 
-            return Ok(await document.ToDocumentModelAsync(GetExpandOptions(expandOptions), cancellationToken));
+            return Ok(document);
         }
 
         /// <summary>

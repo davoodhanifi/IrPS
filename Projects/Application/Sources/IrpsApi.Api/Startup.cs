@@ -16,6 +16,7 @@ using Mabna.WebApi.AspNetCore.Security.Policies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json;
 
 namespace IrpsApi.Api
@@ -36,6 +37,7 @@ namespace IrpsApi.Api
             services.Configure<ApiSessions>(_configuration.GetSection("ApiSessions"));
             services.Configure<SmsSettings>(_configuration.GetSection("SMS"));
             services.Configure<FcmSettings>(_configuration.GetSection("FCM"));
+            services.Configure<MediaBaseUrlSettings>(_configuration.GetSection("Media_Base_Url"));
 
             services.RegisterConnectionStrings();
             services.RegisterRepositories();
@@ -117,10 +119,10 @@ namespace IrpsApi.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -130,6 +132,10 @@ namespace IrpsApi.Api
 
             app.UseBufferedRequestBody();
             app.UseAuthentication();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")), RequestPath = "/StaticFiles"
+            });
             app.UseMvc();
             app.UseResponseCompression();
         }

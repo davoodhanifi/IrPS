@@ -61,5 +61,11 @@ namespace Noandishan.IrpsApi.Repositories.Accounts
             get;
             set;
         }
+
+        public string DocumentUrl
+        {
+            get;
+            set;
+        }
     }
 }

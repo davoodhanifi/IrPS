@@ -14,6 +14,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="static-files\**" />
+    <Content Remove="static-files\**" />
+    <EmbeddedResource Remove="static-files\**" />
+    <None Remove="static-files\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />                                                
   </ItemGroup>
 

@@ -1,20 +1,24 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+using IrpsApi.Api.Configurations;
 using IrpsApi.Api.ExpandOptionsHelpers;
 using IrpsApi.Api.Models.Accounts;
 using IrpsApi.Framework.Accounts;
 using IrpsApi.Framework.Accounts.Repositories;
+using IrpsApi.Framework.System.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace IrpsApi.Api.Controllers.Accounts
 {
-    public class PersonProfileController : RequiresAuthenticationApiControllerBase
+    public class PersonProfileController : DocumentApiControllerBase
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IPersonProfileRepository _personProfileRepository;
 
-        public PersonProfileController(IAccountRepository accountRepository, IPersonProfileRepository personProfileRepository)
+        public PersonProfileController(IAccountRepository accountRepository, IPersonProfileRepository personProfileRepository, IOptionsMonitor<MediaBaseUrlSettings> settings, IDocumentRepository documentRepository, ILogRepository logRepository) : base(settings, documentRepository, logRepository)
         {
             _accountRepository = accountRepository;
             _personProfileRepository = personProfileRepository;
@@ -48,7 +52,10 @@ namespace IrpsApi.Api.Controllers.Accounts
             if (profile == null)
                 return NotFound();
 
-            return Ok(await profile.ToPersonProfileModelAsync(GetExpandOptions(expandOptions), cancellationToken));
+            var profileModel = await profile.ToPersonProfileModelAsync(GetExpandOptions(expandOptions), cancellationToken);
+            profileModel.Avatar = await GetDocumentAsync(account, DocumentTypeIds.Avatar, expandOptions, cancellationToken);
+
+            return Ok(profileModel);
         }
 
         /// <summary>
@@ -76,8 +83,11 @@ namespace IrpsApi.Api.Controllers.Accounts
             var profile = await _personProfileRepository.GetAsync(account, cancellationToken);
             if (profile == null)
                 return NotFound();
+            
+            var profileModel = await profile.ToPersonProfileModelAsync(GetExpandOptions(expandOptions), cancellationToken);
+            profileModel.Avatar = await GetDocumentAsync(account, DocumentTypeIds.Avatar, expandOptions, cancellationToken);
 
-            return Ok(await profile.ToPersonProfileModelAsync(GetExpandOptions(expandOptions), cancellationToken));
+            return Ok(profileModel);
         }
 
         /// <summary>

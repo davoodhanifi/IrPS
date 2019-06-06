@@ -5,6 +5,7 @@ Projects/Application/Sources/IrpsApi.Api/ConnectionStrings.config
 Projects/Database/Publish/
 Projects/Package
 Projects/Application/Sources/.vs/
+Projects/Application/Sources/IrpsApi.Api/StaticFiles
 
 bin
 obj

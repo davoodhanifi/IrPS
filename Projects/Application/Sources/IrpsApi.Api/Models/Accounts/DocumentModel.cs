@@ -49,8 +49,8 @@ namespace IrpsApi.Api.Models.Accounts
             set;
         }
 
-        [DataMember(Name = "data")]
-        public byte[] Data
+        [DataMember(Name = "document_url")]
+        public string DocumentUrl
         {
             get;
             set;
