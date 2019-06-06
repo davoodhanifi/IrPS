@@ -14,7 +14,6 @@ using IrpsApi.Framework.System;
 using IrpsApi.Framework.System.Repositories;
 using Mabna.WebApi.Common;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace IrpsApi.Api.Controllers.Accounting
@@ -103,7 +102,7 @@ namespace IrpsApi.Api.Controllers.Accounting
         /// <summary>
         /// Add new transaction.
         /// </summary>
-        /// <response code="422">missing_transaction_type, invalid_method, invalid_amount, not_enough_credit, rollback_transaction</response>  
+        /// <response code="422">missing_transaction_type, invalid_method, invalid_accounts, invalid_amount, not_enough_credit, rollback_transaction</response>  
         /// <response code="403">forbidden</response>
         [HttpPost]
         [Route("accounting/transactions/add")]
@@ -123,6 +122,9 @@ namespace IrpsApi.Api.Controllers.Accounting
 
             if (transactionModel.Type.Id == TransactionTypeIds.IncreaseCredit)
                 return UnprocessableEntity(new UnprocessableEntityException("invalid_method", "Invalid Method For Increase Credit!"));
+
+            if (transactionModel.FromAccount.Id == transactionModel.ToAccount.Id)
+                return UnprocessableEntity(new UnprocessableEntityException("invalid_accounts", "From Account As Same As To Account!"));
 
             if (transactionModel?.Amount <= 0M)
                 return UnprocessableEntity(new UnprocessableEntityException("invalid_amount", "Amount Must Be Positive!"));
