@@ -36,10 +36,12 @@ namespace IrpsApi.Api.Controllers
             }
 
             var path = string.Empty;
+            var format = document.MimeType.Split('/')[1];
             if (!string.IsNullOrEmpty(document.DocumentUrl))
             {
                 var fileName = document.DocumentUrl.Split('/')[1];
-                path = Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles\\Images", fileName);
+                var fullFileName = $"{fileName}.{format}";
+                path = Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles\\Images", fullFileName);
             }
 
             // اگر به هر دلیلی آواتار در آدرس ذخیره عکس‌ها نباشد، آن را ذخیره می‌کنیم و رکورد را آپدیت می‌کنیم
@@ -47,8 +49,10 @@ namespace IrpsApi.Api.Controllers
             {
                 try
                 {
-                    var url = $"{_settings.CurrentValue.BaseUrl}/{Guid.NewGuid()}{account.UserCode}";
-                    path = Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles\\Images", url.Split('/')[1]);
+                    var fileName = $"{Guid.NewGuid()}{account.UserCode}";
+                    var fullFileName = $"{fileName}.{format}";
+                    var url = $"{_settings.CurrentValue.BaseUrl}/{fileName}";
+                    path = Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles\\Images", fullFileName);
                     using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
                         await fileStream.WriteAsync(document.Data, 0, document.Data.Length, cancellationToken);
 
