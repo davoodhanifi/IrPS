@@ -1,0 +1,346 @@
+﻿body {
+    background: #f8f8f8
+}
+
+.app {
+    margin: auto;
+    margin-bottom: 100px;
+    max-width: 840px
+}
+
+.app-logo {
+    height: 50px
+}
+
+.app-header {
+    height: auto;
+    padding: 20px;
+    text-align: center
+}
+
+.app-intro {
+    font-size: large
+}
+
+.card {
+    background: #fff;
+    border: thin solid #d9d9d9;
+    border-top: 3px solid rgba(21, 35, 57, 0.91);
+    margin-bottom: 18px;
+    padding: 24px 32px
+}
+
+.error {
+    background-color: #f2dede;
+    border: thin solid;
+    border-color: #ebccd1;
+    border-top: 3px solid rgba(237, 76, 79, 0.91);
+    margin-bottom: 18px;
+    padding: 24px 32px;
+    text-align: center;
+}
+
+.card .divider {
+    width: 100%;
+    border: none;
+    border-top: thin solid #d9d9d9
+}
+
+@media only screen and (max-width:840px) {
+    .card {
+        border-left: none;
+        border-right: none
+    }
+}
+
+@media only screen and (max-width:840px) {
+    .flash {
+        border-left: none;
+        border-right: none;
+        border-radius: 0
+    }
+}
+
+.order-summary {
+    position: relative;
+    z-index: 1
+}
+
+    .order-summary > div {
+        margin-bottom: 6px
+    }
+
+    .order-summary * {
+        background: transparent
+    }
+
+    .order-summary .amount {
+        float: left
+    }
+
+@media only screen and (min-width:840px) {
+    .order-summary .date {
+        float: left
+    }
+}
+
+.order-summary .divider {
+    display: inline-block
+}
+
+.invoice-summary-container {
+    position: relative
+}
+
+    .invoice-summary-container .text-support {
+        font-size: 12px;
+        color: #6b6b6b;
+    }
+
+.invoice-error-container .text-support {
+    font-size: 12px;
+    color: #a94442;
+    font-weight: bold;
+}
+
+.payments-container > div {
+    margin-bottom: 6px
+}
+
+.payments-container .method-name {
+    margin-bottom: 16px
+}
+
+.payments-container .divider {
+    margin: 16px 0
+}
+
+.gateway-button {
+    display: inline-block;
+    text-align: center
+}
+
+    .gateway-button img {
+        display: inline-block;
+        height: 68px;
+        padding: 2px
+    }
+
+.gateway-option {
+    display: inline-block;
+    border: 2px solid #e0e0e0;
+    /*box-shadow: 0 0 3px #a0a0a0;*/
+    border-radius: 4px;
+    margin: 5px;
+    padding: 8px;
+    -webkit-transition: all .1s;
+    transition: all .1s;
+    outline: 0;
+}
+
+    .gateway-option:hover {
+        cursor: pointer
+    }
+
+    .gateway-option.active {
+        border: 2px solid rgba(33, 150, 243, .6);
+        box-shadow: 0 0 10px rgba(33, 150, 243, .6);
+        font-weight: bold;
+        outline: 0;
+    }
+
+.gateway-button label {
+    display: block;
+    font-size: .80rem;
+    vertical-align: middle
+}
+
+.payments-container .radio {
+    border: thin solid #c5c5c5;
+    box-shadow: inset 0 0 3px #adadad;
+    border-radius: 50%;
+    display: inline-block;
+    height: 12px;
+    margin-left: 4px;
+    vertical-align: middle;
+    width: 12px
+}
+
+    .payments-container .radio.rect {
+        box-shadow: inset 0 0 2px #adadad;
+        border-radius: 2px;
+        height: 10px;
+        width: 10px
+    }
+
+.payments-container .method .option {
+    padding: 6px 0;
+    cursor: pointer
+}
+
+.payments-container .method.disabled > :not(.notice) {
+    opacity: .3
+}
+
+.payments-container .method.disabled .option {
+    cursor: not-allowed
+}
+
+.actions {
+    text-align: left;
+    margin-bottom: 38px
+}
+
+form {
+    display: inline-block
+}
+
+.hidden {
+    display: none !important
+}
+
+.actions form:not(:last-child) {
+    margin-left: 8px
+}
+
+.actions form.full-width {
+    width: 100%
+}
+
+.actions form button,
+.actions form input[type=submit] {
+    background: #4d3185;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    font-family: IRANSans;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px 32px;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+
+@media only screen and (max-width:840px) {
+    .actions {
+        bottom: 0;
+        box-shadow: 0 0 8px #a2a2a2;
+        margin-bottom: 0;
+        position: fixed;
+        width: 100%;
+        z-index: 10
+    }
+
+        .actions form:not(:last-child) {
+            margin: 0
+        }
+
+        .actions form {
+            width: 50%
+        }
+
+            .actions form.full-width {
+                width: 100%;
+            }
+
+            .actions form button,
+            .actions form button.outline,
+            .actions form input[type=submit] {
+                border-radius: 3px;
+                height: 50px;
+                width: 90%;
+                border-left: none;
+                border-right: none;
+                padding: 0;
+                margin: 6px auto 0 auto;
+            }
+
+    form {
+        background: #fff
+    }
+}
+
+@font-face {
+    font-family: IRANSans;
+    src: url(../fonts/IRANSans-UltraLight-web.eot);
+    src: url(../fonts/IRANSans-UltraLight-web.eot?#iefix) format("embedded-opentype"), url(../fonts/IRANSans-UltraLight-web.woff) format("woff"), url(../fonts/IRANSans-UltraLight-web.ttf) format("truetype"), url(../fonts/IRANSans-UltraLight-web.woff) format("svg");
+    font-weight: 100
+}
+
+@font-face {
+    font-family: IRANSans;
+    src: url(../fonts/IRANSans-Light-web.eot);
+    src: url(../fonts/IRANSans-Light-web.eot?#iefix) format("embedded-opentype"), url(../fonts/IRANSans-Light-web.woff) format("woff"), url(../fonts/IRANSans-Light-web.ttf) format("truetype"), url(../fonts/IRANSans-Light-web.woff) format("svg");
+    font-weight: 400
+}
+
+@font-face {
+    font-family: IRANSans;
+    src: url(../fonts/IRANSans-Medium-web.eot);
+    src: url(../fonts/IRANSans-Medium-web.eot?#iefix) format("embedded-opentype"), url(../fonts/IRANSans-Medium-web.woff) format("woff"), url(../fonts/IRANSans-Medium-web.ttf) format("truetype"), url(../fonts/IRANSans-Medium-web.woff) format("svg");
+    font-weight: 600
+}
+
+@font-face {
+    font-family: IRANSans;
+    src: url(../fonts/IRANSans-Bold-web.eot);
+    src: url(../fonts/IRANSans-Bold-web.eot?#iefix) format("embedded-opentype"), url(../fonts/IRANSans-Bold-web.woff) format("woff"), url(../fonts/IRANSans-Bold-web.ttf) format("truetype"), url(../fonts/IRANSans-Bold-web.woff) format("svg");
+    font-weight: 700
+}
+
+body {
+    font-family: IRANSans, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 14px
+}
+
+@media only screen and (max-width:460px) {
+    .center-sm {
+        text-align: center
+    }
+}
+
+@media only screen and (max-width:380px) {
+    .gateway-button img {
+        display: inline-block;
+        height: 55px;
+        padding: 4px
+    }
+}
+
+@media only screen and (max-width:340px) {
+    .gateway-button img {
+        display: inline-block;
+        height: 50px;
+        padding: 4px
+    }
+}
+
+img::selection {
+    background-color: transparent;
+}
+
+img::-moz-selection {
+    background-color: transparent;
+}
+
+* {
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+button[disabled] {
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    pointer-events: none;
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+}

@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>IrpsApi.Services</AssemblyName>
+    <RootNamespace>IrpsApi.Services</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.0" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.4.0" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.0" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IrpsApi.Framework.Accounting\IrpsApi.Framework.Accounting.csproj" />
+    <ProjectReference Include="..\IrpsApi.Framework.OnlinePayment\IrpsApi.Framework.OnlinePayment.csproj" />
+    <ProjectReference Include="..\IrpsApi.Framework\IrpsApi.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Mabna.Diagnostics.v1">
+      <HintPath>..\..\Packages\mabna.diagnostics.v1\1.3.0\lib\netstandard2.0\Mabna.Diagnostics.v1.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.options\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+</Project>

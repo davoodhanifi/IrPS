@@ -3960,6 +3960,28 @@
           "lib/netstandard1.3/System.Private.DataContractSerialization.dll": {}
         }
       },
+      "System.Private.ServiceModel/4.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.0.0",
+          "System.Net.Http.WinHttpHandler": "4.4.0",
+          "System.Reflection.DispatchProxy": "4.4.0",
+          "System.Security.Principal.Windows": "4.4.0"
+        },
+        "compile": {
+          "ref/netstandard/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netstandard2.0/System.Private.ServiceModel.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
+          "runtimes/win7/lib/netstandard2.0/System.Private.ServiceModel.dll": {
+            "assetType": "runtime",
+            "rid": "win7"
+          }
+        }
+      },
       "System.Reflection/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3971,6 +3993,15 @@
         },
         "compile": {
           "ref/netstandard1.5/System.Reflection.dll": {}
+        }
+      },
+      "System.Reflection.DispatchProxy/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/_._": {}
         }
       },
       "System.Reflection.Emit/4.3.0": {
@@ -4517,6 +4548,70 @@
           }
         }
       },
+      "System.ServiceModel.Duplex/4.4.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Private.ServiceModel": "4.4.0",
+          "System.ServiceModel.Primitives": "4.4.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.ServiceModel.Duplex.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceModel.Duplex.dll": {}
+        }
+      },
+      "System.ServiceModel.Http/4.4.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Private.ServiceModel": "4.4.0",
+          "System.ServiceModel.Primitives": "4.4.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.ServiceModel.Http.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceModel.Http.dll": {}
+        }
+      },
+      "System.ServiceModel.NetTcp/4.4.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Private.ServiceModel": "4.4.0",
+          "System.ServiceModel.Primitives": "4.4.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.ServiceModel.NetTcp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceModel.NetTcp.dll": {}
+        }
+      },
+      "System.ServiceModel.Primitives/4.4.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Private.ServiceModel": "4.4.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.ServiceModel.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceModel.Primitives.dll": {}
+        }
+      },
+      "System.ServiceModel.Security/4.4.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Private.ServiceModel": "4.4.0",
+          "System.ServiceModel.Primitives": "4.4.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.ServiceModel.Security.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceModel.Security.dll": {}
+        }
+      },
       "System.Text.Encoding/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4850,6 +4945,19 @@
           "bin/placeholder/IrpsApi.Framework.Bank.dll": {}
         }
       },
+      "IrpsApi.Framework.OnlinePayment/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "IrpsApi.Framework": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/IrpsApi.Framework.OnlinePayment.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IrpsApi.Framework.OnlinePayment.dll": {}
+        }
+      },
       "IrpsApi.Framework.Operation/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -4877,6 +4985,25 @@
           "bin/placeholder/IrpsApi.Framework.System.dll": {}
         }
       },
+      "IrpsApi.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "IrpsApi.Framework": "1.0.0",
+          "IrpsApi.Framework.Accounting": "1.0.0",
+          "IrpsApi.Framework.OnlinePayment": "1.0.0",
+          "System.ServiceModel.Duplex": "4.4.0",
+          "System.ServiceModel.Http": "4.4.0",
+          "System.ServiceModel.NetTcp": "4.4.0",
+          "System.ServiceModel.Security": "4.4.0"
+        },
+        "compile": {
+          "bin/placeholder/IrpsApi.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IrpsApi.Services.dll": {}
+        }
+      },
       "Noandishan.IrpsApi.Repositories/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -4886,6 +5013,7 @@
           "IrpsApi.Framework.Accounting": "1.0.0",
           "IrpsApi.Framework.Accounts": "1.0.0",
           "IrpsApi.Framework.Bank": "1.0.0",
+          "IrpsApi.Framework.OnlinePayment": "1.0.0",
           "IrpsApi.Framework.Operation": "1.0.0",
           "IrpsApi.Framework.System": "1.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "2.1.1",
@@ -10308,6 +10436,25 @@
         "system.private.datacontractserialization.nuspec"
       ]
     },
+    "System.Private.ServiceModel/4.4.0": {
+      "sha512": "k0c8LdxCWUzUfmSs0lgS3W8hor2c0LwZT4vkQ6xQ3BeFnMAJO+XAkEcn7bTKdSDt4j53tPFNTqNwsb2xtWVt5g==",
+      "type": "package",
+      "path": "system.private.servicemodel/4.4.0",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "ref/netstandard/_._",
+        "runtimes/unix/lib/netstandard1.3/System.Private.ServiceModel.dll",
+        "runtimes/unix/lib/netstandard2.0/System.Private.ServiceModel.dll",
+        "runtimes/win7/lib/netcore50/System.Private.ServiceModel.dll",
+        "runtimes/win7/lib/netstandard1.3/System.Private.ServiceModel.dll",
+        "runtimes/win7/lib/netstandard2.0/System.Private.ServiceModel.dll",
+        "system.private.servicemodel.4.4.0.nupkg.sha512",
+        "system.private.servicemodel.nuspec",
+        "version.txt"
+      ]
+    },
     "System.Reflection/4.3.0": {
       "sha512": "KMiAFoW7MfJGa9nDFNcfu+FpEdiHpWgTcS2HdMpDvt9saK3y/G4GwprPyzqjFH9NTaGPQeWNHU+iDlDILj96aQ==",
       "type": "package",
@@ -10385,6 +10532,51 @@
         "ref/xamarinwatchos10/_._",
         "system.reflection.4.3.0.nupkg.sha512",
         "system.reflection.nuspec"
+      ]
+    },
+    "System.Reflection.DispatchProxy/4.4.0": {
+      "sha512": "OMBZ2YO0MOoi8yarOmXQVLso5RW9S62liNXJ0UjANonTBA4n/H1hn8A90BRNXdwbwIlPKIjis2G2wreukTRSWA==",
+      "type": "package",
+      "path": "system.reflection.dispatchproxy/4.4.0",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.Reflection.DispatchProxy.dll",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.3/System.Reflection.DispatchProxy.dll",
+        "lib/netstandard2.0/System.Reflection.DispatchProxy.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.3/System.Reflection.DispatchProxy.dll",
+        "ref/netstandard1.3/System.Reflection.DispatchProxy.xml",
+        "ref/netstandard1.3/de/System.Reflection.DispatchProxy.xml",
+        "ref/netstandard1.3/es/System.Reflection.DispatchProxy.xml",
+        "ref/netstandard1.3/fr/System.Reflection.DispatchProxy.xml",
+        "ref/netstandard1.3/it/System.Reflection.DispatchProxy.xml",
+        "ref/netstandard1.3/ja/System.Reflection.DispatchProxy.xml",
+        "ref/netstandard1.3/ko/System.Reflection.DispatchProxy.xml",
+        "ref/netstandard1.3/ru/System.Reflection.DispatchProxy.xml",
+        "ref/netstandard1.3/zh-hans/System.Reflection.DispatchProxy.xml",
+        "ref/netstandard1.3/zh-hant/System.Reflection.DispatchProxy.xml",
+        "ref/netstandard2.0/System.Reflection.DispatchProxy.dll",
+        "ref/netstandard2.0/System.Reflection.DispatchProxy.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/aot/lib/netcore50/System.Reflection.DispatchProxy.dll",
+        "system.reflection.dispatchproxy.4.4.0.nupkg.sha512",
+        "system.reflection.dispatchproxy.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Reflection.Emit/4.3.0": {
@@ -11817,6 +12009,217 @@
         "version.txt"
       ]
     },
+    "System.ServiceModel.Duplex/4.4.0": {
+      "sha512": "sCwxTcykS5Qv/rdBWr4H5rNqtqGUyefrAUEqQPMaxt3LmKwBxukyDzrVXzZW/fjo0PXjx0yus77Ivor2tKlmJQ==",
+      "type": "package",
+      "path": "system.servicemodel.duplex/4.4.0",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/net461/System.ServiceModel.Duplex.dll",
+        "lib/netcore50/System.ServiceModel.Duplex.dll",
+        "lib/netstandard1.3/System.ServiceModel.Duplex.dll",
+        "lib/netstandard2.0/System.ServiceModel.Duplex.dll",
+        "lib/portable-net45+win8/_._",
+        "lib/win8/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net461/System.ServiceModel.Duplex.dll",
+        "ref/netcore50/System.ServiceModel.Duplex.dll",
+        "ref/netstandard1.1/System.ServiceModel.Duplex.dll",
+        "ref/netstandard2.0/System.ServiceModel.Duplex.dll",
+        "ref/portable-net45+win8/_._",
+        "ref/win8/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.servicemodel.duplex.4.4.0.nupkg.sha512",
+        "system.servicemodel.duplex.nuspec",
+        "version.txt"
+      ]
+    },
+    "System.ServiceModel.Http/4.4.0": {
+      "sha512": "S7J7W+xyQ+SkVs5/i7yaBw++0jsnkdF2DURlvZqzG/ksKxoxe72zoKpKp77FG5ZvvSUQ2UanVS0t8CK1tv6/9w==",
+      "type": "package",
+      "path": "system.servicemodel.http/4.4.0",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/net46/System.ServiceModel.Http.dll",
+        "lib/net461/System.ServiceModel.Http.dll",
+        "lib/netcore50/System.ServiceModel.Http.dll",
+        "lib/netstandard1.3/System.ServiceModel.Http.dll",
+        "lib/netstandard2.0/System.ServiceModel.Http.dll",
+        "lib/portable-net45+win8+wp8/_._",
+        "lib/win8/_._",
+        "lib/wp8/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net46/System.ServiceModel.Http.dll",
+        "ref/net461/System.ServiceModel.Http.dll",
+        "ref/netcore50/System.ServiceModel.Http.dll",
+        "ref/netstandard1.0/System.ServiceModel.Http.dll",
+        "ref/netstandard1.1/System.ServiceModel.Http.dll",
+        "ref/netstandard1.3/System.ServiceModel.Http.dll",
+        "ref/netstandard2.0/System.ServiceModel.Http.dll",
+        "ref/portable-net45+win8+wp8/_._",
+        "ref/win8/_._",
+        "ref/wp8/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.servicemodel.http.4.4.0.nupkg.sha512",
+        "system.servicemodel.http.nuspec",
+        "version.txt"
+      ]
+    },
+    "System.ServiceModel.NetTcp/4.4.0": {
+      "sha512": "+IxogIKvBRR7l/na1jkGbnYgZpBGgztnX6YfNkY5RdUFw+SZ6bbcCBHqNCXA0ckQjpcKr2e/4HFz/wzIcIayqg==",
+      "type": "package",
+      "path": "system.servicemodel.nettcp/4.4.0",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/net46/System.ServiceModel.NetTcp.dll",
+        "lib/net461/System.ServiceModel.NetTcp.dll",
+        "lib/netcore50/System.ServiceModel.NetTcp.dll",
+        "lib/netstandard1.3/System.ServiceModel.NetTcp.dll",
+        "lib/netstandard2.0/System.ServiceModel.NetTcp.dll",
+        "lib/portable-net45+win8/_._",
+        "lib/win8/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net46/System.ServiceModel.NetTcp.dll",
+        "ref/net461/System.ServiceModel.NetTcp.dll",
+        "ref/netcore50/System.ServiceModel.NetTcp.dll",
+        "ref/netstandard1.1/System.ServiceModel.NetTcp.dll",
+        "ref/netstandard1.3/System.ServiceModel.NetTcp.dll",
+        "ref/netstandard2.0/System.ServiceModel.NetTcp.dll",
+        "ref/portable-net45+win8/_._",
+        "ref/win8/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.servicemodel.nettcp.4.4.0.nupkg.sha512",
+        "system.servicemodel.nettcp.nuspec",
+        "version.txt"
+      ]
+    },
+    "System.ServiceModel.Primitives/4.4.0": {
+      "sha512": "oyUXqZjNKwLgofomcCt+E3Z2Ly7FAfK7rFYYjcdbZyvyHbXLrZjOf7ldo6iy7CkdSb0k/lnsGA/EkAehsZjh0A==",
+      "type": "package",
+      "path": "system.servicemodel.primitives/4.4.0",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/net46/System.ServiceModel.Primitives.dll",
+        "lib/net461/System.ServiceModel.Primitives.dll",
+        "lib/netcore50/System.ServiceModel.Primitives.dll",
+        "lib/netstandard1.3/System.ServiceModel.Primitives.dll",
+        "lib/netstandard2.0/System.ServiceModel.Primitives.dll",
+        "lib/portable-net45+win8+wp8/_._",
+        "lib/win8/_._",
+        "lib/wp8/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net46/System.ServiceModel.Primitives.dll",
+        "ref/net461/System.ServiceModel.Primitives.dll",
+        "ref/netcore50/System.ServiceModel.Primitives.dll",
+        "ref/netstandard1.0/System.ServiceModel.Primitives.dll",
+        "ref/netstandard1.1/System.ServiceModel.Primitives.dll",
+        "ref/netstandard1.3/System.ServiceModel.Primitives.dll",
+        "ref/netstandard2.0/System.ServiceModel.Primitives.dll",
+        "ref/portable-net45+win8+wp8/_._",
+        "ref/win8/_._",
+        "ref/wp8/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.servicemodel.primitives.4.4.0.nupkg.sha512",
+        "system.servicemodel.primitives.nuspec",
+        "version.txt"
+      ]
+    },
+    "System.ServiceModel.Security/4.4.0": {
+      "sha512": "qefN+YSzw75BB2dmJLiv9dQL63u8QxNMdHEbwI8HXVggf3Iseg8329XrvzCFC9h+58KWucLs7mShZxWeBIzflQ==",
+      "type": "package",
+      "path": "system.servicemodel.security/4.4.0",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/System.ServiceModel.Security.dll",
+        "lib/netstandard1.3/System.ServiceModel.Security.dll",
+        "lib/netstandard2.0/System.ServiceModel.Security.dll",
+        "lib/portable-net45+win8+wp8/_._",
+        "lib/win8/_._",
+        "lib/wp8/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/System.ServiceModel.Security.dll",
+        "ref/netstandard1.0/System.ServiceModel.Security.dll",
+        "ref/netstandard1.1/System.ServiceModel.Security.dll",
+        "ref/netstandard2.0/System.ServiceModel.Security.dll",
+        "ref/portable-net45+win8+wp8/_._",
+        "ref/win8/_._",
+        "ref/wp8/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.servicemodel.security.4.4.0.nupkg.sha512",
+        "system.servicemodel.security.nuspec",
+        "version.txt"
+      ]
+    },
     "System.Text.Encoding/4.3.0": {
       "sha512": "BiIg+KWaSDOITze6jGQynxg64naAPtqGHBwDrLaCtixsa5bKiR8dpPOHA7ge3C0JJQizJE+sfkz1wV+BAKAYZw==",
       "type": "package",
@@ -12763,6 +13166,11 @@
       "path": "../IrpsApi.Framework.Bank/IrpsApi.Framework.Bank.csproj",
       "msbuildProject": "../IrpsApi.Framework.Bank/IrpsApi.Framework.Bank.csproj"
     },
+    "IrpsApi.Framework.OnlinePayment/1.0.0": {
+      "type": "project",
+      "path": "../IrpsApi.Framework.OnlinePayment/IrpsApi.Framework.OnlinePayment.csproj",
+      "msbuildProject": "../IrpsApi.Framework.OnlinePayment/IrpsApi.Framework.OnlinePayment.csproj"
+    },
     "IrpsApi.Framework.Operation/1.0.0": {
       "type": "project",
       "path": "../IrpsApi.Framework.Operations/IrpsApi.Framework.Operation.csproj",
@@ -12772,6 +13180,11 @@
       "type": "project",
       "path": "../IrpsApi.Framework.System/IrpsApi.Framework.System.csproj",
       "msbuildProject": "../IrpsApi.Framework.System/IrpsApi.Framework.System.csproj"
+    },
+    "IrpsApi.Services/1.0.0": {
+      "type": "project",
+      "path": "../IrpsApi.Services/IrpsApi.Services.csproj",
+      "msbuildProject": "../IrpsApi.Services/IrpsApi.Services.csproj"
     },
     "Noandishan.IrpsApi.Repositories/1.0.0": {
       "type": "project",
@@ -12786,8 +13199,10 @@
       "CorePush >= 2.0.0",
       "IrpsApi.Framework >= 1.0.0",
       "IrpsApi.Framework.Accounts >= 1.0.0",
+      "IrpsApi.Framework.OnlinePayment >= 1.0.0",
       "IrpsApi.Framework.Operation >= 1.0.0",
       "IrpsApi.Framework.System >= 1.0.0",
+      "IrpsApi.Services >= 1.0.0",
       "Kavenegar.Core >= 1.0.1-alpha2",
       "Mabna.WebApi.AspNetCore.v1 >= 1.0.0-beta06",
       "Microsoft.AspNetCore.App >= 2.1.2",
@@ -12832,6 +13247,9 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
+            "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Services\\IrpsApi.Services.csproj": {
+              "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Services\\IrpsApi.Services.csproj"
+            },
             "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj": {
               "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework\\IrpsApi.Framework.csproj"
             },
@@ -12846,6 +13264,9 @@
             },
             "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj": {
               "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj"
+            },
+            "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.OnlinePayment\\IrpsApi.Framework.OnlinePayment.csproj": {
+              "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.OnlinePayment\\IrpsApi.Framework.OnlinePayment.csproj"
             }
           }
         }

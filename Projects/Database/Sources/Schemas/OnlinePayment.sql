@@ -1,0 +1,1 @@
+CREATE SCHEMA [OnlinePayment] AUTHORIZATION dbo

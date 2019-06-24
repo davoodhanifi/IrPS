@@ -429,6 +429,19 @@
           "bin/placeholder/IrpsApi.Framework.Bank.dll": {}
         }
       },
+      "IrpsApi.Framework.OnlinePayment/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "IrpsApi.Framework": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/IrpsApi.Framework.OnlinePayment.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IrpsApi.Framework.OnlinePayment.dll": {}
+        }
+      },
       "IrpsApi.Framework.Operation/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -1715,6 +1728,11 @@
       "path": "../IrpsApi.Framework.Bank/IrpsApi.Framework.Bank.csproj",
       "msbuildProject": "../IrpsApi.Framework.Bank/IrpsApi.Framework.Bank.csproj"
     },
+    "IrpsApi.Framework.OnlinePayment/1.0.0": {
+      "type": "project",
+      "path": "../IrpsApi.Framework.OnlinePayment/IrpsApi.Framework.OnlinePayment.csproj",
+      "msbuildProject": "../IrpsApi.Framework.OnlinePayment/IrpsApi.Framework.OnlinePayment.csproj"
+    },
     "IrpsApi.Framework.Operation/1.0.0": {
       "type": "project",
       "path": "../IrpsApi.Framework.Operations/IrpsApi.Framework.Operation.csproj",
@@ -1733,6 +1751,7 @@
       "IrpsApi.Framework.Accounting >= 1.0.0",
       "IrpsApi.Framework.Accounts >= 1.0.0",
       "IrpsApi.Framework.Bank >= 1.0.0",
+      "IrpsApi.Framework.OnlinePayment >= 1.0.0",
       "IrpsApi.Framework.Operation >= 1.0.0",
       "IrpsApi.Framework.System >= 1.0.0",
       "Microsoft.Extensions.Configuration.Abstractions >= 2.1.1",
@@ -1791,6 +1810,9 @@
             },
             "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj": {
               "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.System\\IrpsApi.Framework.System.csproj"
+            },
+            "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.OnlinePayment\\IrpsApi.Framework.OnlinePayment.csproj": {
+              "projectPath": "E:\\Projects\\Noandishan\\irps-v1\\Projects\\Application\\Sources\\IrpsApi.Framework.OnlinePayment\\IrpsApi.Framework.OnlinePayment.csproj"
             }
           }
         }

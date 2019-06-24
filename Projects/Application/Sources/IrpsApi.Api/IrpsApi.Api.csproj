@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />                                                
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="CorePush" Version="2.0.0" />
@@ -42,11 +38,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Assets\css\payment.css" />
+    <None Include="wwwroot\Assets\fonts\IRANSans-Bold-web.woff" />
+    <None Include="wwwroot\Assets\fonts\IRANSans-Light-web.woff" />
+    <None Include="wwwroot\Assets\images\Poolino-Logo.png" />
+    <None Include="wwwroot\Assets\images\saman.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\IrpsApi.Framework.Accounts\IrpsApi.Framework.Accounts.csproj" />
+    <ProjectReference Include="..\IrpsApi.Framework.OnlinePayment\IrpsApi.Framework.OnlinePayment.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework.Operations\IrpsApi.Framework.Operation.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework.System\IrpsApi.Framework.System.csproj" />
     <ProjectReference Include="..\IrpsApi.Framework\IrpsApi.Framework.csproj" />
     <ProjectReference Include="..\IrpsApi.Repositories\IrpsApi.Repositories.csproj" />
+    <ProjectReference Include="..\IrpsApi.Services\IrpsApi.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,6 +62,12 @@
     <Reference Include="Mabna.MessagingQueueSdk.v1">
       <HintPath>..\..\Libraries\Mabna.MessagingQueueSdk.v1.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Finance\RedirectToPaymentGateway.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>

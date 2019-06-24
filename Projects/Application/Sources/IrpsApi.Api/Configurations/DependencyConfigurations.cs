@@ -4,14 +4,18 @@ using IrpsApi.Api.Services;
 using IrpsApi.Framework.Accounting.Repositories;
 using IrpsApi.Framework.Accounts.Repositories;
 using IrpsApi.Framework.Bank.Repositories;
+using IrpsApi.Framework.OnlinePayment;
+using IrpsApi.Framework.OnlinePayment.Repositories;
 using IrpsApi.Framework.Operation;
 using IrpsApi.Framework.Operation.Repositories;
 using IrpsApi.Framework.System.Repositories;
+using IrpsApi.Services.OnlinePayment;
 using Microsoft.Extensions.DependencyInjection;
 using Noandishan.IrpsApi.Repositories.Accounting;
 using Noandishan.IrpsApi.Repositories.Accounts;
 using Noandishan.IrpsApi.Repositories.Bank;
 using Noandishan.IrpsApi.Repositories.ConnectionStrings;
+using Noandishan.IrpsApi.Repositories.OnlinePayment;
 using Noandishan.IrpsApi.Repositories.Operation;
 using Noandishan.IrpsApi.Repositories.System;
 
@@ -39,6 +43,10 @@ namespace IrpsApi.Api.Configurations
             services.AddSingleton<IRequestTypeRepository, RequestTypeRepository>();
             services.AddSingleton<IRequestRepository, RequestRepository>();
             services.AddSingleton<ILogRepository, LogRepository>();
+            services.AddSingleton<IOnlinePaymentRepository, OnlinePaymentRepository>();
+            services.AddSingleton<IOnlinePaymentStateRepository, OnlinePaymentStateRepository>();
+            services.AddSingleton<IOnlinePaymentGatewayRepository, OnlinePaymentGatewayRepository>();
+            services.AddSingleton<IOnlinePaymentParameterRepository, OnlinePaymentParameterRepository>();
         }
 
         public static void RegisterServices(this IServiceCollection services)
@@ -48,6 +56,7 @@ namespace IrpsApi.Api.Configurations
             //AddMessagingQueueSmsService(services);
             services.AddSingleton<ISmsService, SmsService>();
             services.AddSingleton<IFcmService, FcmService>();
+            services.AddSingleton<IOnlinePaymentService, OnlinePaymentService>();
         }
 
         //private static void AddMessagingQueueSmsService(IServiceCollection services)

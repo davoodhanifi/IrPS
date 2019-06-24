@@ -24,7 +24,9 @@ C:\Projects\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\obj\De
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\bin\Debug\netstandard2.0\IrpsApi.Framework.System.deps.json
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\bin\Debug\netstandard2.0\IrpsApi.Framework.System.dll
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\bin\Debug\netstandard2.0\IrpsApi.Framework.System.pdb
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\bin\Debug\netstandard2.0\IrpsApi.Framework.Accounts.dll
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\bin\Debug\netstandard2.0\IrpsApi.Framework.dll
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\bin\Debug\netstandard2.0\IrpsApi.Framework.Accounts.pdb
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\bin\Debug\netstandard2.0\IrpsApi.Framework.pdb
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\obj\Debug\netstandard2.0\IrpsApi.Framework.System.csprojResolveAssemblyReference.cache
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\obj\Debug\netstandard2.0\IrpsApi.Framework.System.csproj.CoreCompileInputs.cache
@@ -32,5 +34,3 @@ E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.Sy
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\obj\Debug\netstandard2.0\IrpsApi.Framework.System.AssemblyInfo.cs
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\obj\Debug\netstandard2.0\IrpsApi.Framework.System.dll
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\obj\Debug\netstandard2.0\IrpsApi.Framework.System.pdb
-E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\bin\Debug\netstandard2.0\IrpsApi.Framework.Accounts.dll
-E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework.System\bin\Debug\netstandard2.0\IrpsApi.Framework.Accounts.pdb

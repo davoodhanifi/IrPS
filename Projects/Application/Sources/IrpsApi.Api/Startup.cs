@@ -9,6 +9,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using IrpsApi.Framework.OnlinePayment;
 using Mabna.WebApi.AspNetCore.BasicAuthentication;
 using Mabna.WebApi.AspNetCore.BufferedRequestBodyMiddleware;
 using Mabna.WebApi.AspNetCore.Security;
@@ -38,6 +39,7 @@ namespace IrpsApi.Api
             services.Configure<SmsSettings>(_configuration.GetSection("SMS"));
             services.Configure<FcmSettings>(_configuration.GetSection("FCM"));
             services.Configure<MediaBaseUrlSettings>(_configuration.GetSection("Media_Base_Url"));
+            services.Configure<SamanGatewaySettings>(_configuration.GetSection("Saman_Gateway"));
 
             services.RegisterConnectionStrings();
             services.RegisterRepositories();
@@ -137,6 +139,7 @@ namespace IrpsApi.Api
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")), RequestPath = "/StaticFiles"
             });
             app.UseMvc();
+            app.UseStaticFiles();
             app.UseResponseCompression();
         }
     }

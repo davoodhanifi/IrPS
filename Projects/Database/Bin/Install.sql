@@ -4,6 +4,8 @@ CREATE SCHEMA [Accounts] AUTHORIZATION [dbo]
 GO
 CREATE SCHEMA [Bank] AUTHORIZATION [dbo]
 GO
+CREATE SCHEMA [OnlinePayment] AUTHORIZATION dbo
+GO
 CREATE SCHEMA [Operation] AUTHORIZATION	 [dbo]
 GO
 CREATE SCHEMA [System] AUTHORIZATION [dbo]
@@ -265,6 +267,7 @@ CREATE TABLE [Accounts].[Document]
       [Data] [varbinary](MAX) NOT NULL ,
       [Note][nvarchar](MAX) NULL,
       [FileName] [nvarchar](MAX) NULL,
+      [DocumentUrl] [nvarchar](MAX) NULL,
       [RecordVersion] TIMESTAMP ,
       [RecordState] [int] NOT NULL CONSTRAINT [DF_Document_RecordState] DEFAULT 0,
       [RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_Document_RecordInsertDateTime] DEFAULT GETDATE(),
@@ -650,6 +653,79 @@ CREATE TABLE [Bank].[BankAccountType]
     )
 ON  [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+CREATE TABLE [OnlinePayment].[OnlinePayment](
+    [Id] [int] IDENTITY(1,1) NOT NULL,
+    [AccountId] [int] NOT NULL,
+    [Amount] [decimal](19, 4) NOT NULL,
+    [GatewayId] [int] NOT NULL,
+    [CreationDateTime] [datetime] NOT NULL,
+    [PaymentDateTime] [datetime] NULL,
+    [PaidAmount] [decimal](19, 4) NULL,
+    [StateId] [int] NOT NULL,
+    [RecordVersion] TIMESTAMP ,
+    [RecordState] INT NOT NULL CONSTRAINT [DF_OnlinePayment_RecordState] DEFAULT 0,
+    [RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_OnlinePayment_RecordInsertDateTime] DEFAULT GETDATE(),
+    [RecordUpdateDateTime] DATETIME NULL ,
+    [RecordDeleteDateTime] DATETIME NULL ,
+CONSTRAINT [PK_OnlinePayment] PRIMARY KEY CLUSTERED 
+(
+    [Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE TABLE [OnlinePayment].[OnlinePaymentGateway]
+(
+    [Id] [INT] IDENTITY(1, 1) NOT NULL,
+    [Title] NVARCHAR(MAX),
+    [TitleEn] VARCHAR(MAX),
+    [RecordVersion] [timestamp] NOT NULL,
+    [RecordState] INT NOT NULL CONSTRAINT [DF_OnlinePaymentGateway_RecordState] DEFAULT 0,
+    [RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_OnlinePaymentGateway_RecordInsertDateTime] DEFAULT GETDATE(),
+    [RecordUpdateDateTime] DATETIME NULL ,
+    [RecordDeleteDateTime] DATETIME NULL ,
+CONSTRAINT [PK_OnlinePaymentGateway] PRIMARY KEY CLUSTERED 
+(
+    [Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE TABLE [OnlinePayment].[OnlinePaymentParameter](
+    [Id] [int] IDENTITY(1,1) NOT NULL,
+    [OnlinePaymentId] [int] NOT NULL,
+    [Key] [nvarchar](max) NOT NULL,
+    [BooleanValue] [bit] NULL,
+    [IntegerValue] [bigint] NULL,
+    [DecimalValue] [decimal](19, 4) NULL,
+    [TextValue] [nvarchar](max) NULL,
+    [DateTimeValue] [datetime] NULL,
+    [BinaryValue] [varbinary](max) NULL,
+    [RecordVersion] TIMESTAMP ,
+    [RecordState] INT NOT NULL CONSTRAINT [DF_OnlinePaymentParameter_RecordState] DEFAULT 0,
+    [RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_OnlinePaymentParameter_RecordInsertDateTime] DEFAULT GETDATE(),
+    [RecordUpdateDateTime] DATETIME NULL ,
+    [RecordDeleteDateTime] DATETIME NULL ,
+CONSTRAINT [PK_OnlinePaymentParameter] PRIMARY KEY CLUSTERED 
+(
+    [Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+CREATE TABLE [OnlinePayment].[OnlinePaymentState]
+(
+    [Id] [INT] IDENTITY(1, 1) NOT NULL,
+    [Title] NVARCHAR(MAX),
+    [TitleEn] VARCHAR(MAX),
+    [RecordVersion] [timestamp] NOT NULL,
+    [RecordState] INT NOT NULL CONSTRAINT [DF_OnlinePaymentState_RecordState] DEFAULT 0,
+    [RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_OnlinePaymentState_RecordInsertDateTime] DEFAULT GETDATE(),
+    [RecordUpdateDateTime] DATETIME NULL ,
+    [RecordDeleteDateTime] DATETIME NULL ,
+CONSTRAINT [PK_OnlinePaymentState] PRIMARY KEY CLUSTERED 
+(
+    [Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 CREATE TABLE [Operation].[Request](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[AccountId] [int] NOT NULL,
@@ -745,58 +821,49 @@ CONSTRAINT [PK_Message] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-CREATE TABLE [System].[SystemLog](
+CREATE TABLE [System].[Log](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[DateTime] [datetime] NOT NULL,
-	[Action] [nvarchar](max) NOT NULL
- CONSTRAINT [PK_SystemLog] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-CREATE TABLE [System].[SystemLogParameter](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[SystemLogId] [int] NOT NULL,
-	[Key] [varchar](255) NOT NULL,
-	[BooleanValue] [bit] NULL,
-	[IntegerValue] [bigint] NULL,
-	[DecimalValue] [decimal](19, 4) NULL,
-	[TextValue] [nvarchar](max) NULL,
-	[DateTime] [datetime] NULL,
-	[BinaryValue] [varbinary](max) NULL
- CONSTRAINT [PK_SystemLogParameter] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-CREATE TABLE [System].[UserLog](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[AccountId] [int] NOT NULL,
+    [Source] [nvarchar](max) NOT NULL,
+    [LevelId] [int] NOT NULL,
+	[AccountId] [int] NULL,
 	[DateTime] [datetime] NOT NULL,
 	[Action] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_UserLog] PRIMARY KEY CLUSTERED 
+	[Parameters] [nvarchar](max) NULL,
+	[RecordVersion] TIMESTAMP ,
+	[RecordState] INT NOT NULL CONSTRAINT [DF_Log_RecordState] DEFAULT 0,
+	[RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_Log_RecordInsertDateTime] DEFAULT GETDATE(),
+	[RecordUpdateDateTime] DATETIME NULL ,
+	[RecordDeleteDateTime] DATETIME NULL ,
+CONSTRAINT [PK_Log] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-CREATE TABLE [System].[UserLogParameter](
+
+CREATE NONCLUSTERED INDEX [IX_Account_Log] ON [System].[Log]
+(
+	[AccountId] ASC,
+	[RecordState] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+
+GO
+CREATE TABLE [System].[LogLevel](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserLogId] [int] NOT NULL,
-	[Key] [varchar](255) NOT NULL,
-	[BooleanValue] [bit] NULL,
-	[IntegerValue] [bigint] NULL,
-	[DecimalValue] [decimal](19, 4) NULL,
-	[TextValue] [nvarchar](max) NULL,
-	[DateValue] [datetime] NULL,
-	[BinaryValue] [varbinary](max) NULL,
- CONSTRAINT [PK_UserLogParameter] PRIMARY KEY CLUSTERED 
+	[Title] [nvarchar](max) NOT NULL,
+	[TitleEn] [varchar](max) NULL,
+	[RecordVersion] TIMESTAMP ,
+	[RecordState] INT NOT NULL CONSTRAINT [DF_LogLevel_RecordState] DEFAULT 0,
+	[RecordInsertDateTime] DATETIME NULL CONSTRAINT [DF_LogLevel_RecordInsertDateTime] DEFAULT GETDATE(),
+	[RecordUpdateDateTime] DATETIME NULL ,
+	[RecordDeleteDateTime] DATETIME NULL ,
+ CONSTRAINT [PK_AccountType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
 GO
 SET IDENTITY_INSERT [Accounts].[SessionState] ON
 INSERT INTO [Accounts].[SessionState] (Id, Title)
@@ -1250,6 +1317,16 @@ VALUES
         ( 1, N'کوتاه مدت' ),
         ( 2, N'جاری' )
 GO
+SET IDENTITY_INSERT [OnlinePayment].[OnlinePaymentGateway] ON 
+INSERT INTO [OnlinePayment].[OnlinePaymentGateway] (Id, Title, TitleEn)
+VALUES (1, N'سامان', 'Saman')
+SET IDENTITY_INSERT [OnlinePayment].[OnlinePaymentGateway] OFF
+GO
+SET IDENTITY_INSERT [OnlinePayment].[OnlinePaymentState] ON 
+INSERT INTO [OnlinePayment].[OnlinePaymentState] (Id, Title, TitleEn)
+VALUES (1, N'ساخته شده', 'Created'), (2, N'پرداخت شده', 'Paid'), (3, N'ناموفق', 'Failed'), (4, N'رد شده', 'Rejected'), (5, N'تایید شده', 'Verified')
+SET IDENTITY_INSERT [OnlinePayment].[OnlinePaymentState] OFF
+GO
 SET IDENTITY_INSERT [Operation].[RequestStatus] ON
 INSERT INTO [Operation].[RequestStatus] (Id, Title, TitleEn)
 VALUES (1, N'در انتظار اقدام', 'Pending'),
@@ -1268,6 +1345,14 @@ SET IDENTITY_INSERT [Operation].[RequestType] OFF
 GO
 INSERT [System].[Configuration] ([Key], [TextValue], [Tags]) VALUES (N'System.Version', N'0.1', N'system internal')
 INSERT [System].[Configuration] ([Key], [TextValue], [Tags]) VALUES (N'System.UniqueId', NEWID(), N'system internal')
+
+GO
+SET IDENTITY_INSERT [System].[LogLevel] ON 
+INSERT [System].[LogLevel] ([Id], [Title], [TitleEn]) VALUES (1, N'کامل', 'Verbose')
+INSERT [System].[LogLevel] ([Id], [Title], [TitleEn]) VALUES (2, N'اطلاعاتی', 'Information')
+INSERT [System].[LogLevel] ([Id], [Title], [TitleEn]) VALUES (3, N'هشدار', 'Warning')
+INSERT [System].[LogLevel] ([Id], [Title], [TitleEn]) VALUES (4, N'خطا', 'Error')
+SET IDENTITY_INSERT [System].[LogLevel] OFF
 
 GO
 CREATE TRIGGER [Accounting].[Transaction_Delete] ON [Accounting].[Transaction]
@@ -2425,6 +2510,174 @@ BEGIN
     END
 END
 GO
+CREATE TRIGGER [OnlinePayment].[OnlinePayment_Delete] ON [OnlinePayment].[OnlinePayment]
+INSTEAD OF DELETE
+AS
+BEGIN
+
+  SET NOCOUNT ON;
+
+  IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+  BEGIN
+    RAISERROR ('Cannot update deleted records',16,1)
+    ROLLBACK TRANSACTION
+    RETURN
+  END
+
+  UPDATE [OnlinePayment].[OnlinePayment]
+  SET [RecordDeleteDateTime] = GETDATE(), [RecordState] = 2
+  WHERE [Id] IN (SELECT [Id] FROM DELETED)
+  
+END
+GO
+CREATE TRIGGER [OnlinePayment].[OnlinePayment_Update] ON [OnlinePayment].[OnlinePayment]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [OnlinePayment].[OnlinePayment] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
+CREATE TRIGGER [OnlinePayment].[OnlinePaymentGateway_Delete] ON [OnlinePayment].[OnlinePaymentGateway]
+INSTEAD OF DELETE
+AS
+BEGIN
+
+  SET NOCOUNT ON;
+
+  IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+  BEGIN
+    RAISERROR ('Cannot update deleted records',16,1)
+    ROLLBACK TRANSACTION
+    RETURN
+  END
+
+  UPDATE [OnlinePayment].[OnlinePaymentGateway]
+  SET [RecordDeleteDateTime] = GETDATE(), [RecordState] = 2
+  WHERE [Id] IN (SELECT [Id] FROM DELETED)
+  
+END
+GO
+CREATE TRIGGER [OnlinePayment].[OnlinePaymentGateway_Update] ON [OnlinePayment].[OnlinePaymentGateway]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [OnlinePayment].[OnlinePaymentGateway] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
+CREATE TRIGGER [OnlinePayment].[OnlinePaymentParameter_Delete] ON [OnlinePayment].[OnlinePaymentParameter]
+INSTEAD OF DELETE
+AS
+BEGIN
+
+  SET NOCOUNT ON;
+
+  IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+  BEGIN
+    RAISERROR ('Cannot update deleted records',16,1)
+    ROLLBACK TRANSACTION
+    RETURN
+  END
+
+  UPDATE [OnlinePayment].[OnlinePaymentParameter]
+  SET [RecordDeleteDateTime] = GETDATE(), [RecordState] = 2
+  WHERE [Id] IN (SELECT [Id] FROM DELETED)
+  
+END
+GO
+CREATE TRIGGER [OnlinePayment].[OnlinePaymentParameter_Update] ON [OnlinePayment].[OnlinePaymentParameter]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [OnlinePayment].[OnlinePaymentParameter] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
+CREATE TRIGGER [OnlinePayment].[OnlinePaymentState_Delete] ON [OnlinePayment].[OnlinePaymentState]
+INSTEAD OF DELETE
+AS
+BEGIN
+
+  SET NOCOUNT ON;
+
+  IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+  BEGIN
+    RAISERROR ('Cannot update deleted records',16,1)
+    ROLLBACK TRANSACTION
+    RETURN
+  END
+
+  UPDATE [OnlinePayment].[OnlinePaymentState]
+  SET [RecordDeleteDateTime] = GETDATE(), [RecordState] = 2
+  WHERE [Id] IN (SELECT [Id] FROM DELETED)
+  
+END
+GO
+CREATE TRIGGER [OnlinePayment].[OnlinePaymentState_Update] ON [OnlinePayment].[OnlinePaymentState]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [OnlinePayment].[OnlinePaymentState] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
 CREATE TRIGGER [Operation].[Request_Delete] ON [Operation].[Request]
             INSTEAD OF DELETE
 AS
@@ -2555,6 +2808,96 @@ BEGIN
         END
         
         UPDATE [Operation].[RequestType] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
+CREATE TRIGGER [System].[Log_Delete] ON [System].[Log]
+            INSTEAD OF DELETE
+AS
+BEGIN
+                
+    SET NOCOUNT ON;
+                
+    IF EXISTS ( SELECT  *
+                FROM    DELETED
+                WHERE   RecordState > 1 )
+        BEGIN
+            RAISERROR ('Cannot update deleted records',16,1)
+            ROLLBACK TRANSACTION
+            RETURN
+        END
+                
+    UPDATE  [System].[Log]
+    SET     [RecordDeleteDateTime] = GETDATE() ,
+            [RecordState] = 2
+    WHERE   [Id] IN ( SELECT    [Id]
+                        FROM      DELETED )
+END
+GO
+CREATE TRIGGER [System].[Log_Update] ON [System].[Log]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [System].[Log] 
+        SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
+        WHERE [Id] IN (SELECT [Id] FROM INSERTED)
+    END
+END
+GO
+CREATE TRIGGER [System].[LogLevel_Delete] ON [System].[LogLevel]
+            INSTEAD OF DELETE
+AS
+BEGIN
+                
+    SET NOCOUNT ON;
+                
+    IF EXISTS ( SELECT  *
+                FROM    DELETED
+                WHERE   RecordState > 1 )
+        BEGIN
+            RAISERROR ('Cannot update deleted records',16,1)
+            ROLLBACK TRANSACTION
+            RETURN
+        END
+                
+    UPDATE  [System].[LogLevel]
+    SET     [RecordDeleteDateTime] = GETDATE() ,
+            [RecordState] = 2
+    WHERE   [Id] IN ( SELECT    [Id]
+                        FROM      DELETED )
+END
+GO
+CREATE TRIGGER [System].[LogLevel_Update] ON [System].[LogLevel]
+				FOR UPDATE
+AS
+BEGIN
+        
+    SET NOCOUNT ON;
+        
+    IF NOT (UPDATE ([RecordInsertDateTime]) OR UPDATE ([RecordUpdateDateTime]) OR UPDATE ([RecordDeleteDateTime]) OR UPDATE ([RecordState]))
+    BEGIN
+        IF EXISTS (SELECT * FROM DELETED WHERE RecordState > 1)
+        BEGIN
+        RAISERROR ('Cannot update deleted records',16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+        END
+        
+        UPDATE [System].[LogLevel] 
         SET [RecordUpdateDateTime] = GETDATE(), [RecordState] = 1
         WHERE [Id] IN (SELECT [Id] FROM INSERTED)
     END

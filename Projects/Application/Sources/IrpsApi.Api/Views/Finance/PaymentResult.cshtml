@@ -1,0 +1,51 @@
+﻿@model IrpsApi.Framework.OnlinePayment.IOnlinePayment
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>پولینو - نتیجه پرداخت</title>
+    <link rel="stylesheet" type="text/css" href="~/assets/css/payment.css" rel="stylesheet" />
+    <meta charset="utf-8" content="text/html" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+</head>
+
+<body>
+    <div id="root">
+        <div class="app" dir="rtl">
+            <div class="app-header"><img class="app-logo" src="~/assets/images/Poolino-Logo.png" alt="logo" /></div>
+            <div>
+                <div class="card">
+                    <div class="invoice-summary-container">
+                        <div>
+                            <div class="order-summary">
+                                <div>
+                                    <span>
+                                        <strong class="title">
+                                            @if (!string.IsNullOrEmpty(ViewBag.Success))
+                                             {
+                                                <span>@ViewBag.Success</span>
+                                             }
+                                            else if (!string.IsNullOrEmpty(ViewBag.Error))
+                                            {
+                                                <span>@ViewBag.Error</span>
+                                            }
+                                        </strong>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <div class="full-width">
+                       <a href="poolino://poolino.ir" style="background: #4d3185;border: none;border-radius: 5px;color: #ffffff;font-family: IRANSans;font-size: 15px;font-weight: bold;padding: 8px 32px;display: block;width: 92.5%;cursor: pointer;text-decoration: none;text-align: center;">
+                        بازگشت به نرم‌افزار
+                       </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

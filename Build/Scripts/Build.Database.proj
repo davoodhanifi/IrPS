@@ -23,6 +23,7 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Accounting.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Accounts.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Bank.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\OnlinePayment.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\Operation.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Schemas\System.sql" />
       
@@ -57,6 +58,10 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccount.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccountHistory.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Bank.BankAccountType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\OnlinePayment.OnlinePayment.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\OnlinePayment.OnlinePaymentGateway.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\OnlinePayment.OnlinePaymentParameter.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\OnlinePayment.OnlinePaymentState.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Operation.Request.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Operation.RequestStatus.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Tables\Operation.RequestType.sql" />
@@ -83,6 +88,8 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Accounts.VerificationStatus.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Bank.Bank.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Bank.BankAccountType.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\OnlinePayment.OnlinePaymentGateway.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\OnlinePayment.OnlinePaymentState.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Operation.RequestStatus.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\Operation.RequestType.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Data\System.Configuration.sql" />
@@ -141,6 +148,14 @@
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccount_Update.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountType_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Bank.BankAccountType_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\OnlinePayment.OnlinePayment_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\OnlinePayment.OnlinePayment_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\OnlinePayment.OnlinePaymentGateway_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\OnlinePayment.OnlinePaymentGateway_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\OnlinePayment.OnlinePaymentParameter_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\OnlinePayment.OnlinePaymentParameter_Update.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\OnlinePayment.OnlinePaymentState_Delete.sql" />
+      <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\OnlinePayment.OnlinePaymentState_Update.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.Request_Delete.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.Request_Update.sql" />
       <InstallFiles Include="$(BuildDatabaseSourcesPath)\Triggers\Operation.RequestStatus_Delete.sql" />

@@ -1,0 +1,73 @@
+﻿@model IrpsApi.Framework.OnlinePayment.IOnlinePayment
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>پولینو - پرداخت</title>
+    <link rel="stylesheet" type="text/css" href="~/assets/css/payment.css" rel="stylesheet" />
+    <meta charset="utf-8" content="text/html" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+</head>
+
+<body>
+<div id="root">
+    <div class="app" dir="rtl">
+        <div class="app-header"><img class="app-logo" src="~/assets/images/Poolino-Logo.png" alt="logo" /></div>
+        <div>
+            <div class="card">
+                <div class="invoice-summary-container">
+                    <div>
+                        <div class="order-summary">
+                            <div>
+                                <span>
+                                    <strong class="title">
+                                        <span>افزایش اعتبار به مبلغ:&nbsp;</span>
+                                        <span id="amount_persian">@Model.Amount.ToString("##,###")</span><span>&nbsp; ریال</span>
+                                    </strong>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="payments-container">
+                    <div class="center-sm"><strong class="title">لطفا درگاه پرداخت را انتخاب کنید</strong></div>
+                    <div class="divider"></div>
+                    <div class="method">
+                        <div class="option center-sm">
+                            <div class="gateway-option saman active" id="saman">
+                                <div class="gateway-button option" id="saman-child">
+                                    <img src="~/assets/images/saman.png" alt="saman" role="presentation" />
+                                    <label><span>سامان</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <div>
+                    <form action="https://sep.shaparak.ir/payment.aspx" class="full-width" autocomplete="off" method="post" onsubmit="disableButton()">
+                        @foreach (var p in Model.OnlinePaymentParameters)
+                        {
+                            <input type="hidden" name="@p.Key" value="@p.Value" />
+                        }
+                        <button type="submit" id="pay">
+                            <span>پرداخت</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function disableButton() {
+        var submitBtn = $('button[type=submit]');
+        submitBtn.addClass('disabled');
+    }
+</script>
+</body>
+</html>
