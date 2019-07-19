@@ -138,7 +138,13 @@ namespace IrpsApi.Api
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")), RequestPath = "/StaticFiles"
             });
-            app.UseMvc();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Index}/{action=Index}/{id?}");
+            });
             app.UseStaticFiles();
             app.UseResponseCompression();
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using IrpsApi.Api.Models.OnlinePayment;
 using IrpsApi.Framework.OnlinePayment.Repositories;
 using Mabna.WebApi.Common;
 using Microsoft.AspNetCore.Authorization;

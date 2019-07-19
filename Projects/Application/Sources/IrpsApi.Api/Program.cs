@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using System.Diagnostics;
+using System.IO;
 using Microsoft.Extensions.Configuration;
 
 namespace IrpsApi.Api
@@ -29,6 +30,7 @@ namespace IrpsApi.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .ConfigureAppConfiguration(config =>
                 {

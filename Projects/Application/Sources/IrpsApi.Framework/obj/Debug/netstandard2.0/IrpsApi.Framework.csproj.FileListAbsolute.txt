@@ -36,4 +36,4 @@ E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\ob
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.AssemblyInfo.cs
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.dll
 E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.pdb
-E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.csprojResolveAssemblyReference.cache
+E:\Projects\Noandishan\irps-v1\Projects\Application\Sources\IrpsApi.Framework\obj\Debug\netstandard2.0\IrpsApi.Framework.csprojAssemblyReference.cache
